@@ -24,7 +24,11 @@ const Register = ({navigation}) =>{
     
     <View style={styles.TextinputContainer}>
        <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='Username' placeholderTextColor='#360f9a' />
+       <TextInput style={styles.Textinput} placeholder='First Name' placeholderTextColor='#360f9a' />
+    </View>
+    <View style={styles.TextinputContainer}>
+       <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
+       <TextInput style={styles.Textinput} placeholder='Last Name' placeholderTextColor='#360f9a' />
     </View>
     <View style={styles.TextinputContainer}>
        <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
@@ -62,6 +66,7 @@ const Register = ({navigation}) =>{
 const styles =StyleSheet.create({
     Container:{
         marginHorizontal: 30,
+        marginTop:-30,
     },
     
     WelcomText:{
