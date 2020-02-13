@@ -1,20 +1,18 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-
 const Login = ({navigation}) =>{
-  return (
+    const [mail,setMail] =useState('');
+    const [password,setPassword] =useState('');
+    return (
       <View style ={styles.Container}>
-  {/* <Text style={styles.Textinput}>Hello Login  </Text>
-  <Text>
-      Lorem <Icon name="ios-book" color="#000000"  /> Ipsum
-    </Text> */}
+
     
     <View style={styles.shape2}>
         <View style={styles.shape}/>
-        {/* <View style={styles.shape3}/> */}
+      
     </View>
  
 
@@ -23,16 +21,25 @@ const Login = ({navigation}) =>{
     <Text style={styles.WelcomText} >Welcome back !</Text>
     
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='Username' placeholderTextColor='#360f9a' />
-    </View>
-    {/* <Text style={styles.validationText}>Can't be empty</Text> */}
+       <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
+       <TextInput style={styles.Textinput} placeholder='Mail' placeholderTextColor='#360f9a' 
+      value={mail}
+      onChangeText={newvalue => setMail(newvalue)}
+      />
+   </View>
+   {mail.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+   
 
     <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
-       <TextInput style={styles.Textinput} placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a' />  
+       <TextInput style={styles.Textinput} placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a'
+       
+       value={password}
+       onChangeText={newvalue => setPassword(newvalue)}
+       />  
         </View>
-        {/* <Text style={styles.validationText}>Can't be empty</Text> */}
+        
+        {password.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
         
 
         <TouchableOpacity style={styles.Button}>
@@ -41,7 +48,7 @@ const Login = ({navigation}) =>{
 
         <View style={styles.CreateAccountContainer}>
         <Text style={styles.createTextNormal}>Don't have an account ? </Text>
-        <Text style={styles.createTextColored} onPress={()=> navigation.navigate('register')}>Create One</Text>
+        <Text style={styles.createTextColored} onPress={()=> navigation.navigate('Register')}>Create One</Text>
         </View>
 
         <View style={styles.shape3}/>
@@ -65,7 +72,7 @@ const styles =StyleSheet.create({
     TextinputContainer:{
         
         borderRadius : 25,
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#360f9a',
         flexDirection:'row',
         
@@ -75,13 +82,14 @@ const styles =StyleSheet.create({
     },
     Textinput :{
       
-        fontSize : 20,
+        fontSize : 18,
         color : '#000',
         paddingLeft :20,
        
     },
     Icon:{
-        fontSize: 40, 
+        marginVertical:8,
+        fontSize: 25,
     },
     Button:{
         borderRadius : 25,

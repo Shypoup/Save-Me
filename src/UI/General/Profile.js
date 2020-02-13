@@ -7,24 +7,40 @@ import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 
 
 
-const Profile =()=>{
+const Profile =props=>{
   return (
       <View>
           <View style={styles.Container}>
-  <View style={styles.PhotoContainer} >
-  <Image  style={styles.ProfilePicture} source ={require('../Components/hesham.jpg')}/>
-  <Text style={styles.username}>Hesham Gamal</Text>
-  </View>
+                <View style={styles.PhotoContainer} >
+                <Image  style={styles.ProfilePicture} source ={require('../Components/hesham.jpg')}/>
+                <Text style={styles.username}>Hesham Gamal</Text>
+                </View>
+            </View>
   <View  style={styles.DataContainer} >
+<Text style={styles.Title}>Your Data</Text>
   <Text style={styles.user}>hesham@mail.com</Text>
-  <Text style={styles.user}>01111111111111</Text>
-  <Text style={styles.user}>My Adress</Text>
-  </View>
+  <Text style={styles.user}>011456364422</Text>
+  <Text style={styles.user}>Pyramids,Giza</Text>
+  <Text style={styles.user}>O+</Text>
+  <Text style={styles.Title}>Trusted Numbers</Text>
+  <Text style={styles.user}>011456364422</Text>
+  <Text style={styles.user}>011456364422</Text>
+  <Text style={styles.user}>011456364422</Text>
   </View>
   
-  <TouchableOpacity style={styles.Button}>
+  <TouchableOpacity 
+    onPress={()=> props.navigation.navigate('EditProfile')}
+    style={styles.Button}
+  >
             <Text  style={styles.ButtonText}>Edit Profile</Text>
         </TouchableOpacity>
+  <TouchableOpacity 
+   onPress={()=> props.navigation.navigate('QR')}
+  style={styles.Button}>
+            <Text  style={styles.ButtonText}>Generate QR Code</Text>
+        </TouchableOpacity>
+
+
   </View>
   
   )
@@ -32,12 +48,14 @@ const Profile =()=>{
 
 const styles =StyleSheet.create({
 Container:{
-    backgroundColor:"#360f9a",
-    height:400,
+  // backgroundColor:"#360f9a",
+    height:200,
     borderBottomEndRadius:90,
+    marginHorizontal:10,
 },
 PhotoContainer:{
     flexDirection:'row',
+    
     
 },
 ProfilePicture:{
@@ -51,8 +69,8 @@ ProfilePicture:{
    
 },
 username:{
-    color:'rgb(255,255,255)',
-    fontSize:30,
+    color:'#360f9a',
+    fontSize:25,
     marginVertical:60,
     marginHorizontal:20,
     alignSelf:'flex-end',
@@ -62,18 +80,25 @@ username:{
     
 },
 DataContainer:{
-    marginHorizontal:20,
-    marginVertical:20,
+    marginHorizontal:50,
+    marginVertical:30,
+    marginBottom:60,
 },
 user:{
     fontSize:20,
-    color:'rgb(255,255,255)',
+    color:'#000',
+},
+Title:{
+    color:'#360f9a',
+    
+    marginVertical:10,
 },
 Button:{
     borderRadius : 25,
     backgroundColor: '#360f9a',
-    marginVertical:150,
+    marginVertical:5,
     marginHorizontal: 60,
+    
 
 },
 ButtonText:{
