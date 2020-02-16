@@ -1,37 +1,101 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image,ScrollView} from 'react-native';
 import PickerComponent from '../Components/PickerComponent';
 import PhotoUpload from 'react-native-photo-upload';
 import ImagePicker from '../Components/ImagePicker';
 import DatePicker from '../Components/DatePicker';
+import axios from 'axios';
 
 
-
-const EditProfile = () =>{
-    
-  
+export  default class EditProfile extends React.Component{
+    //7const Profile =props=>{
         
+        constructor(props){
+            super(props);
+            this.state={
+                firstName:" ",
+                lastName:" ",
+                mail:" ",
+                phone:" ",
+                address:" ",
+                bloodType:" ",
+                firstTrusted:" ",
+                secondTrusted:" ",
+                thirdTrusted:" ",
+            };
+        }
+         
+        componentDidMount(){
+        axios.get('http://192.168.43.238:3000/profile',{
+            headers :{
+            'X-AUTH':`  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY`
+            }
+        }).then(response=>{
+        console.log(response.data);
+        console.log(response.data.Fname);
+        console.log(response.data.Lname);
+        console.log(response.data.phone);
+        console.log(response.data.email);
+        console.log(response.data.trusted1);
+        
+        
+        this.setState({firstName : response.data.Fname})
+        this.setState({lastName : response.data.Lname})
+        this.setState({phone : response.data.phone})
+        this.setState({mail : response.data.email})
+        
+    }).catch(error =>{
+        console.log(error);
+        
+    });
+       }
     
+        
+        render(){
+      return (
     
-    return (
         <ScrollView>
       <View style ={styles.Container}>
             <Text style={styles.WelcomText} >Edit Profile</Text>
         <Text style={styles.Title}>Your Info</Text>
-       <TextInput style={styles.TextinputContainer} placeholder='First Name' placeholderTextColor='#360f9a' >Hesham</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Last Name' placeholderTextColor='#360f9a' >Gamal </TextInput> 
-       <TextInput style={styles.TextinputContainer} placeholder='Mail' placeholderTextColor='#360f9a' >hesham.mail.com</TextInput> 
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >0114563456</TextInput>  
-       <TextInput style={styles.TextinputContainer} placeholder='Address' placeholderTextColor='#360f9a' >pyramids,Giza</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Blood Type' placeholderTextColor='#360f9a' >O+</TextInput>
+      <TextInput style={styles.TextinputContainer} placeholder='First Name' placeholderTextColor='#360f9a' >{this.state.firstName}</TextInput>
+       <TextInput style={styles.TextinputContainer} placeholder='Last Name' placeholderTextColor='#360f9a' >{this.state.lastName} </TextInput> 
+       <TextInput style={styles.TextinputContainer} placeholder='Mail' placeholderTextColor='#360f9a' >{this.state.mail}</TextInput> 
+       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.phone}</TextInput>  
+       <TextInput style={styles.TextinputContainer} placeholder='Address' placeholderTextColor='#360f9a' >{this.state.address}</TextInput>
+       <TextInput style={styles.TextinputContainer} placeholder='Blood Type' placeholderTextColor='#360f9a' >{this.state.bloodType}</TextInput>
        <Text  style={styles.Title}>Trusted persons' Numbers</Text>
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >01245636463</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >01124569463</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >01123645663</TextInput>
+       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.firstTrusted}</TextInput>
+       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.secondTrusted}</TextInput>
+       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.thirdTrusted}</TextInput>
+ 
 
 
-
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button}
+            onPress={()=>{
+                var config = {
+                    headers :{
+                        'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
+                    }
+                }; 
+                axios.patch('http://192.168.43.238:3000/editProfile',{
+                    // headers :{
+                    // "X-AUTH":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
+                    // }
+                    config,
+                    "Fname" :"Gamal"
+                
+    
+    
+            }).then(response=>{
+                console.log(response.data);
+            }).catch(error =>{
+                console.log(error);
+                
+            });
+        
+            }}
+        >
             <Text  style={styles.ButtonText}>Edit</Text>
         </TouchableOpacity>
         
@@ -41,7 +105,7 @@ const EditProfile = () =>{
   </ScrollView>
   )
 }
-
+}
 const styles =StyleSheet.create({
     Container:{
         marginHorizontal: 50,
@@ -126,4 +190,3 @@ const styles =StyleSheet.create({
     },
 });
     
-export default EditProfile;

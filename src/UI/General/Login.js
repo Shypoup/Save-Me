@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import axios from 'axios';
 
 const Login = ({navigation}) =>{
     const [mail,setMail] =useState('');
@@ -42,7 +42,21 @@ const Login = ({navigation}) =>{
         {password.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
         
 
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button}
+        onPress={()=>{
+            axios.post('http://192.168.43.238:3000/login',{
+            email:`${mail}`,
+            password:`${password}`,
+
+        }).then(response=>{
+            console.log(response.data);
+        }).catch(error =>{
+            console.log(error);
+            
+        });
+    
+        }}
+        >
             <Text  style={styles.ButtonText}>Login</Text>
         </TouchableOpacity>
 

@@ -1,17 +1,21 @@
 import React,{useState} from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from'axios';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
 const Register = ({navigation}) =>{
   const [firstName,setFirstName] =useState('');
   const [lastName,setLastName] =useState('');
+  const [phone,setPhone]=useState('');
   const [mail,setMail] =useState('');
   const [password,setPassword] =useState('');
   const [confirmPassword,setConfirmPassword] =useState('');
   
   return (
+      <ScrollView>
       <View style ={styles.Container}>
 
     <View style={styles.shape2}>
@@ -40,8 +44,13 @@ const Register = ({navigation}) =>{
        />
     </View>
     {lastName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
-
-
+    <View style={styles.TextinputContainer}>
+    <Icon name="ios-mobile" color="#360f9a" style={styles.Icon} />     
+       <TextInput style={styles.Textinput} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' 
+       value={phone}
+       onChangeText={newvalue => setPhone(newvalue)}
+       />
+    </View>
     <View style={styles.TextinputContainer}>
        <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
        <TextInput style={styles.Textinput} placeholder='Mail' placeholderTextColor='#360f9a' textContentType='emailAddress' 
@@ -74,7 +83,24 @@ const Register = ({navigation}) =>{
         {confirmPassword.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
         
 
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button}
+         onPress={()=>{
+            axios.post('http://192.168.43.238:3000/register',{
+            Fname: `${firstName}`,
+            Lname:`${lastName}`,
+            phone:`${phone}`,
+            email:`${mail}`,
+            password:`${password}`,
+
+        }).then(response=>{
+            console.log(response.data);
+        }).catch(error =>{
+            console.log(error);
+            
+        });
+    
+        }}
+        >
             <Text  style={styles.ButtonText}>Register</Text>
         </TouchableOpacity>
 
@@ -85,7 +111,7 @@ const Register = ({navigation}) =>{
 
         <View style={styles.shape3}/>
     </View>
-  
+    </ScrollView>
   )
 }
 

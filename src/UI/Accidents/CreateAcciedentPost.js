@@ -1,18 +1,10 @@
 import React,{useState} from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
-import PickerComponent from '../Components/PickerComponent';
-import PhotoUpload from 'react-native-photo-upload';
-import ImagePicker from '../Components/ImagePicker';
-import DatePicker from '../Components/DatePicker';
-import UploadImage from '../Components/UploadImage';
 
 
 
-const CreatePost = ({navigation}) =>{
-    
-    const [cityPicker,setCityPicker] =useState('0');
-        
-    
+
+const CreateAcciedentPost = ({navigation}) =>{
     
     return (
        
@@ -24,40 +16,15 @@ const CreatePost = ({navigation}) =>{
     <Text style={styles.WelcomText} >Create Post</Text>
     
        <TextInput style={styles.TextinputContainer} placeholder='Name' placeholderTextColor='#360f9a' />
-       <TextInput style={styles.TextinputContainer} placeholder='Age' placeholderTextColor='#360f9a' />
-
-       <View style={styles.PickerContainer}>
-       <Picker
-		style={styles.Picker}
-		selectedValue={cityPicker}
-		onValueChange={newvalue => setCityPicker(newvalue)}
-		>
-		<Picker.Item label="Select a city " value="0"/>
-		<Picker.Item label="Cairo" value="Cairo" />
-		<Picker.Item label="Giza" value="Giza"/>
-        <Picker.Item label="Alex" value="Alex" />
-		<Picker.Item label="Paris" value="Paris"/>
-        <Picker.Item label="London" value="London" />
-		<Picker.Item label="New York" value="90"/>
-		</Picker>
-       </View>
-
-        
-       <TextInput style={styles.TextinputContainer} placeholder='Lost Date' placeholderTextColor='#360f9a' />
        <TextInput style={styles.TextinputContainer} placeholder='Description' placeholderTextColor='#360f9a' />
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' />
-       
-            <UploadImage  />
-        
+      
 
         <TouchableOpacity style={styles.Button}>
             <Text  style={styles.ButtonText}>Post</Text>
         </TouchableOpacity>
         
 
-        {/* <DatePicker /> */}
-
-        
+    
 
     </View>
   
@@ -144,4 +111,4 @@ const styles =StyleSheet.create({
     },
 });
     
-export default CreatePost;
+export default CreateAcciedentPost;
