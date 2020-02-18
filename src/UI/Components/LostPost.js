@@ -4,7 +4,7 @@ import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 
 
 
-const LostPost =( props) =>{
+const LostPost =props=>{
    
   return (
      
@@ -16,11 +16,11 @@ const LostPost =( props) =>{
     <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{props.Age}</Text></Text>
     <Text style={styles.postText}>City: <Text style={styles.innerPostText}>{props.City}</Text></Text>
     <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{props.LostDate}</Text></Text> 
-    <TouchableOpacity
-      onPress={() => this.props.navigation.navigate('Profile')}
+    {/* <TouchableOpacity
+      onPress={() =>props.navigation.navigate('LostDetail')}
     >
         <Text style={styles.seeMore}   >See More </Text>
-    </TouchableOpacity>
+    </TouchableOpacity> */}
     
     </View>
     <Image style={styles.postImage} source ={props.ImageSource}/>

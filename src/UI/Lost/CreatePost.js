@@ -5,6 +5,7 @@ import PhotoUpload from 'react-native-photo-upload';
 import ImagePicker from '../Components/ImagePicker';
 import DatePicker from '../Components/DatePicker';
 import UploadImage from '../Components/UploadImage';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -15,7 +16,7 @@ const CreatePost = ({navigation}) =>{
     
     
     return (
-       
+       <ScrollView>
       <View style ={styles.Container}>
 
 
@@ -60,7 +61,7 @@ const CreatePost = ({navigation}) =>{
         
 
     </View>
-  
+    </ScrollView>
   )
 }
 

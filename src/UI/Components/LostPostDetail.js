@@ -1,12 +1,13 @@
 import React from 'react';
 import {View, StyleSheet,Text,Image} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
 const LostPostDetail =(props)=>{
   return (
      
-  
+  <ScrollView>
     <View>
   <View style={styles.postContainer}>
   <Image style={styles.postImage} source ={require('../Components/hesham2.jpg')}/>
@@ -30,6 +31,7 @@ const LostPostDetail =(props)=>{
 
     
     </View>
+    </ScrollView>
   )
 }
 

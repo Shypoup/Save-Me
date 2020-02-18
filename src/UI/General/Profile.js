@@ -23,30 +23,30 @@ export  default class Profile extends React.Component{
         };
     }
      
-    componentDidMount(){
-    axios.get('http://192.168.43.238:3000/profile',{
-        headers :{
-        'X-AUTH':`  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY`
-        }
-    }).then(response=>{
-    console.log(response.data);
-    console.log(response.data.Fname);
-    console.log(response.data.Lname);
-    console.log(response.data.phone);
-    console.log(response.data.email);
-    console.log(response.data.trusted1);
+//     componentDidMount(){
+//     axios.get('http://192.168.1.8:3000/profile',{
+//         headers :{
+//         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ5OWI4ZjViM2I1YTM1ZDAyMDRkMWIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxODgyMjk1fQ.XxABeeIYS_QnkFut2dk3orejkVgL_u6aEBrTdrLuolU"
+//     }
+//     }).then(response=>{
+//     console.log(response.data);
+//     console.log(response.data.Fname);
+//     console.log(response.data.Lname);
+//     console.log(response.data.phone);
+//     console.log(response.data.email);
+//     console.log(response.data.trusted1);
     
     
-    this.setState({firstName : response.data.Fname})
-    this.setState({lastName : response.data.Lname})
-    this.setState({phone : response.data.phone})
-    this.setState({mail : response.data.email})
+//     this.setState({firstName : response.data.Fname})
+//     this.setState({lastName : response.data.Lname})
+//     this.setState({phone : response.data.phone})
+//     this.setState({mail : response.data.email})
     
-}).catch(error =>{
-    console.log(error);
+// }).catch(error =>{
+//     console.log(error);
     
-});
-   }
+// });
+//    }
 
     
     render(){
@@ -56,13 +56,13 @@ export  default class Profile extends React.Component{
           <View style={styles.Container}>
                 <View style={styles.PhotoContainer} >
                 <Image  style={styles.ProfilePicture} source ={require('../Components/hesham.jpg')}/>
-  <Text style={styles.username}>{this.state.firstName} {this.state.lastName}</Text>
+  <Text style={styles.username}>{this.state.firstName} {this.state.lastName}Hesham Gamal</Text>
                 </View>
             </View>
   <View  style={styles.DataContainer} >
 <Text style={styles.Title}>Your Data</Text>
-  <Text style={styles.user}>{this.state.mail}</Text>
-  <Text style={styles.user}>{this.state.phone}</Text>
+  <Text style={styles.user}>hesham.fcih@gmail.com{this.state.mail}</Text>
+  <Text style={styles.user}>01123121021{this.state.phone}</Text>
   <Text style={styles.user}>Pyramids,Giza</Text>
   <Text style={styles.user}>O+</Text>
   <Text style={styles.Title}>Trusted Numbers</Text>
@@ -83,7 +83,7 @@ export  default class Profile extends React.Component{
   >
             <Text  style={styles.ButtonText}>Generate QR Code</Text>
         </TouchableOpacity>
-<Text style={styles.user}>Hello: {this.state.firstname}</Text>
+
 
   </View>
   </ScrollView>

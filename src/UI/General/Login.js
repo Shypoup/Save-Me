@@ -43,19 +43,23 @@ const Login = ({navigation}) =>{
         
 
         <TouchableOpacity style={styles.Button}
-        onPress={()=>{
-            axios.post('http://192.168.43.238:3000/login',{
-            email:`${mail}`,
-            password:`${password}`,
+        // onPress={()=>{
+        //     axios.post('http://192.168.1.8:3000/login',{
+        //     email:`${mail}`,
+        //     password:`${password}`,
 
-        }).then(response=>{
-            console.log(response.data);
-        }).catch(error =>{
-            console.log(error);
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+
+        // }).then(response=>{
+        //     console.log(response.data);
+        // }).catch(error =>{
+        //     console.log(error);
             
-        });
+        // });
     
-        }}
+        // }}
         >
             <Text  style={styles.ButtonText}>Login</Text>
         </TouchableOpacity>

@@ -25,30 +25,30 @@ export  default class EditProfile extends React.Component{
             };
         }
          
-        componentDidMount(){
-        axios.get('http://192.168.43.238:3000/profile',{
-            headers :{
-            'X-AUTH':`  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY`
-            }
-        }).then(response=>{
-        console.log(response.data);
-        console.log(response.data.Fname);
-        console.log(response.data.Lname);
-        console.log(response.data.phone);
-        console.log(response.data.email);
-        console.log(response.data.trusted1);
+    //     componentDidMount(){
+    //     axios.get('http://192.168.1.8:3000/profile',{
+    //         headers :{
+    //         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ5OWI4ZjViM2I1YTM1ZDAyMDRkMWIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxODgyMjk1fQ.XxABeeIYS_QnkFut2dk3orejkVgL_u6aEBrTdrLuolU"
+    //     }
+    //     }).then(response=>{
+    //     console.log(response.data);
+    //     console.log(response.data.Fname);
+    //     console.log(response.data.Lname);
+    //     console.log(response.data.phone);
+    //     console.log(response.data.email);
+    //     console.log(response.data.trusted1);
         
         
-        this.setState({firstName : response.data.Fname})
-        this.setState({lastName : response.data.Lname})
-        this.setState({phone : response.data.phone})
-        this.setState({mail : response.data.email})
+    //     this.setState({firstName : response.data.Fname})
+    //     this.setState({lastName : response.data.Lname})
+    //     this.setState({phone : response.data.phone})
+    //     this.setState({mail : response.data.email})
         
-    }).catch(error =>{
-        console.log(error);
+    // }).catch(error =>{
+    //     console.log(error);
         
-    });
-       }
+    // });
+    //    }
     
         
         render(){
@@ -72,29 +72,38 @@ export  default class EditProfile extends React.Component{
 
 
         <TouchableOpacity style={styles.Button}
-            onPress={()=>{
-                var config = {
-                    headers :{
-                        'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
-                    }
-                }; 
-                axios.patch('http://192.168.43.238:3000/editProfile',{
-                    // headers :{
-                    // "X-AUTH":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
-                    // }
-                    config,
-                    "Fname" :"Gamal"
+            // onPress={()=>{
+                // var config = {
+                //     headers :{
+                //         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
+                //     }
+                // }; 
+            //     axios.post('http://192.168.1.8:3000/editProfile',{
+            //         headers :{
+            //         "X-AUTH":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ5OWI4ZjViM2I1YTM1ZDAyMDRkMWIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxODgyNTAyfQ.Hobpz307DMV1fzXE4gCKNbQBOu3yLhqJqNKhJ-xHiOg",
+            //         'Content-Type': 'application/json',
+            //     },
+                    
+            //         Fname :"Gamal",
+            //         Lname:"Ali",
+            //         email:"gamal@mail.com",
+            //         password:"123456",
+            //         phone:"12345669",
+            //         // trusted1:"45663453",
+            //         // trusted2:"45634452",
+            //         // trusted3:"45695223",
+                    
                 
     
     
-            }).then(response=>{
-                console.log(response.data);
-            }).catch(error =>{
-                console.log(error);
+            // }).then(response=>{
+            //     console.log(response.data);
+            // }).catch(error =>{
+            //     console.log(error);
                 
-            });
+            // });
         
-            }}
+            // }}
         >
             <Text  style={styles.ButtonText}>Edit</Text>
         </TouchableOpacity>
