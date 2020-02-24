@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
 
+import UploadImage from '../Components/UploadImage';
 
 
 
@@ -15,9 +16,11 @@ const CreateAcciedentPost = ({navigation}) =>{
         
     <Text style={styles.WelcomText} >Create Post</Text>
     
-       <TextInput style={styles.TextinputContainer} placeholder='Name' placeholderTextColor='#360f9a' />
+       
        <TextInput style={styles.TextinputContainer} placeholder='Description' placeholderTextColor='#360f9a' />
-      
+       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' />
+       <UploadImage  />
+
 
         <TouchableOpacity style={styles.Button}>
             <Text  style={styles.ButtonText}>Post</Text>

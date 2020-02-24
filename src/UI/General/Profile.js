@@ -1,4 +1,4 @@
-import React,{useState,Components} from 'react';
+import React from 'react';
 import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
 export  default class Profile extends React.Component{
-//7const Profile =props=>{
+
     
     constructor(props){
         super(props);

@@ -172,7 +172,7 @@ function Drawerr() {
     // </Drawer.Navigator>
 
     <Stack.Navigator>
-    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
     
     <Stack.Screen name="other" component={Otherr} /> 
    
@@ -185,7 +185,7 @@ function Drawerr() {
 function Profilee() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }}/>
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="QR" component={QRGenerator} />
      
@@ -199,24 +199,50 @@ export default function MyTabs() {
       initialRouteName="HomeScreen"
       tabBarOptions={{
         activeTintColor: '#360f9a',
-        marginBottom:10,
+        inactiveTintColor: 'gray',
       }}
+      screenOptions={({ route }) => ({
+        
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+           color='gray';
+
+          if (route.name === 'Home') {
+            iconName = 'ios-home'
+            color= focused ?'#360f9a' : 'gray';
+              
+          } else if (route.name === 'Notifications') {
+            iconName = focused ? 'ios-notifications' : 'md-notifications';
+            color= focused ?'#360f9a' : 'gray';
+          } else if (route.name === 'Profile') {
+          iconName =  'ios-person'
+          color= focused ?'#360f9a' : 'gray';
+        }
+
+          
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      
+      
     >
       <Tab.Screen
         name="Home"
         component={Drawerr}
+
        
       />
       <Tab.Screen
         name="Notifications"
         component={Notifications}
-      
+        
           
         
       />
       <Tab.Screen
         name="Profile"
         component={Profilee}
+        
         
       />
     </Tab.Navigator>
