@@ -28,9 +28,10 @@ marginVertical:8,
 flexDirection:'row',
 borderWidth : 0.4,
 borderColor: '#360f9a',
-borderRadius:2,
+borderRadius:20,
 alignItems:'flex-start',
 height:100,
+backgroundColor: '#E8E8E8'
 },
 
 postTextContainer:{

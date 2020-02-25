@@ -2,6 +2,8 @@ import React from 'react';
 import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import NotificationCard from '../Components/NotificationCard';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 
@@ -10,7 +12,7 @@ const Notifications =( props) =>{
   return (
      <ScrollView>
   <View>
-        <Text style={styles.headerText}>Notifications</Text>
+        <Text style={styles.headerText}><Icon name="ios-notifications" size={25} color="#2c0f7f"/>  Notifications   </Text>
             <NotificationCard />
             <NotificationCard />
             <NotificationCard />
@@ -48,9 +50,12 @@ alignItems:'flex-start',
 height:140,
 },
 headerText:{
-    fontSize:20,
+    fontSize:25,
     marginHorizontal: 20,
     marginVertical:10,
+    fontWeight: "bold",
+    color: '#360f6f',
+    //fontStyle: 'italic',
 },
 postTextContainer:{
     // alignSelf:'flex-start',
