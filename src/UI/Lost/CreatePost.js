@@ -6,7 +6,7 @@ import ImagePicker from '../Components/ImagePicker';
 import DatePicker from '../Components/DatePicker';
 import UploadImage from '../Components/UploadImage';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import axios from 'axios';
 
 
 const CreatePost = ({navigation}) =>{
@@ -51,7 +51,43 @@ const CreatePost = ({navigation}) =>{
             <UploadImage  />
         
 
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button}
+        
+        // onPress={()=>{
+        //     // var config = {
+        //     //     headers :{
+        //     //         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
+        //     //     }
+        //     // }; 
+        //     axios.post('http://192.168.1.8:3000//hbd',{
+        //         headers :{
+        //         'X-AUTH': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU1NjQ3ZTdjZmUyMTA4NjAzM2E4MDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyNjU0NjE5fQ.fsa8nxL1YzLhXFpQMJPcfgeiOeE2K2fCLHDQNJ2Yidg`,
+        //       'Content-Type': `application/json`,
+                    
+                
+        //     },
+                    
+        //     Fname :"Gamal",
+            
+                
+                
+                
+            
+
+
+        // }).then(response=>{
+        //     console.log(response.data);
+        // }).catch(error =>{
+        //     console.log(error);
+           
+            
+        // });
+    
+        // }}
+        
+        
+        
+        >
             <Text  style={styles.ButtonText}>Post</Text>
         </TouchableOpacity>
         

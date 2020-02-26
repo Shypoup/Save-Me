@@ -84,22 +84,22 @@ const Register = ({navigation}) =>{
         
 
         <TouchableOpacity style={styles.Button}
-         onPress={()=>{
-            axios.post('http://192.168.227.1:3000/register',{
-            Fname: `${firstName}`,
-            Lname:`${lastName}`,
-            phone:`${phone}`,
-            email:`${mail}`,
-            password:`${password}`,
+        //  onPress={()=>{
+        //     axios.post('http://192.168.1.8:3000/register',{
+        //     Fname: `${firstName}`,
+        //     Lname:`${lastName}`,
+        //     phone:`${phone}`,
+        //     email:`${mail}`,
+        //     password:`${password}`,
 
-        }).then(response=>{
-            console.log(response.data);
-        }).catch(error =>{
-            console.log(error);
+        // }).then(response=>{
+        //     console.log(response.data);
+        // }).catch(error =>{
+        //     console.log(error);
             
-        });
+        // });
     
-        }}
+        // }}
         >
             <Text  style={styles.ButtonText}>Register</Text>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View, StyleSheet,TextInput,Text,TouchableOpacity} from 'react-native';
+import {View, StyleSheet,TextInput,Text,TouchableOpacity,ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 
@@ -7,7 +7,10 @@ const Login = ({navigation}) =>{
     const [mail,setMail] =useState('');
     const [password,setPassword] =useState('');
     return (
-      <View style ={styles.Container}>
+
+
+        <ScrollView>
+        <View style ={styles.Container}>
 
     
     <View style={styles.shape2}>
@@ -71,7 +74,7 @@ const Login = ({navigation}) =>{
 
         <View style={styles.shape3}/>
     </View>
-  
+    </ScrollView>
   )
 }
 

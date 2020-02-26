@@ -22,10 +22,10 @@ class HomeScreen extends React.Component{
 }
  
 // componentDidMount(){
-// axios.get('http://192.168.1.8:3000/profile',{
-//   headers: { Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
-//           ,
-//           'Content-Type':  'application/x-www-form-urlencoded',    
+// axios.get('http://192.168.1.8:3000/LostPosts',{
+//   headers: {
+//     'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU1NjQ3ZTdjZmUyMTA4NjAzM2E4MDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyNjU0NjE5fQ.fsa8nxL1YzLhXFpQMJPcfgeiOeE2K2fCLHDQNJ2Yidg"
+               
 // }
 // }).then(response=>{
 // console.log(response.data);

@@ -26,7 +26,7 @@ export  default class Profile extends React.Component{
 //     componentDidMount(){
 //     axios.get('http://192.168.1.8:3000/profile',{
 //         headers :{
-//         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ5OWI4ZjViM2I1YTM1ZDAyMDRkMWIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxODgyMjk1fQ.XxABeeIYS_QnkFut2dk3orejkVgL_u6aEBrTdrLuolU"
+//         'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU1NjQ3ZTdjZmUyMTA4NjAzM2E4MDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyNjU0NjE5fQ.fsa8nxL1YzLhXFpQMJPcfgeiOeE2K2fCLHDQNJ2Yidg"
 //     }
 //     }).then(response=>{
 //     console.log(response.data);
@@ -56,19 +56,19 @@ export  default class Profile extends React.Component{
           <View style={styles.Container}>
                 <View style={styles.PhotoContainer} >
                 <Image  style={styles.ProfilePicture} source ={require('../Components/hesham.jpg')}/>
-  <Text style={styles.username}>{this.state.firstName} {this.state.lastName}Hesham Gamal</Text>
+  <Text style={styles.username}>{this.state.firstName} {this.state.lastName}</Text>
                 </View>
             </View>
   <View  style={styles.DataContainer} >
 <Text style={styles.Title}>Your Data</Text>
-  <Text style={styles.user}>hesham.fcih@gmail.com{this.state.mail}</Text>
-  <Text style={styles.user}>01123121021{this.state.phone}</Text>
-  <Text style={styles.user}>Pyramids,Giza</Text>
-  <Text style={styles.user}>O+</Text>
+  <Text style={styles.user}>{this.state.mail}</Text>
+  <Text style={styles.user}>{this.state.phone}</Text>
+  <Text style={styles.user}></Text>
+  <Text style={styles.user}></Text>
   <Text style={styles.Title}>Trusted Numbers</Text>
-  <Text style={styles.user}>011456364422</Text>
-  <Text style={styles.user}>011456364422</Text>
-  <Text style={styles.user}>011456364422</Text>
+  <Text style={styles.user}></Text>
+  <Text style={styles.user}></Text>
+  <Text style={styles.user}></Text>
   </View>
   
   <TouchableOpacity 

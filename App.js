@@ -128,7 +128,16 @@ import other from './other';
 
 const Tab = createBottomTabNavigator();
 const Stack=createStackNavigator();
-const Drawer=createDrawerNavigator ();
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Article" component={Article} />
+    </Drawer.Navigator>
+  );
+}
 
 function Otherr() {
   return (
@@ -192,6 +201,13 @@ function Profilee() {
     </Stack.Navigator>
   );
 }
+
+
+
+
+
+
+/************BUTTOMTAPNAVIGATOR */
 export default function MyTabs() {
   return (
     <NavigationContainer>
@@ -248,4 +264,4 @@ export default function MyTabs() {
     </Tab.Navigator>
     </NavigationContainer>
   );
-}11
+}
