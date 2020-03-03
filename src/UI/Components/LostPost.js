@@ -4,7 +4,7 @@ import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 
 
 
-const LostPost =props=>{
+const LostPost =(props)=>{
    
   return (
      

@@ -45,7 +45,7 @@ const Register = ({navigation}) =>{
     </View>
     {lastName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
     <View style={styles.TextinputContainer}>
-    <Icon name="ios-mobile" color="#360f9a" style={styles.Icon} />     
+    <Icon name="md-phone-portrait" color="#360f9a" style={styles.Icon} />     
        <TextInput style={styles.Textinput} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' 
        value={phone}
        onChangeText={newvalue => setPhone(newvalue)}
@@ -84,22 +84,22 @@ const Register = ({navigation}) =>{
         
 
         <TouchableOpacity style={styles.Button}
-        //  onPress={()=>{
-        //     axios.post('http://192.168.1.8:3000/register',{
-        //     Fname: `${firstName}`,
-        //     Lname:`${lastName}`,
-        //     phone:`${phone}`,
-        //     email:`${mail}`,
-        //     password:`${password}`,
+         onPress={()=>{
+            axios.post('http://192.168.1.7:3000/register',{
+            Fname: `${firstName}`,
+            Lname:`${lastName}`,
+            phone:`${phone}`,
+            email:`${mail}`,
+            password:`${password}`,
 
-        // }).then(response=>{
-        //     console.log(response.data);
-        // }).catch(error =>{
-        //     console.log(error);
+        }).then(response=>{
+            console.log(response.data);
+        }).catch(error =>{
+            console.log(error);
             
-        // });
+        });
     
-        // }}
+        }}
         >
             <Text  style={styles.ButtonText}>Register</Text>
         </TouchableOpacity>

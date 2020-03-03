@@ -23,30 +23,34 @@ export  default class Profile extends React.Component{
         };
     }
      
-//     componentDidMount(){
-//     axios.get('http://192.168.1.8:3000/profile',{
-//         headers :{
-//         'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU1NjQ3ZTdjZmUyMTA4NjAzM2E4MDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyNjU0NjE5fQ.fsa8nxL1YzLhXFpQMJPcfgeiOeE2K2fCLHDQNJ2Yidg"
-//     }
-//     }).then(response=>{
-//     console.log(response.data);
-//     console.log(response.data.Fname);
-//     console.log(response.data.Lname);
-//     console.log(response.data.phone);
-//     console.log(response.data.email);
-//     console.log(response.data.trusted1);
+    componentDidMount(){
+    axios.get('http://192.168.1.7:3000/profile',{
+        headers :{
+        'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyOTE5MzIwfQ.OUdMSqfpUV7MA6QnCP7fGkHelhK9UEaTUtj0KnrMo7k"
+
+    }
+    }).then(response=>{
+    console.log(response.data);
+    console.log(response.data.Fname);
+    console.log(response.data.Lname);
+    console.log(response.data.phone);
+    console.log(response.data.email);
+    console.log(response.data.trusted1);
     
     
-//     this.setState({firstName : response.data.Fname})
-//     this.setState({lastName : response.data.Lname})
-//     this.setState({phone : response.data.phone})
-//     this.setState({mail : response.data.email})
+    this.setState({firstName : response.data.Fname})
+    this.setState({lastName : response.data.Lname})
+    this.setState({phone : response.data.phone})
+    this.setState({mail : response.data.email})
+    this.setState({firstTrusted : response.data.trusted1})
+    this.setState({secondTrusted : response.data.trusted2})
+    this.setState({thirdTrusted : response.data.trusted3})
     
-// }).catch(error =>{
-//     console.log(error);
+}).catch(error =>{
+    console.log(error);
     
-// });
-//    }
+});
+   }
 
     
     render(){
@@ -63,12 +67,12 @@ export  default class Profile extends React.Component{
 <Text style={styles.Title}>Your Data</Text>
   <Text style={styles.user}>{this.state.mail}</Text>
   <Text style={styles.user}>{this.state.phone}</Text>
-  <Text style={styles.user}></Text>
-  <Text style={styles.user}></Text>
+  <Text style={styles.user}>Giza</Text>
+  <Text style={styles.user}>A+</Text>
   <Text style={styles.Title}>Trusted Numbers</Text>
-  <Text style={styles.user}></Text>
-  <Text style={styles.user}></Text>
-  <Text style={styles.user}></Text>
+  <Text style={styles.user}>{this.state.firstTrusted}</Text>
+  <Text style={styles.user}>{this.state.secondTrusted}</Text>
+  <Text style={styles.user}>{this.state.thirdTrusted}</Text>
   </View>
   
   <TouchableOpacity 

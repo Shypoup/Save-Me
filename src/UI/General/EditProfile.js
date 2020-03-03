@@ -25,43 +25,35 @@ export  default class EditProfile extends React.Component{
             };
         }
          
-    //     componentDidMount(){
-    //         var data = { Fname :"Gamal",
-    //         Lname:"Ali",
-    //         email:"gamal@mail.com",
-    //         password:"123456",
-    //         phone:"12345669",
-    //         trusted1:"45663453",
-    //         trusted2:"45634452",
-    //         trusted3:"45695223"}
-            
-    //     axios.get('http://192.168.1.8:3000/profile',{
-    //         headers :{
-    //             'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU1NjQ3ZTdjZmUyMTA4NjAzM2E4MDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyNjU0NjE5fQ.fsa8nxL1YzLhXFpQMJPcfgeiOeE2K2fCLHDQNJ2Yidg"
-            
-    //         },
-            
-            
-    //     }).then(response=>{
-    //     console.log(response.data);
-    //     console.log(response.data.Fname);
-    //     console.log(response.data.Lname);
-    //     console.log(response.data.phone);
-    //     console.log(response.data.email);
-    //     console.log(response.data.trusted1);
+    componentDidMount(){
+        axios.get('http://192.168.1.7:3000/profile',{
+            headers :{
+                'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyOTE5MzIwfQ.OUdMSqfpUV7MA6QnCP7fGkHelhK9UEaTUtj0KnrMo7k"
+
+        }
+        }).then(response=>{
+        console.log(response.data);
+        console.log(response.data.Fname);
+        console.log(response.data.Lname);
+        console.log(response.data.phone);
+        console.log(response.data.email);
+        console.log(response.data.trusted1);
         
         
-    //     this.setState({firstName : response.data.Fname})
-    //     this.setState({lastName : response.data.Lname})
-    //     this.setState({phone : response.data.phone})
-    //     this.setState({mail : response.data.email})
+        this.setState({firstName : response.data.Fname})
+        this.setState({lastName : response.data.Lname})
+        this.setState({phone : response.data.phone})
+        this.setState({mail : response.data.email})
+        this.setState({firstTrusted : response.data.trusted1})
+        this.setState({secondTrusted : response.data.trusted2})
+        this.setState({thirdTrusted : response.data.trusted3})
+    }).catch(error =>{
+        console.log(error);
         
-    // }).catch(error =>{
-    //     console.log(error);
-        
-    // });
-    //    }
+    });
+       }
     
+
         
         render(){
       return (
@@ -70,20 +62,129 @@ export  default class EditProfile extends React.Component{
       <View style ={styles.Container}>
             <Text style={styles.WelcomText} >Edit Profile</Text>
         <Text style={styles.Title}>Your Info</Text>
-      <TextInput style={styles.TextinputContainer} placeholder='First Name' placeholderTextColor='#360f9a' >{this.state.firstName}</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Last Name' placeholderTextColor='#360f9a' >{this.state.lastName} </TextInput> 
-       <TextInput style={styles.TextinputContainer} placeholder='Mail' placeholderTextColor='#360f9a' >{this.state.mail}</TextInput> 
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.phone}</TextInput>  
-       <TextInput style={styles.TextinputContainer} placeholder='Address' placeholderTextColor='#360f9a' >{this.state.address}</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Blood Type' placeholderTextColor='#360f9a' >{this.state.bloodType}</TextInput>
+      <TextInput
+       style={styles.TextinputContainer} 
+       placeholder='First Name'
+        placeholderTextColor='#360f9a'  
+     onChangeText={firstName => this.setState({firstName})}
+       value={this.state.firstName}
+      />
+      
+       <TextInput
+        style={styles.TextinputContainer} 
+        placeholder='Last Name'
+         placeholderTextColor='#360f9a'  onChangeText={lastName => this.setState({lastName})}
+         value={this.state.lastName}
+        />
+
+       <TextInput 
+       style={styles.TextinputContainer}
+        placeholder='Mail' 
+        placeholderTextColor='#360f9a'
+          onChangeText={mail => this.setState({mail})}
+        value={this.state.mail}
+       />
+      
+       <TextInput 
+       style={styles.TextinputContainer}
+        placeholder='Phone'
+         placeholderTextColor='#360f9a'
+          textContentType='telephoneNumber' 
+          onChangeText={phone => this.setState({phone})}
+            value={this.state.phone}
+            />
+     
+       <TextInput
+        style={styles.TextinputContainer} 
+        placeholder='Address'
+         placeholderTextColor='#360f9a' 
+         textContentType='fullStreetAddress'
+         onChangeText={address => this.setState({address})}
+       value={this.state.address}
+      />
+      
+       <TextInput 
+       style={styles.TextinputContainer}
+        placeholder='Blood Type'
+         placeholderTextColor='#360f9a' 
+         textContentType='none'
+         onChangeText={bloodType => this.setState({bloodType})}
+          value={this.state.bloodType}
+      />
+       
+       
        <Text  style={styles.Title}>Trusted persons' Numbers</Text>
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.firstTrusted}</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.secondTrusted}</TextInput>
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' >{this.state.thirdTrusted}</TextInput>
+       <TextInput 
+       style={styles.TextinputContainer} 
+       placeholder='Phone1'
+        placeholderTextColor='#360f9a'
+         textContentType='telephoneNumber' 
+         onChangeText={firstTrusted => this.setState({firstTrusted})}
+       value={this.state.firstTrusted}
+      />
+       
+       <TextInput
+        style={styles.TextinputContainer} 
+        placeholder='Phone2'
+         placeholderTextColor='#360f9a'
+         textContentType='telephoneNumber'
+         onChangeText={secondTrusted => this.setState({secondTrusted})}
+       value={this.state.secondTrusted}
+      />
+      
+       <TextInput 
+       style={styles.TextinputContainer}
+        placeholder='Phone3'
+        placeholderTextColor='#360f9a' 
+        textContentType='telephoneNumber' 
+        onChangeText={thirdTrusted => this.setState({thirdTrusted})}
+       value={this.state.thirdTrusted}
+      />
  
 
 
         <TouchableOpacity style={styles.Button}
+
+
+onPress={()=>{
+    axios({
+        method:'post',
+        url:'http://192.168.1.7:3000/editProfile',
+        data:{
+            Fname:`${this.state.firstName}`,
+            Lname:this.state.lastName,
+            email:this.state.mail,
+            phone:this.state.phone,
+            trusted1:this.state.firstTrusted,
+            trusted2:this.state.secondTrusted,
+            trusted3:this.state.thirdTrusted,
+
+        },
+        headers:{
+           'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgzMjM5MDQwfQ.KZPkxkEMZTgBWfl44c0wy9TLyb2cOWrZ1vYF6JyLYpc",
+              
+        }
+    }).then((res) => {
+        console.log("Response is:",res); 
+    }).catch((error) => {
+        if(error.response){
+           console.log(error.response.data);
+           console.log(error.response.status);
+           console.log(error.response.headers);
+        }else if (error.request) {
+           console.log(error.request);
+       } else {
+           // Something happened in setting up the request and triggered an Error
+           console.log('Error', error.message);
+       }
+       console.log(error.config);
+    })
+
+   }}
+
+
+
+
             // onPress={()=>{
             //     // var config = {
             //     //     headers :{

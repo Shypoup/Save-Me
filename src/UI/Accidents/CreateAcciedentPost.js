@@ -1,9 +1,11 @@
 import React,{useState} from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
-
+import axios from 'axios';
 import UploadImage from '../Components/UploadImage';
+// import uploadData from '../Components/UploadImage';
+import FormData from 'form-data';
 
-
+// let dataa=uploadData;
 
 const CreateAcciedentPost = ({navigation}) =>{
     
@@ -19,10 +21,45 @@ const CreateAcciedentPost = ({navigation}) =>{
        
        <TextInput style={styles.TextinputContainer} placeholder='Description' placeholderTextColor='#360f9a' />
        <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' />
-       <UploadImage  />
+       <UploadImage fileName={1} /> 
 
 
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button}
+        
+        
+// onPress={()=>{
+  
+//     axios({
+//         method:'post',
+//         url:'http://192.168.1.7:3000/RoadAccedint',
+//         data:{
+         
+//             dataa
+//         },
+//         headers:{
+//            'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyOTE5MzIwfQ.OUdMSqfpUV7MA6QnCP7fGkHelhK9UEaTUtj0KnrMo7k",
+//            'accept': 'application/json',
+//            'Accept-Language': 'en-US,en;q=0.8',
+//            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+//          }
+//     }).then((res) => {
+//         console.log("Response is:",res); 
+//     }).catch((error) => {
+//         if(error.response){
+//            console.log(error.response.data);
+//            console.log(error.response.status);
+//            console.log(error.response.headers);
+//         }else if (error.request) {
+//            console.log(error.request);
+//        } else {
+//            // Something happened in setting up the request and triggered an Error
+//            console.log('Error', error.message);
+//        }
+//        console.log(error.config);
+//     })
+
+//    }}
+        >
             <Text  style={styles.ButtonText}>Post</Text>
         </TouchableOpacity>
         
