@@ -42,6 +42,8 @@ target 'SAVEME' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'SAVEMETests' do
     inherit! :search_paths
     # Pods for testing

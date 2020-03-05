@@ -1,10 +1,7 @@
 import React from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image,ScrollView} from 'react-native';
-import PickerComponent from '../Components/PickerComponent';
-import PhotoUpload from 'react-native-photo-upload';
-import ImagePicker from '../Components/ImagePicker';
-import DatePicker from '../Components/DatePicker';
 import axios from 'axios';
+import {URL,Token} from '../../../API/Defaults';
 
 
 export  default class EditProfile extends React.Component{
@@ -26,10 +23,9 @@ export  default class EditProfile extends React.Component{
         }
          
     componentDidMount(){
-        axios.get('http://192.168.1.7:3000/profile',{
+        axios.get(`${URL}/profile`,{
             headers :{
-                'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyOTE5MzIwfQ.OUdMSqfpUV7MA6QnCP7fGkHelhK9UEaTUtj0KnrMo7k"
-
+                'X-AUTH': `${Token}`
         }
         }).then(response=>{
         console.log(response.data);
@@ -149,7 +145,7 @@ export  default class EditProfile extends React.Component{
 onPress={()=>{
     axios({
         method:'post',
-        url:'http://192.168.1.7:3000/editProfile',
+        url:`${URL}/editProfile`,
         data:{
             Fname:`${this.state.firstName}`,
             Lname:this.state.lastName,
@@ -161,8 +157,7 @@ onPress={()=>{
 
         },
         headers:{
-           'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgzMjM5MDQwfQ.KZPkxkEMZTgBWfl44c0wy9TLyb2cOWrZ1vYF6JyLYpc",
-              
+           'X-AUTH':`${Token}`
         }
     }).then((res) => {
         console.log("Response is:",res); 

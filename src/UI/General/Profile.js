@@ -2,6 +2,8 @@ import React from 'react';
 import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import QRCode from 'react-native-qrcode';
+import {URL,Token} from '../../../API/Defaults';
 
 
 
@@ -20,14 +22,14 @@ export  default class Profile extends React.Component{
             firstTrusted:" ",
             secondTrusted:" ",
             thirdTrusted:" ",
+            showQR : false,
         };
     }
      
     componentDidMount(){
-    axios.get('http://192.168.1.7:3000/profile',{
+    axios.get(`${URL}/profile`,{
         headers :{
-        'X-AUTH': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyOTE5MzIwfQ.OUdMSqfpUV7MA6QnCP7fGkHelhK9UEaTUtj0KnrMo7k"
-
+        'X-AUTH': `${Token}`
     }
     }).then(response=>{
     console.log(response.data);
@@ -82,12 +84,32 @@ export  default class Profile extends React.Component{
             <Text  style={styles.ButtonText}>Edit Profile</Text>
         </TouchableOpacity>
   <TouchableOpacity 
-   onPress={()=> this.props.navigation.navigate('QR')}
+   onPress={()=> this.setState({showQR : true})}
+//    onPress={()=> this.props.navigation.navigate('QR')}
   style={styles.Button}
   >
             <Text  style={styles.ButtonText}>Generate QR Code</Text>
         </TouchableOpacity>
+        
 
+        {this.state.showQR ?  <View style={styles.qr}>
+            <TouchableOpacity
+            onPress={()=> this.setState({showQR : false})}
+            >
+                <Text style={styles.hideButton}>hide</Text>
+            </TouchableOpacity>
+        <QRCode
+        value={"Name: "+this.state.firstName +this.state.lastName +"\n" + "     Phone:  "+this.state.phone +"\n"+"E-mail:  " +this.state.mail+"Adsress:    "+this.state.address +"\n"+
+                "Blood Type :  "+this.state.bloodType +"\n" 
+        }
+        size={530}
+        bgColor='#360f9a'
+        fgColor='#fff' 
+        
+        />
+        </View >
+           : null
+        }
 
   </View>
   </ScrollView>
@@ -146,6 +168,7 @@ Button:{
     backgroundColor: '#360f9a',
     marginVertical:5,
     marginHorizontal: 60,
+    marginBottom: 20,
     
 
 },
@@ -156,7 +179,14 @@ ButtonText:{
     fontFamily:'sans-serif-condensed',
     marginVertical:5,
 },
+qr:{
+    marginVertical:10,
+    marginHorizontal: 60
+},
+hideButton:{
+    color:'#360f9a',
+    fontSize:15,
+}
 
 });
     
-// export default Profile;

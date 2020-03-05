@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Image,
@@ -154,24 +153,26 @@ export default class App extends React.Component {
         
         onPress={()=>{
          // alert("You pressed");
-          let Data =new FormData();
-          Data.append('information','ok');
-         
-      
-          Data.append('photo',
+          let Dataa =new FormData();
+          Dataa.append('childname','Hesham');
+          Dataa.append('Gender','Male');
+          Dataa.append('phone','01112345665');
+          Dataa.append('photo',
           {type:'image/jpg',
-           uri:this.image_uri,
-            name:'hello.jpg'})
+           uri:this.state.image_uri,
+            name:this.state.imagename})
+      
+          
           axios({
             method:'post',
-            url:'http://192.168.1.7:3000/found',Data,
-            headers:{
-               'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgzMjM5MDQwfQ.KZPkxkEMZTgBWfl44c0wy9TLyb2cOWrZ1vYF6JyLYpc",
+            url:'http://192.168.1.7:3000/lost',data:{Dataa},
+            // headers:{
+            //    'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgzMjM5MDQwfQ.KZPkxkEMZTgBWfl44c0wy9TLyb2cOWrZ1vYF6JyLYpc",
               
-               //  'accept': 'application/json',
-              //  'Accept-Language': 'en-US,en;q=0.8',
-              //  'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-             }
+            //    //  'accept': 'application/json',
+            //   //  'Accept-Language': 'en-US,en;q=0.8',
+            //   //  'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+            //  }
         }).then((res) => {
           alert("Uploaded");
           console.log('Done');
@@ -181,20 +182,20 @@ export default class App extends React.Component {
         }).catch((error) => {
           alert("Failed");
           console.log("Failedss");
-          //   if(error.response){
-          //     console.log(error.response.data);
-          //   //    console.log(error.response.status);
-          //   //    console.log(error.response.headers);
-          //    console.log("Failed 1");
-          //   }else if (error.request) {
-          //      console.log(error.request);
-          //      console.log("Failed 2");
-          //  } else {
-          //      // Something happened in setting up the request and triggered an Error
-          //      console.log('Error', error.message);
-          //      console.log("Failed 3");
-          //  }
-          //  console.log(error.config);
+            if(error.response){
+              console.log(error.response.data);
+            //    console.log(error.response.status);
+            //    console.log(error.response.headers);
+             console.log("Failed 1");
+            }else if (error.request) {
+               console.log(error.request);
+               console.log("Failed 2");
+           } else {
+               // Something happened in setting up the request and triggered an Error
+               console.log('Error', error.message);
+               console.log("Failed 3");
+           }
+           console.log(error.config);
           }
           )
         
