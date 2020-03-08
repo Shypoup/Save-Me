@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
 import axios from 'axios';
-import {URL,Token} from './API/Defaults';
-export default class HomeScreen extends React.Component{
+import {URL,Token} from '../../../API/Defaults';
+export default class AccidentsPosts extends React.Component{
   
     constructor(props){
         super(props);
@@ -15,8 +15,8 @@ export default class HomeScreen extends React.Component{
     
    
     componentDidMount(){
-        var obj;
-         axios.get(`${URL}/FoundPosts`,{
+       
+         axios.get(`${URL}/RoadAccedint`,{
                         headers :{
                         'X-AUTH': `${Token}`
                     }
@@ -24,13 +24,16 @@ export default class HomeScreen extends React.Component{
                     console.log(response.data);
                     console.log(response.data.length);
                   
-             
+                   
+                    console.log();
+                    console.log();
                     this.setState({
                         isloading: false,
                         datasource:response.data, 
                         
                     })
-                   
+                    
+                    console.log("Data Source : "+ this.state.datasource.inforamation[1]);
                     
                 }).catch(error =>{
                     console.log(error);
@@ -54,36 +57,35 @@ export default class HomeScreen extends React.Component{
                   )
               }
               return(
-                <View style={{flex:1, paddingTop:20}}>
-              
-                <Text style={styles.headerText}>Found Posts </Text>
+               
+            
                     <FlatList
                         data={this.state.datasource}
-                        
-              renderItem={({item})=><View> 
-                  <View style={styles.postContainer}>
+                        renderItem={({item})=><View> 
+                   <View style={styles.postContainer}>
     
-    <View style={styles.postText}>
-    <Text style={styles.postText}>Name:<Text style={styles.innerPostText}> {item.name}</Text></Text>
-    <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>9</Text></Text>
-    <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.Gender}</Text></Text>
-    <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text>
-    <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text> 
-    {/* <TouchableOpacity
-      onPress={() =>props.navigation.navigate('LostDetail')}
-    >
-        <Text style={styles.seeMore}   >See More </Text>
-    </TouchableOpacity> */}
-    
-    </View>
-    <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
-    </View> 
-           
-                   </View>
-                  }
-                        keyExtractor={item => item._id}
-                        />
+                    <View style={styles.postText}>
+                    <Text style={styles.postText}>Description:</Text>
+                    <Text style={styles.innerPostText}> {item.inforamation}</Text>
+                    
+
+                    {/* <TouchableOpacity
+                    onPress={() =>props.navigation.navigate('LostDetail')}
+                    >
+                        <Text style={styles.seeMore}   >See More </Text>
+                    </TouchableOpacity> */}
+                    
                     </View>
+                    <View style={styles.ImageContainer}>
+                    <Image style={styles.postImage} source={{uri: `${item.photo_URL}`}}/>
+                    </View>
+                    </View> 
+                              
+                                </View>
+                                }
+                                keyExtractor={item => item._id}
+                                        />
+                                    
               )
           }      
     }
@@ -96,16 +98,7 @@ const styles =StyleSheet.create({
     borderWidth : 0.3,
     borderColor: '#360f9a',
     borderRadius:9,
-    alignItems:'flex-start',
-    },
-    headerText:{
-        fontSize:20,
-        marginHorizontal: 20,
-        marginTop:-10,
-        marginBottom:5,
-        fontWeight: "bold",
-        color: '#360f6f',
-        //fontStyle: 'italic',
+    alignItems:'stretch',
     },
     postImage:{
         flex: 1,
@@ -119,7 +112,7 @@ const styles =StyleSheet.create({
     },
     postTextContainer:{
         // alignSelf:'flex-start',
-        alignItems:'flex-start',
+        // alignItems:'flex-start',
         flex:1,
         
     },
@@ -128,12 +121,17 @@ const styles =StyleSheet.create({
         fontSize:16,
         marginVertical:5,
         marginHorizontal:5,
+        alignSelf:'flex-start'
     
     },
     innerPostText:{
         color: '#000',
         fontSize:15,
+        width:150,
     
+    },
+    ImageContainer:{
+        alignSelf:'flex-end',
     },
     seeMore:{
         

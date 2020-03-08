@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
 import axios from 'axios';
-import {URL,Token} from './API/Defaults';
-export default class HomeScreen extends React.Component{
+import {URL,Token} from '../../../API/Defaults';
+export default class LostPosts extends React.Component{
   
     constructor(props){
         super(props);
@@ -16,7 +16,7 @@ export default class HomeScreen extends React.Component{
    
     componentDidMount(){
         var obj;
-         axios.get(`${URL}/FoundPosts`,{
+         axios.get(`${URL}/LostPosts`,{
                         headers :{
                         'X-AUTH': `${Token}`
                     }
@@ -33,7 +33,7 @@ export default class HomeScreen extends React.Component{
                    
                     
                 }).catch(error =>{
-                    console.log(error);
+                    // console.log(error);
                     
                 })
                    
@@ -56,7 +56,7 @@ export default class HomeScreen extends React.Component{
               return(
                 <View style={{flex:1, paddingTop:20}}>
               
-                <Text style={styles.headerText}>Found Posts </Text>
+                <Text style={styles.headerText}>Lost Posts </Text>
                     <FlatList
                         data={this.state.datasource}
                         
@@ -64,7 +64,7 @@ export default class HomeScreen extends React.Component{
                   <View style={styles.postContainer}>
     
     <View style={styles.postText}>
-    <Text style={styles.postText}>Name:<Text style={styles.innerPostText}> {item.name}</Text></Text>
+    <Text style={styles.postText}>Name:<Text style={styles.innerPostText}> {item.childname}</Text></Text>
     <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>9</Text></Text>
     <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.Gender}</Text></Text>
     <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text>

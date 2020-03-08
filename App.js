@@ -5,6 +5,7 @@
  import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import HomeScreen from './HomeScreen';
 import Login from './src/UI/General/Login';
 import Register from './src/UI/General/Register';
@@ -28,11 +29,30 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import other from './other';
 import SelectPost from './src/UI/Components/SelectPost';
+import AccidentsPosts from './src/UI/Accidents/ShowAccidentPosts';
+import LostPosts from './src/UI/Lost/ShowLostPosts';
 
 const Tab = createBottomTabNavigator();
 const Stack=createStackNavigator();
 const Drawer = createDrawerNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
+function topTabs() {
+  return (
+    <TopTab.Navigator
+    tabBarOptions={{
+      activeTintColor:'#360f9a',
+      indicatorStyle: {color:'#360f9a'},
+      activeTintColor: '#360f9a',
+    // style: { backgroundColor: 'powderblue' },
+  }}
+    >
+      <TopTab.Screen name="Home" component={HomeScreen} />
+      <TopTab.Screen name="Lost " component={LostPosts} />
+      <TopTab.Screen name="Accidents" component={AccidentsPosts} />
+    </TopTab.Navigator>
+  );
+}
 function MyDrawer() {
   return (
     <Drawer.Navigator>
@@ -144,7 +164,7 @@ export default function MyTabs() {
     >
       <Tab.Screen
         name="Home"
-        component={Drawerr}
+        component={topTabs}
 
        
       />
@@ -154,6 +174,9 @@ export default function MyTabs() {
         
         
       />
+     
+
+
       <Tab.Screen
         name="Notifications"
         component={Notifications}
