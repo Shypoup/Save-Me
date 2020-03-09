@@ -32,6 +32,7 @@ import SelectPost from './src/UI/Components/SelectPost';
 import AccidentsPosts from './src/UI/Accidents/ShowAccidentPosts';
 import LostPosts from './src/UI/Lost/ShowLostPosts';
 
+
 const Tab = createBottomTabNavigator();
 const Stack=createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -71,8 +72,7 @@ function Otherr() {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
     <Stack.Screen name="LostPost" component={LostPost} options={{ headerShown: false }} />
-    
-    <Stack.Screen name="SearchLost" component={SearchLost} options={{ headerShown: false }}/>
+   
      
     <Stack.Screen name="Image" component={ImagePicker} />
   
@@ -124,73 +124,100 @@ function Create(){
 /************BUTTOMTAPNAVIGATOR */
 export default function MyTabs() {
   return (
-    <NavigationContainer>
-    <Tab.Navigator tabstyle={{}}
-      initialRouteName="HomeScreen"
-      tabBarOptions={{
-        activeTintColor: '#360f9a',
-        inactiveTintColor: 'gray',
-      }}
-      screenOptions={({ route }) => ({
-        
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-           color='gray';
-
-          if (route.name === 'Home') {
-            iconName = 'ios-home'
-            color= focused ?'#360f9a' : 'gray';
-              
-          } else if (route.name === 'Notifications') {
-            iconName = focused ? 'ios-notifications' : 'md-notifications';
-            color= focused ?'#360f9a' : 'gray';
-          } else if (route.name === 'Profile') {
-          iconName =  'ios-person'
-          color= focused ?'#360f9a' : 'gray';
-        }else if (route.name === 'Create Post') {
-          iconName =  'ios-add-circle'
-          color= focused ?'#360f9a' : 'gray';
-        }
-          
-          
-          
-
-          
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
+  
+  <NavigationContainer>
+     <Stack.Navigator>
       
-      
-    >
-      <Tab.Screen
-        name="Home"
-        component={topTabs}
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+    <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
+    <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} /> 
 
-       
-      />
-       <Tab.Screen
-        name="Create Post"
-        component={Create}
-        
-        
-      />
-     
+   
+  
+    </Stack.Navigator>
 
-
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        
-          
-        
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profilee}
-        
-        
-      />
-    </Tab.Navigator>
     </NavigationContainer>
+   
   );
+}
+
+function Home (){
+  return(
+    <Tab.Navigator tabstyle={{}}
+    initialRouteName="HomeScreen"
+    tabBarOptions={{
+      activeTintColor: '#360f9a',
+      inactiveTintColor: 'gray',
+    }}
+    screenOptions={({ route }) => ({
+      
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+         color='gray';
+
+        if (route.name === 'Home') {
+          iconName = 'ios-home'
+          color= focused ?'#360f9a' : 'gray';
+            
+        } else if (route.name === 'Notifications') {
+          iconName = focused ? 'ios-notifications' : 'md-notifications';
+          color= focused ?'#360f9a' : 'gray';
+        } else if (route.name === 'Profile') {
+        iconName =  'ios-person'
+        color= focused ?'#360f9a' : 'gray';
+      }else if (route.name === 'Create Post') {
+        iconName =  'ios-add-circle'
+        color= focused ?'#360f9a' : 'gray';
+      }else if (route.name === 'Search') {
+        iconName =  'ios-search'
+        color= focused ?'#360f9a' : 'gray';
+      }
+        
+        
+        
+
+        
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+    })}
+    
+    
+  >
+    <Tab.Screen
+      name="Home"
+      component={topTabs}
+
+     
+    />
+     <Tab.Screen
+      name="Create Post"
+      component={Create}
+      
+      
+    />
+   
+   <Tab.Screen
+      name="Search"
+      component={SearchLost}
+      
+      
+    />
+
+
+    {/* <Tab.Screen
+      name="Notifications"
+      component={Notifications}
+      
+        
+      
+    /> */}
+    <Tab.Screen
+      name="Profile"
+      component={Profilee}
+      
+      
+    />
+  </Tab.Navigator>
+
+  )
 }

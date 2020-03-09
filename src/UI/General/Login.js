@@ -1,11 +1,52 @@
 import React,{useState} from 'react';
-import {View, StyleSheet,TextInput,Text,TouchableOpacity,ScrollView} from 'react-native';
+import {View, StyleSheet,TextInput,Text,TouchableOpacity,ScrollView,AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import {URL} from '../../../API/Defaults';
+const ACCESS_TOKEN ='access_token';
 
-const Login = ({navigation}) =>{
-    const [mail,setMail] =useState('');
-    const [password,setPassword] =useState('');
+
+
+export default class Login extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            
+            mail:"",
+            password:""
+            
+        };
+    }
+
+    async storeToken(accessToken){
+    try{
+        await AsyncStorage.setItem(ACCESS_TOKEN,accessToken);
+        this.getToken();
+    }catch(error){
+        console.log("Somethimg went Wrong");
+    }
+}
+
+async getToken(){
+    try{
+      let token =  await AsyncStorage.getItem(ACCESS_TOKEN);
+      console.log("Token is : "+token)
+        
+    }catch(error){
+        console.log("Somethimg went Wrong");
+    }
+}
+async removeToken(){
+    try{
+        await AsyncStorage.removeItem(ACCESS_TOKEN);
+        this.getToken();
+    }catch(error){
+        console.log("Somethimg went Wrong");
+    }
+}
+
+render(){
+
     return (
 
 
@@ -26,37 +67,43 @@ const Login = ({navigation}) =>{
     <View style={styles.TextinputContainer}>
        <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
        <TextInput style={styles.Textinput} placeholder='Mail' placeholderTextColor='#360f9a' 
-      value={mail}
-      onChangeText={newvalue => setMail(newvalue)}
+      value={this.state.mail}
+      onChangeText={mail => this.setState({mail})}
       />
    </View>
-   {mail.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+   {this.state.mail.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
    
 
     <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
        <TextInput style={styles.Textinput} placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a'
        
-       value={password}
-       onChangeText={newvalue => setPassword(newvalue)}
+       value={this.state.password}
+       onChangeText={password => this.setState({password})}
        />  
         </View>
         
-        {password.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+        {this.state.password.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
         
 
         <TouchableOpacity style={styles.Button}
         onPress={()=>{
-            axios.post('http://192.168.1.7:3000/login',{
-            email:`${mail}`,
-            password:`${password}`,
+            axios.post(`${URL}/login`,{
+            email:`${this.state.mail}`,
+            password:`${this.state.password}`,
 
             headers: {
                 'Content-Type': 'application/json',
             }
-
+            
         }).then(response=>{
-            console.log(response.data);
+            // let res=await response.token;
+           console.log(response.data);
+            let accessToken=response.data.token;
+            console.log("Show Token : "+ response.data.tokens[0].token);
+            this.storeToken(accessToken);
+            
+            this.props.navigation.navigate('Ho');
         }).catch(error =>{
             console.log(error);
             
@@ -77,7 +124,7 @@ const Login = ({navigation}) =>{
     </ScrollView>
   )
 }
-
+}
 const styles =StyleSheet.create({
     Container:{
         marginHorizontal: 30,
@@ -174,4 +221,3 @@ const styles =StyleSheet.create({
     },
 });
     
-export default Login;

@@ -3,6 +3,7 @@ import {View, StyleSheet,TextInput,Text,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import {URL} from '../../../API/Defaults';
 
 
 
@@ -85,7 +86,7 @@ const Register = ({navigation}) =>{
 
         <TouchableOpacity style={styles.Button}
          onPress={()=>{
-            axios.post('http://192.168.1.7:3000/register',{
+            axios.post(`${URL}/register`,{
             Fname: `${firstName}`,
             Lname:`${lastName}`,
             phone:`${phone}`,
@@ -94,12 +95,16 @@ const Register = ({navigation}) =>{
 
         }).then(response=>{
             console.log(response.data);
+            navigation.navigate("Ho");
         }).catch(error =>{
             console.log(error);
             
+            
         });
     
-        }}
+        }
+        
+        }
         >
             <Text  style={styles.ButtonText}>Register</Text>
         </TouchableOpacity>
