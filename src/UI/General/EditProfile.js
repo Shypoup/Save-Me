@@ -64,6 +64,9 @@ export  default class EditProfile extends React.Component{
         placeholderTextColor='#360f9a'  
      onChangeText={firstName => this.setState({firstName})}
        value={this.state.firstName}
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.lastName.focus(); }}
+        blurOnSubmit={false}
       />
       
        <TextInput
@@ -71,6 +74,10 @@ export  default class EditProfile extends React.Component{
         placeholder='Last Name'
          placeholderTextColor='#360f9a'  onChangeText={lastName => this.setState({lastName})}
          value={this.state.lastName}
+         ref={ref => {this.lastName = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Mail.focus(); }}
+        blurOnSubmit={false}
         />
 
        <TextInput 
@@ -79,15 +86,23 @@ export  default class EditProfile extends React.Component{
         placeholderTextColor='#360f9a'
           onChangeText={mail => this.setState({mail})}
         value={this.state.mail}
+          ref={ref => {this.Mail = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone.focus(); }}
+        blurOnSubmit={false}
        />
       
        <TextInput 
-       style={styles.TextinputContainer}
+        style={styles.TextinputContainer}
         placeholder='Phone'
-         placeholderTextColor='#360f9a'
-          textContentType='telephoneNumber' 
-          onChangeText={phone => this.setState({phone})}
-            value={this.state.phone}
+        placeholderTextColor='#360f9a'
+        textContentType='telephoneNumber' 
+        onChangeText={phone => this.setState({phone})}
+        value={this.state.phone}
+        ref={ref => {this.Phone = ref;}} 
+        returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Address.focus(); }}
+        blurOnSubmit={false}
             />
      
        <TextInput
@@ -97,6 +112,10 @@ export  default class EditProfile extends React.Component{
          textContentType='fullStreetAddress'
          onChangeText={address => this.setState({address})}
        value={this.state.address}
+         ref={ref => {this.Address = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.bloodType.focus(); }}
+        blurOnSubmit={false}
       />
       
        <TextInput 
@@ -106,6 +125,10 @@ export  default class EditProfile extends React.Component{
          textContentType='none'
          onChangeText={bloodType => this.setState({bloodType})}
           value={this.state.bloodType}
+            ref={ref => {this.bloodType = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone1.focus(); }}
+        blurOnSubmit={false}
       />
        
        
@@ -117,6 +140,11 @@ export  default class EditProfile extends React.Component{
          textContentType='telephoneNumber' 
          onChangeText={firstTrusted => this.setState({firstTrusted})}
        value={this.state.firstTrusted}
+         ref={ref => {this.Phone1 = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone2.focus(); }}
+        blurOnSubmit={false}
+        keyboardType='numeric'
       />
        
        <TextInput
@@ -126,6 +154,11 @@ export  default class EditProfile extends React.Component{
          textContentType='telephoneNumber'
          onChangeText={secondTrusted => this.setState({secondTrusted})}
        value={this.state.secondTrusted}
+         ref={ref => {this.Phone2 = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone3.focus(); }}
+        blurOnSubmit={false}
+        keyboardType='numeric'
       />
       
        <TextInput 
@@ -135,6 +168,8 @@ export  default class EditProfile extends React.Component{
         textContentType='telephoneNumber' 
         onChangeText={thirdTrusted => this.setState({thirdTrusted})}
        value={this.state.thirdTrusted}
+         ref={ref => {this.Phone3 = ref;}} 
+         keyboardType='numeric'
       />
  
 

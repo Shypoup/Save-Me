@@ -65,10 +65,18 @@ render(){
     <Text style={styles.WelcomText} >Welcome back !</Text>
     
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='Mail' placeholderTextColor='#360f9a' 
-      value={this.state.mail}
-      onChangeText={mail => this.setState({mail})}
+       <Icon name="ios-mail" 
+       color="#360f9a" 
+       style={styles.Icon} />     
+       <TextInput 
+        style={styles.Textinput} 
+        placeholder='Mail' 
+        placeholderTextColor='#360f9a' 
+        value={this.state.mail}
+        onChangeText={mail => this.setState({mail})}
+        returnKeyType = { "next" }
+        onSubmitEditing={() => { this.password.focus(); }}
+        blurOnSubmit={false}
       />
    </View>
    {this.state.mail.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
@@ -76,10 +84,15 @@ render(){
 
     <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
-       <TextInput style={styles.Textinput} placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a'
-       
-       value={this.state.password}
-       onChangeText={password => this.setState({password})}
+       <TextInput 
+        style={styles.Textinput}
+        placeholder='password' 
+        textContentType='password' 
+        secureTextEntry={true} 
+        placeholderTextColor='#360f9a'
+        ref={(input) => { this.password = input; }} 
+        value={this.state.password}
+        onChangeText={password => this.setState({password})}
        />  
         </View>
         

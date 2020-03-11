@@ -19,8 +19,23 @@ const CreateAcciedentPost = ({navigation}) =>{
     <Text style={styles.WelcomText} >Create Post</Text>
     
        
-       <TextInput style={styles.TextinputContainer} placeholder='Description' placeholderTextColor='#360f9a' />
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' />
+       <TextInput 
+       style={styles.TextinputContainer}
+        returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone.focus(); }}
+        blurOnSubmit={false}
+        placeholder='Description' 
+        placeholderTextColor='#360f9a' />
+
+       <TextInput 
+       style={styles.TextinputContainer}
+       ref={(input) => { this.Phone = input; }} 
+       placeholder='Phone' 
+       placeholderTextColor='#360f9a' 
+       textContentType='telephoneNumber'
+       keyboardType='numeric'
+        />
+       
        <UploadImage fileName={1} /> 
 
 

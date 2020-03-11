@@ -30,7 +30,11 @@ const Register = ({navigation}) =>{
     
     <View style={styles.TextinputContainer}>
        <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='First Name' placeholderTextColor='#360f9a'
+       <TextInput style={styles.Textinput}
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.lastName.focus(); }}
+        blurOnSubmit={false}
+        placeholder='First Name' placeholderTextColor='#360f9a'
        value={firstName}
        onChangeText={newvalue => setFirstName(newvalue)}
        />
@@ -39,7 +43,12 @@ const Register = ({navigation}) =>{
     
     <View style={styles.TextinputContainer}>
        <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='Last Name' placeholderTextColor='#360f9a'
+       <TextInput style={styles.Textinput}
+       ref={ref => {this.lastName = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone.focus(); }}
+        blurOnSubmit={false}
+        placeholder='Last Name' placeholderTextColor='#360f9a'
        value={lastName}
        onChangeText={newvalue => setLastName(newvalue)}
        />
@@ -47,14 +56,27 @@ const Register = ({navigation}) =>{
     {lastName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
     <View style={styles.TextinputContainer}>
     <Icon name="md-phone-portrait" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' 
+       <TextInput style={styles.Textinput}
+       ref={ref => {this.Phone = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Mail.focus(); }}
+        blurOnSubmit={false}
+        placeholder='Phone' 
+        placeholderTextColor='#360f9a' 
+        textContentType='telephoneNumber' 
        value={phone}
        onChangeText={newvalue => setPhone(newvalue)}
+       keyboardType='numeric'
        />
     </View>
     <View style={styles.TextinputContainer}>
        <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
-       <TextInput style={styles.Textinput} placeholder='Mail' placeholderTextColor='#360f9a' textContentType='emailAddress' 
+       <TextInput style={styles.Textinput}
+       ref={ref => {this.Mail = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.password.focus(); }}
+        blurOnSubmit={false}
+        placeholder='Mail' placeholderTextColor='#360f9a' textContentType='emailAddress' 
        value={mail}
        onChangeText={newvalue => setMail(newvalue)}
        />
@@ -63,7 +85,12 @@ const Register = ({navigation}) =>{
 
     <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
-       <TextInput style={styles.Textinput} placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a'
+       <TextInput style={styles.Textinput}
+       ref={ref => {this.password = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.confirmPassword.focus(); }}
+        blurOnSubmit={false}
+        placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a'
        value={password}
        onChangeText={newvalue => setPassword(newvalue)}
        />  
@@ -74,9 +101,13 @@ const Register = ({navigation}) =>{
 
         <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
-       <TextInput style={styles.Textinput} placeholder='Confirm password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a' 
-       
+       <TextInput style={styles.Textinput} 
        value={confirmPassword}
+       ref={ref => {this.confirmPassword = ref;}} 
+       placeholder='Confirm password' 
+       textContentType='password' 
+       secureTextEntry={true}  
+       placeholderTextColor='#360f9a'  
        onChangeText={newvalue => setConfirmPassword(newvalue)}
        />  
         </View>

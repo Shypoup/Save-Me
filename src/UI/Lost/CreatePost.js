@@ -7,6 +7,7 @@ import DatePicker from '../Components/DatePicker';
 import UploadImage from '../Components/UploadImage';
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
+import FormData from 'form-data';
 
 
 const CreatePost = ({navigation}) =>{
@@ -24,10 +25,53 @@ const CreatePost = ({navigation}) =>{
         
     <Text style={styles.WelcomText} >Create Post</Text>
     
-       <TextInput style={styles.TextinputContainer} placeholder='Name' placeholderTextColor='#360f9a' />
-       <TextInput style={styles.TextinputContainer} placeholder='Age' placeholderTextColor='#360f9a' />
+       <TextInput 
+       style={styles.TextinputContainer} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Age.focus(); }}
+        blurOnSubmit={false}
+       placeholder='Name' 
+       placeholderTextColor='#360f9a' />
 
-       <View style={styles.PickerContainer}>
+       <TextInput 
+       style={styles.TextinputContainer}
+       style={styles.TextinputContainer}
+       ref={ref => {this.Age = ref;}} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.LostDate.focus(); }}
+        blurOnSubmit={false}
+       placeholder='Age' placeholderTextColor='#360f9a' />
+
+        
+       <TextInput 
+       style={styles.TextinputContainer}
+       placeholder='LostDate' 
+       placeholderTextColor='#360f9a'
+       ref={ref => {this.LostDate = ref; }}
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Description.focus(); }}
+        blurOnSubmit={false} 
+       />
+
+       <TextInput 
+       style={styles.TextinputContainer}
+       ref={ref => {this.Description = ref; }} 
+       returnKeyType = { "next" }
+        onSubmitEditing={() => { this.Phone.focus(); }}
+        blurOnSubmit={false} 
+       placeholder='Description' 
+       placeholderTextColor='#360f9a' />
+
+       <TextInput 
+       style={styles.TextinputContainer} 
+       ref={(input) => { this.Phone = input; }} 
+       placeholder='Phone' 
+       placeholderTextColor='#360f9a' 
+       textContentType='telephoneNumber'
+       keyboardType='numeric'
+        />
+
+        <View style={styles.PickerContainer}>
        <Picker
 		style={styles.Picker}
 		selectedValue={cityPicker}
@@ -42,11 +86,6 @@ const CreatePost = ({navigation}) =>{
 		<Picker.Item label="New York" value="90"/>
 		</Picker>
        </View>
-
-        
-       <TextInput style={styles.TextinputContainer} placeholder='Lost Date' placeholderTextColor='#360f9a' />
-       <TextInput style={styles.TextinputContainer} placeholder='Description' placeholderTextColor='#360f9a' />
-       <TextInput style={styles.TextinputContainer} placeholder='Phone' placeholderTextColor='#360f9a' textContentType='telephoneNumber' />
        
             <UploadImage  />
         
