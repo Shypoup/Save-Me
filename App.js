@@ -1,11 +1,13 @@
-// import 'react-native-gesture-handler';
+import * as React from 'react';
 
-
- import * as React from 'react';
- import {NavigationContainer} from '@react-navigation/native';
+//Navogation libraries
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+//Screens 
 import HomeScreen from './HomeScreen';
 import Login from './src/UI/General/Login';
 import Register from './src/UI/General/Register';
@@ -22,22 +24,19 @@ import QRGenerator from './src/UI/Components/QRGenerator';
 import CreateAcciedentPost from './src/UI/Accidents/CreateAcciedentPost';
 import UploadImage from './src/UI/Components/UploadImage';
 import Notifications from './src/UI/General/Notifications';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import other from './other';
 import SelectPost from './src/UI/Components/SelectPost';
 import AccidentsPosts from './src/UI/Accidents/ShowAccidentPosts';
 import LostPosts from './src/UI/Lost/ShowLostPosts';
 
+//Objects of screens
+const Tab = createBottomTabNavigator();  //bottonTab object
+const Stack=createStackNavigator();      //Stack  object
+const Drawer = createDrawerNavigator();  // Drawer object  not used
+const TopTab = createMaterialTopTabNavigator(); // Toptab object
 
-const Tab = createBottomTabNavigator();
-const Stack=createStackNavigator();
-const Drawer = createDrawerNavigator();
-const TopTab = createMaterialTopTabNavigator();
 
+//topTap
 function topTabs() {
   return (
     <TopTab.Navigator
@@ -54,47 +53,12 @@ function topTabs() {
     </TopTab.Navigator>
   );
 }
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
-    </Drawer.Navigator>
-  );
-}
 
-function Otherr() {
-  return (
-   
 
-    <Stack.Navigator>
-      <Stack.Screen name="other" component={other} /> 
-      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-    <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
-    <Stack.Screen name="LostPost" component={LostPost} options={{ headerShown: false }} />
-   
-     
-    <Stack.Screen name="Image" component={ImagePicker} />
-  
-   <Stack.Screen name="UploadImage" component={UploadImage} />
-   
-  
-    </Stack.Navigator>
-)
 
-}
-function Drawerr() {
-  return (
-    <Stack.Navigator>
-      
-    <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="other" component={Otherr} />  
-    <Stack.Screen name="LostDetail" component={LostPostDetail}  />
-    </Stack.Navigator>
-)
 
-}
 
+// Stack navigation for Profile
 function Profilee() {
   return (
     <Stack.Navigator>
@@ -106,6 +70,8 @@ function Profilee() {
   );
 }
 
+
+// Stack navigation for Create Post
 function Create(){
   return (
     <Stack.Navigator>
@@ -120,27 +86,25 @@ function Create(){
 
 
 
-
-/************BUTTOMTAPNAVIGATOR */
+// Stack navigation for Login 
 export default function MyTabs() {
   return (
   
   <NavigationContainer>
      <Stack.Navigator>
-          <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} /> 
-
-      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-    <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
-
-   
-  
+          <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
+           
     </Stack.Navigator>
-
     </NavigationContainer>
    
   );
 }
 
+
+
+//Botton Tab Navigator  "Main Navigator"
 function Home (){
   return(
     <Tab.Navigator tabstyle={{}}

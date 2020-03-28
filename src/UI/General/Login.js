@@ -1,9 +1,12 @@
 import React,{useState} from 'react';
-import {View, StyleSheet,TextInput,Text,TouchableOpacity,ScrollView,AsyncStorage} from 'react-native';
+import {View, StyleSheet,TextInput,Text,TouchableOpacity,ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import {URL} from '../../../API/Defaults';
-const ACCESS_TOKEN ='access_token';
+import AsyncStorage from '@react-native-community/async-storage';
+
+
+
 
 
 
@@ -13,29 +16,33 @@ export default class Login extends React.Component{
         this.state={
             
             mail:"",
-            password:""
+            password:"",
+            Token:''
             
         };
     }
 
-    async storeToken(accessToken){
-    try{
-        await AsyncStorage.setItem(ACCESS_TOKEN,accessToken);
-        this.getToken();
-    }catch(error){
-        console.log("Somethimg went Wrong");
+storeToken = async (accessToken) => {
+    try {
+      await AsyncStorage.setItem('token', accessToken)
+      console.log('Done Store Token')
+    } catch(e) {
+        console.log("Somethimg went Wrong Store Token");
     }
-}
+  }
 
-async getToken(){
-    try{
-      let token =  await AsyncStorage.getItem(ACCESS_TOKEN);
-      console.log("Token is : "+token)
-        
-    }catch(error){
-        console.log("Somethimg went Wrong");
+getToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token')
+      console.log('Done Get Token')
+      return value;
+    } catch(e) {
+        console.log("Somethimg went Wrong Get Token");
     }
-}
+  
+   
+  
+  }
 async removeToken(){
     try{
         await AsyncStorage.removeItem(ACCESS_TOKEN);
@@ -45,8 +52,10 @@ async removeToken(){
     }
 }
 
-render(){
 
+
+render(){
+    
     return (
 
 
@@ -112,10 +121,16 @@ render(){
         }).then(response=>{
             // let res=await response.token;
            console.log(response.data);
-            let accessToken=response.data.token;
-            console.log("Show Token : "+ response.data.tokens[0].token);
-            this.storeToken(accessToken);
+            let accessToken=response.data.tokens[1].token;
             
+            this.storeToken(accessToken);
+            console.log("Show Token : "+ accessToken);
+            this.getToken().then((value)=>{
+                console.log("GET Token : "+ value);
+            })
+           
+           
+
             this.props.navigation.navigate('Ho');
         }).catch(error =>{
             console.log(error);
@@ -129,7 +144,7 @@ render(){
 
         <View style={styles.CreateAccountContainer}>
         <Text style={styles.createTextNormal}>Don't have an account ? </Text>
-        <Text style={styles.createTextColored} onPress={()=> navigation.navigate('Register')}>Create One</Text>
+        <Text style={styles.createTextColored} onPress={()=> this.props.navigation.navigate('Register')}>Create One</Text>
         </View>
 
         <View style={styles.shape3}/>

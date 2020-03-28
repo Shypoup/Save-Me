@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image,ScrollView} from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import {URL,Token} from '../../../API/Defaults';
 
 
 export  default class EditProfile extends React.Component{
-    //7const Profile =props=>{
         
         constructor(props){
             super(props);
@@ -19,38 +19,53 @@ export  default class EditProfile extends React.Component{
                 firstTrusted:" ",
                 secondTrusted:" ",
                 thirdTrusted:" ",
+                Token:'',
             };
         }
-         
+       
+getToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token')
+      console.log('Done Get Token')
+      return value;
+    } catch(e) {
+        console.log("Somethimg went Wrong Get Token");
+    }
+  
+  }   
+      
+      
+    
     componentDidMount(){
+        this.getToken().then((value)=>{
+            console.log("GET Token : "+ value);
+            this.setState({
+                Token:value
+            })
         axios.get(`${URL}/profile`,{
             headers :{
-                'X-AUTH': `${Token}`
+                'X-AUTH': `${this.state.Token}`
         }
         }).then(response=>{
         console.log(response.data);
-        console.log(response.data.Fname);
-        console.log(response.data.Lname);
-        console.log(response.data.phone);
-        console.log(response.data.email);
-        console.log(response.data.trusted1);
-        
-        
-        this.setState({firstName : response.data.Fname})
-        this.setState({lastName : response.data.Lname})
-        this.setState({phone : response.data.phone})
-        this.setState({mail : response.data.email})
-        this.setState({firstTrusted : response.data.trusted1})
-        this.setState({secondTrusted : response.data.trusted2})
-        this.setState({thirdTrusted : response.data.trusted3})
+          this.setState({
+        firstName    : response.data.Fname,
+        lastName     : response.data.Lname,
+        phone        : response.data.phone,
+        mail         : response.data.email,
+        firstTrusted : response.data.trusted1,
+        secondTrusted: response.data.trusted2,
+        thirdTrusted : response.data.trusted3,
+        address      :response.data.address,
+        bloodType    :response.data.bloodType, 
+        })
     }).catch(error =>{
         console.log(error);
-        
     });
-       }
+       
     
-
-        
+})
+    }    
         render(){
       return (
     
@@ -186,68 +201,33 @@ onPress={()=>{
             Lname:this.state.lastName,
             email:this.state.mail,
             phone:this.state.phone,
+            address:this.state.address,
+            bloodType:this.state.bloodType,
             trusted1:this.state.firstTrusted,
             trusted2:this.state.secondTrusted,
             trusted3:this.state.thirdTrusted,
 
         },
         headers:{
-           'X-AUTH':`${Token}`
+           'X-AUTH':`${this.state.Token}`
         }
     }).then((res) => {
         console.log("Response is:",res); 
+        this.props.navigation.pop();
     }).catch((error) => {
         if(error.response){
            console.log(error.response.data);
-           console.log(error.response.status);
-           console.log(error.response.headers);
+          
         }else if (error.request) {
            console.log(error.request);
        } else {
-           // Something happened in setting up the request and triggered an Error
+          
            console.log('Error', error.message);
        }
        console.log(error.config);
     })
 
    }}
-
-
-
-
-            // onPress={()=>{
-            //     // var config = {
-            //     //     headers :{
-            //     //         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ2ZjNlNGQ1Yjk3ODEzODQ1MzNkYzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgxNzA4MzYxfQ.c9489sSczuAlFOidLS8e_jY9ezWTHuetjvAzrp5XBsY"
-            //     //     }
-            //     // }; 
-            //     axios.post('http://192.168.1.8:3000/editProfile',{
-            //         headers :{
-            //         'X-AUTH': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU1NjQ3ZTdjZmUyMTA4NjAzM2E4MDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyNjU0NjE5fQ.fsa8nxL1YzLhXFpQMJPcfgeiOeE2K2fCLHDQNJ2Yidg`,
-            //       'Content-Type': `application/json`,
-           
-                    
-            //     },
-                
-                
-                    
-                  
-                
-    
-    
-            // }).then(response=>{
-            //     console.log(response.status);
-            //     console.log(response.headers);
-            // }).catch(error =>{
-            //     console.log(headers);
-        
-            //     console.log(error);
-            //     //console.log(error.req._headers);
-            //     console.log(error);
-                
-            // });
-        
-            // }}
         >
             <Text  style={styles.ButtonText}>Edit</Text>
         </TouchableOpacity>
@@ -273,8 +253,6 @@ const styles =StyleSheet.create({
     },
     TextinputContainer:{
         borderBottomWidth: 1,
-        //borderRadius : 25,
-        //borderWidth: 2,
         borderColor: '#360f9a',
         flexDirection:'row',
         

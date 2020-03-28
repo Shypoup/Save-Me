@@ -2,6 +2,11 @@ import React from 'react';
 import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
 import axios from 'axios';
 import {URL,Token} from './API/Defaults';
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
+
+import AsyncStorage from '@react-native-community/async-storage';
+
+
 export default class HomeScreen extends React.Component{
   
     constructor(props){
@@ -10,19 +15,41 @@ export default class HomeScreen extends React.Component{
         isloading: true,
         datasource:'',
         inforamation:[],
+        ipAddress:'',
+        Token:''
         }
     }
+  
     
-   
+getToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token')
+      console.log('Done Get Token')
+      return value;
+    } catch(e) {
+        console.log("Somethimg went Wrong Get Token");
+    }
+  
+  }   
+      
+      
+    
     componentDidMount(){
-        var obj;
+        this.getToken().then((value)=>{
+            console.log("GET Token : "+ value);
+            this.setState({
+                Token:value
+            })
+            
          axios.get(`${URL}/FoundPosts`,{
                         headers :{
-                        'X-AUTH': `${Token}`
-                    }
+                        
+                        'X-AUTH': `${this.state.Token}`
+                        }
                     }).then(response=>{
                     console.log(response.data);
                     console.log(response.data.length);
+                    console.log("Done");
                   
              
                     this.setState({
@@ -36,10 +63,10 @@ export default class HomeScreen extends React.Component{
                     console.log(error);
                     
                 })
-                   
-                }
+            })           
+            }
 
-
+        
 
           render()
          
@@ -60,28 +87,22 @@ export default class HomeScreen extends React.Component{
                     <FlatList
                         data={this.state.datasource}
                         
-              renderItem={({item})=><View> 
-                  <View style={styles.postContainer}>
-    
-    <View style={styles.postText}>
-    <Text style={styles.postText}>Name:<Text style={styles.innerPostText}> {item.name}</Text></Text>
-    <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>9</Text></Text>
-    <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.Gender}</Text></Text>
-    <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text>
-    <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text> 
-    {/* <TouchableOpacity
-      onPress={() =>props.navigation.navigate('LostDetail')}
-    >
-        <Text style={styles.seeMore}   >See More </Text>
-    </TouchableOpacity> */}
-    
-    </View>
-    <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
-    </View> 
-           
+              renderItem={({item})=>  <Card title={item.name}>
+                     <View style={styles.postContainer}>
+
+              
+                            <View style={styles.postText}>
+                                <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>9</Text></Text>
+                                <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.Gender}</Text></Text>
+                                <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text>
+                                <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text> 
+
+                            </View>
+                            <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
                    </View>
+                                         </Card>
                   }
-                        keyExtractor={item => item._id}
+              keyExtractor={item => item._id}
                         />
                     </View>
               )
@@ -90,13 +111,9 @@ export default class HomeScreen extends React.Component{
     
 const styles =StyleSheet.create({
     postContainer :{
-    marginHorizontal: 20,
-    marginVertical:5,
+    
     flexDirection:'row',
-    borderWidth : 0.3,
-    borderColor: '#360f9a',
-    borderRadius:9,
-    alignItems:'flex-start',
+   
     },
     headerText:{
         fontSize:20,
@@ -105,11 +122,11 @@ const styles =StyleSheet.create({
         marginBottom:5,
         fontWeight: "bold",
         color: '#360f6f',
-        //fontStyle: 'italic',
+        
     },
     postImage:{
         flex: 1,
-        width: 200,
+        width: "100%",
         height: 200,
         resizeMode:  'contain',
          alignSelf:'flex-end',
@@ -118,7 +135,7 @@ const styles =StyleSheet.create({
       
     },
     postTextContainer:{
-        // alignSelf:'flex-start',
+       
         alignItems:'flex-start',
         flex:1,
         

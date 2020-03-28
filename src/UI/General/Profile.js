@@ -3,7 +3,8 @@ import {View, StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import QRCode from 'react-native-qrcode';
-import {URL,Token} from '../../../API/Defaults';
+import AsyncStorage from '@react-native-community/async-storage';
+import {URL} from '../../../API/Defaults';
 
 
 
@@ -23,36 +24,53 @@ export  default class Profile extends React.Component{
             secondTrusted:" ",
             thirdTrusted:" ",
             showQR : false,
+            Token:'',
         };
     }
-     
-    componentDidMount(){
+       
+    getToken = async () => {
+        try {
+          const value = await AsyncStorage.getItem('token')
+          console.log('Done Get Token')
+          return value;
+        } catch(e) {
+            console.log("Somethimg went Wrong Get Token");
+        }
+      
+      }   
+          
+          
+        
+        componentDidMount(){
+            this.getToken().then((value)=>{
+                console.log("GET Token : "+ value);
+                this.setState({
+                    Token:value
+                })
     axios.get(`${URL}/profile`,{
         headers :{
-        'X-AUTH': `${Token}`
+        'X-AUTH': `${this.state.Token}`
     }
     }).then(response=>{
     console.log(response.data);
-    console.log(response.data.Fname);
-    console.log(response.data.Lname);
-    console.log(response.data.phone);
-    console.log(response.data.email);
-    console.log(response.data.trusted1);
-    
-    
-    this.setState({firstName : response.data.Fname})
-    this.setState({lastName : response.data.Lname})
-    this.setState({phone : response.data.phone})
-    this.setState({mail : response.data.email})
-    this.setState({firstTrusted : response.data.trusted1})
-    this.setState({secondTrusted : response.data.trusted2})
-    this.setState({thirdTrusted : response.data.trusted3})
+    this.setState({
+        firstName    : response.data.Fname,
+        lastName     : response.data.Lname,
+        phone        : response.data.phone,
+        mail         : response.data.email,
+        firstTrusted : response.data.trusted1,
+        secondTrusted: response.data.trusted2,
+        thirdTrusted : response.data.trusted3,
+        address      :response.data.address,
+        bloodType    :response.data.bloodType, 
+    })
     
 }).catch(error =>{
     console.log(error);
     
 });
-   }
+   })
+}
 
     
     render(){
@@ -69,8 +87,8 @@ export  default class Profile extends React.Component{
 <Text style={styles.Title}>Your Data</Text>
   <Text style={styles.user}>{this.state.mail}</Text>
   <Text style={styles.user}>{this.state.phone}</Text>
-  <Text style={styles.user}>Giza</Text>
-  <Text style={styles.user}>A+</Text>
+  <Text style={styles.user}>{this.state.address}</Text>
+  <Text style={styles.user}>{this.state.bloodType}</Text>
   <Text style={styles.Title}>Trusted Numbers</Text>
   <Text style={styles.user}>{this.state.firstTrusted}</Text>
   <Text style={styles.user}>{this.state.secondTrusted}</Text>

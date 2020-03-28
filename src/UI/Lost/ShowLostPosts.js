@@ -9,16 +9,30 @@ export default class LostPosts extends React.Component{
         this.state={
         isloading: true,
         datasource:'',
-        inforamation:[],
+        Token:''
         }
     }
+          
+getToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token')
+      console.log('Done Get Token')
+      return value;
+    } catch(e) {
+        console.log("Somethimg went Wrong Get Token");
+    }
+  
+  }     
     
-   
     componentDidMount(){
-        var obj;
+        this.getToken().then((value)=>{
+            console.log("GET Token : "+ value);
+            this.setState({
+                Token:value
+            })
          axios.get(`${URL}/LostPosts`,{
                         headers :{
-                        'X-AUTH': `${Token}`
+                        'X-AUTH': `${this.state.Token}`
                     }
                     }).then(response=>{
                     console.log(response.data);
@@ -38,6 +52,7 @@ export default class LostPosts extends React.Component{
                 })
                    
                 }
+        )}
 
 
 

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import FormData from 'form-data';
-
+import {URL,Token} from '../../../API/Defaults';
 import axios from 'axios';
 
 
@@ -73,15 +73,17 @@ export default class App extends React.Component {
 
   uploadImage =async (image_uri)=>{
     const file ={
-      uri:image_uri,
+      uri:'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg',
       name:'younis.jpg',
       type:'image/jpeg',
     }
     let Data =new FormData();
-    Data.append('childname','Hesham');
-    Data.append('Gender','Male');
     Data.append('phone','01112345665');
-    Data.append('file',file);
+    Data.append('Gender','Male');
+    Data.append('name','Hesham');
+    
+    
+    Data.append('',file);
    
 
     // Data.append('',
@@ -91,7 +93,7 @@ export default class App extends React.Component {
     //   name:'hello.jpg'})
     axios({
       method:'post',
-      url:'http://192.168.1.7:3000/lost',
+      url:'http://192.168.1.6:3000/found',
       data :{
         // Childname: 'Hesham',
         // Gender : 'male',
@@ -103,7 +105,7 @@ export default class App extends React.Component {
       }
       ,
       headers:{
-         'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgzMjM5MDQwfQ.KZPkxkEMZTgBWfl44c0wy9TLyb2cOWrZ1vYF6JyLYpc",
+         'X-AUTH': `${Token}`,
          'Content-Type': 'application/json',
          //  'accept': 'application/json',
         //  'Accept-Language': 'en-US,en;q=0.8',
@@ -154,18 +156,18 @@ export default class App extends React.Component {
         onPress={()=>{
          // alert("You pressed");
           let Dataa =new FormData();
-          Dataa.append('childname','Hesham');
+          Dataa.append('name','Hesham');
           Dataa.append('Gender','Male');
           Dataa.append('phone','01112345665');
-          Dataa.append('photo',
+          Dataa.append('',
           {type:'image/jpg',
            uri:this.state.image_uri,
-            name:this.state.imagename})
+           })
       
           
           axios({
             method:'post',
-            url:'http://192.168.1.7:3000/lost',data:{Dataa},
+            url:'http://192.168.1.6:3000/found',data:{Dataa},
             // headers:{
             //    'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgzMjM5MDQwfQ.KZPkxkEMZTgBWfl44c0wy9TLyb2cOWrZ1vYF6JyLYpc",
               
