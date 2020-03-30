@@ -4,6 +4,8 @@ import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import QRCode from 'react-native-qrcode';
 import AsyncStorage from '@react-native-community/async-storage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {URL} from '../../../API/Defaults';
 
 
@@ -85,14 +87,14 @@ export  default class Profile extends React.Component{
             </View>
   <View  style={styles.DataContainer} >
 <Text style={styles.Title}>Your Data</Text>
-  <Text style={styles.user}>{this.state.mail}</Text>
-  <Text style={styles.user}>{this.state.phone}</Text>
-  <Text style={styles.user}>{this.state.address}</Text>
-  <Text style={styles.user}>{this.state.bloodType}</Text>
+  <Text style={styles.user}><Ionicons name="ios-mail" size={18} color="#360f9a" />  {this.state.mail}</Text>
+  <Text style={styles.user}><Ionicons name="ios-phone-portrait" size={18} color="#360f9a" />  {this.state.phone}</Text>
+  <Text style={styles.user}><Ionicons name="md-locate" size={18} color="#360f9a" />  {this.state.address}</Text>
+  <Text style={styles.user}><Ionicons name="md-medical" size={18} color="#360f9a" />  {this.state.bloodType}</Text>
   <Text style={styles.Title}>Trusted Numbers</Text>
-  <Text style={styles.user}>{this.state.firstTrusted}</Text>
-  <Text style={styles.user}>{this.state.secondTrusted}</Text>
-  <Text style={styles.user}>{this.state.thirdTrusted}</Text>
+  <Text style={styles.user}><Ionicons name="ios-person" size={18} color="#360f9a" />  {this.state.firstTrusted}</Text>
+  <Text style={styles.user}><Ionicons name="ios-person" size={18} color="#360f9a" />  {this.state.secondTrusted}</Text>
+  <Text style={styles.user}><Ionicons name="ios-person" size={18} color="#360f9a" />  {this.state.thirdTrusted}</Text>
   </View>
   
   <TouchableOpacity 
