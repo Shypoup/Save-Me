@@ -171,7 +171,7 @@ const styles =StyleSheet.create({
         borderWidth: 1,
         borderColor: '#360f9a',
         flexDirection:'row',
-        
+        flex:1,
         paddingHorizontal:20,
         marginVertical:10,
         
@@ -181,7 +181,7 @@ const styles =StyleSheet.create({
         fontSize : 18,
         color : '#000',
         paddingLeft :20,
-       
+        flex:1,
     },
     Icon:{
         marginVertical:8,
