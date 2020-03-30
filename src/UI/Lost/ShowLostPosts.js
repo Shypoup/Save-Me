@@ -1,7 +1,8 @@
 import React from 'react';
 import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
 import axios from 'axios';
-import {URL,Token} from '../../../API/Defaults';
+import AsyncStorage from '@react-native-community/async-storage';
+import {URL} from '../../../API/Defaults';
 export default class LostPosts extends React.Component{
   
     constructor(props){
@@ -32,7 +33,7 @@ getToken = async () => {
             })
          axios.get(`${URL}/LostPosts`,{
                         headers :{
-                        'X-AUTH': `${this.state.Token}`
+                        'X-AUTH': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdmOGUzNjllNDljYTI0MzhlMGJkMzgiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTg1NDE3ODc2fQ.cIvpR86UblPnWB-ZvhTJ1HVo66XDRC6K6iP7ThcFKhQ`
                     }
                     }).then(response=>{
                     console.log(response.data);
@@ -47,7 +48,7 @@ getToken = async () => {
                    
                     
                 }).catch(error =>{
-                    // console.log(error);
+                    console.log(error);
                     
                 })
                    
@@ -60,14 +61,15 @@ getToken = async () => {
          
           
           {
-              if(this.state.isloading){
-                  return(
-                      <View style={{flex:1, padding:20}}>
-                          <ActivityIndicator/>
-                      </View>
+            //   if(this.state.isloading){
+            //       return(
+            //           <View style={{flex:1, padding:20}}>
+                          
+            //               <ActivityIndicator/>
+            //           </View>
 
-                  )
-              }
+            //       )
+              
               return(
                 <View style={{flex:1, paddingTop:20}}>
               

@@ -14,7 +14,7 @@ import {URL} from '../../../API/Defaults';
 
 
 
-export default class CreateLost extends React.Component{
+export default class CreateFoundPost extends React.Component{
 
     state = {
         //data
@@ -173,7 +173,7 @@ setDate = (event, date) => {
        <ScrollView>
       <View style ={styles.Container}>
 
-              <Text style={styles.WelcomText} > Lost Post</Text>
+              <Text style={styles.WelcomText} > Founded Post</Text>
                     
                     <TextInput 
                         style={styles.TextinputContainer} 
@@ -339,14 +339,14 @@ setDate = (event, date) => {
 
                             
                             
-                            RNFetchBlob.fetch('POST', `${URL}/lost`, {
+                            RNFetchBlob.fetch('POST', `${URL}/found`, {
                     
                                 'Content-Type' : 'multipart/formdata',
                                 'X-AUTH': `${this.state.Token}`
                             }, [
                                 // part file from storage
                                 { name : '', filename : this.state.imagename, type:this.image_type, data: RNFetchBlob.wrap(this.state.image_path)},
-                                {name:'childname',data:`${this.state.name}`},
+                                {name:'name',data:`${this.state.name}`},
                                 {name:'Gender',data:`${this.state.gender}`},
                                 {name:'phone',data:`${this.state.phone}`}
                         

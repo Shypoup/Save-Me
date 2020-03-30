@@ -28,6 +28,7 @@ import other from './other';
 import SelectPost from './src/UI/Components/SelectPost';
 import AccidentsPosts from './src/UI/Accidents/ShowAccidentPosts';
 import LostPosts from './src/UI/Lost/ShowLostPosts';
+import CreateFoundPost from './src/UI/Lost/CreateFoundPost';
 
 //Objects of screens
 const Tab = createBottomTabNavigator();  //bottonTab object
@@ -47,8 +48,9 @@ function topTabs() {
     // style: { backgroundColor: 'powderblue' },
   }}
     >
-      <TopTab.Screen name="Home" component={HomeScreen} />
+      
       <TopTab.Screen name="Lost " component={LostPosts} />
+      <TopTab.Screen name="Home" component={HomeScreen} />
       <TopTab.Screen name="Accidents" component={AccidentsPosts} />
     </TopTab.Navigator>
   );
@@ -77,6 +79,7 @@ function Create(){
     <Stack.Navigator>
       <Stack.Screen name="Select" component={SelectPost} options={{ headerShown: false }}/>
       <Stack.Screen name="CreateLost" component={CreatePost} />
+      <Stack.Screen name="Create Founded" component={CreateFoundPost}  /> 
       <Stack.Screen name="Car accident" component={CreateAcciedentPost}  /> 
     </Stack.Navigator>
   );

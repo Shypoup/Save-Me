@@ -20,6 +20,12 @@ import {View, StyleSheet,Text,TouchableOpacity} from 'react-native';
             <Text  style={styles.ButtonText}>Create Lost Post</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity 
+            onPress={()=> navigation.navigate('Create Founded')}
+            style={styles.Button}
+            >
+            <Text  style={styles.ButtonText}>Create Founded Post</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity 
    onPress={()=> navigation.navigate('Car accident')}
