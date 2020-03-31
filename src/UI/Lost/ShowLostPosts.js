@@ -3,6 +3,9 @@ import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-nativ
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import {URL} from '../../../API/Defaults';
+
+
+
 export default class LostPosts extends React.Component{
   
     constructor(props){
@@ -33,7 +36,7 @@ getToken = async () => {
             })
          axios.get(`${URL}/LostPosts`,{
                         headers :{
-                        'X-AUTH': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdmOGUzNjllNDljYTI0MzhlMGJkMzgiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTg1NDE3ODc2fQ.cIvpR86UblPnWB-ZvhTJ1HVo66XDRC6K6iP7ThcFKhQ`
+                        'X-AUTH': `${this.state.Token}`
                     }
                     }).then(response=>{
                     console.log(response.data);
@@ -74,6 +77,7 @@ getToken = async () => {
                 <View style={{flex:1, paddingTop:20}}>
               
                 <Text style={styles.headerText}>Lost Posts </Text>
+                
                     <FlatList
                         data={this.state.datasource}
                         
