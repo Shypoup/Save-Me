@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 import {URL} from '../../../API/Defaults';
@@ -42,7 +43,17 @@ export  default class Profile extends React.Component{
             console.log("Somethimg went Wrong Get Token");
         }
       
-      }   
+      }
+      
+      removeToken = async () => {
+        try {
+          await AsyncStorage.removeItem('token')
+        } catch(e) {
+            console.log('Remove token Error.')
+        }
+      
+        console.log('Remove token Done.')
+      }
           
           
         
@@ -83,10 +94,41 @@ export  default class Profile extends React.Component{
       <ScrollView>
       <View>
           <View style={styles.Container}>
+                <TouchableOpacity 
+                style={styles.logout}
+                onPress={()=>{
+                    axios.delete(`${URL}/logout`,{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-AUth': `${this.state.Token}`
+                    }
+                    
+                }).then(response=>{
+                  
+                   this.removeToken();
+                    this.props.navigation.navigate('Login');
+                }).catch(error =>{
+                    console.log(error);
+                    
+                });
+            
+                }}
+                >
+                    <MaterialCommunityIcons name="logout" size={25} color="#360f9a" />
+                </TouchableOpacity>
+
+
+
+
+
+                
                 <View style={styles.PhotoContainer} >
-                <Image  style={styles.ProfilePicture} source ={require('../Components/hesham.jpg')}/>
+                
+                <Image  style={styles.ProfilePicture} source ={require('../Components/photo.png')}/>
+                
   <Text style={styles.username}>{this.state.firstName} {this.state.lastName}</Text>
                 </View>
+                
             </View>
   <View  style={styles.DataContainer} >
 <Text style={styles.Title}>Your Data</Text>
@@ -145,6 +187,7 @@ Container:{
     height:200,
     borderBottomEndRadius:90,
     marginHorizontal:10,
+    
 },
 PhotoContainer:{
     flexDirection:'row',
@@ -209,6 +252,11 @@ qr:{
 hideButton:{
     color:'#360f9a',
     fontSize:15,
+},
+logout:{
+    alignSelf:'flex-end',
+    marginTop:10,
+    marginRight:5,
 }
 
 });

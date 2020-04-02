@@ -38,19 +38,11 @@ getToken = async () => {
       return value;
     } catch(e) {
         console.log("Somethimg went Wrong Get Token");
-    }
-  
-   
-  
+    }  
   }
-async removeToken(){
-    try{
-        await AsyncStorage.removeItem(ACCESS_TOKEN);
-        this.getToken();
-    }catch(error){
-        console.log("Somethimg went Wrong");
-    }
-}
+
+
+
 
 
 

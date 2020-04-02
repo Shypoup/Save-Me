@@ -6,6 +6,8 @@ import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import Modal from './src/UI/Components/Modal';
+
 
 export default class HomeScreen extends React.Component{
   
@@ -84,6 +86,7 @@ getToken = async () => {
                 <View style={{flex:1, paddingTop:20}}>
               
                 <Text style={styles.headerText}>Found Posts </Text>
+                
                     <FlatList
                         data={this.state.datasource}
                         

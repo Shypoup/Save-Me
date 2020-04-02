@@ -24,15 +24,15 @@ const ModalShow = (navigation ) => {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Hello World!</Text>
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              style={styles.options}
               onPress={() => {
-                console.log("Modal Works !!!!!")
+                console.warn("Modal Works !!!!!")
               }}
             >
               <Text style={styles.textStyle}>Hide Modal</Text>
             </TouchableHighlight>
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              style={styles.options}
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
@@ -84,13 +84,16 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
+    color: "#000",
     textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  options:{
+    marginVertical:5,
+    borderColor:'black'
   }
 });
 
