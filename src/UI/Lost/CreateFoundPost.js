@@ -5,10 +5,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'rn-fetch-blob';
 import AsyncStorage from '@react-native-community/async-storage';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from  'moment';
 
 // imoprt Reusable Components
 import {URL} from '../../../API/Defaults';
+
 
 
 
@@ -29,9 +31,8 @@ export default class CreateFoundPost extends React.Component{
 
 
          //Date Picker
-         date: new Date('2020-06-12'),
-         mode: 'date',
-         show: false,
+         isDatePickerVisible : false,
+         chosenDate: '',
          
 
         // Image Picker
@@ -72,11 +73,11 @@ export default class CreateFoundPost extends React.Component{
     var age=this.state.age;
     var des=this.state.description;
     var img=this.state.image_path;
-    
+    var time=this.state.chosenDate;
     var genderSelect = this.state.gender;
     var citySelect=this.state.city;
     
-    if(name=="" || age=="" || des=="" || img=="" || genderSelect=="0" || citySelect=="0"){
+    if(name=="" || age=="" || des=="" || img=="" || genderSelect=="0" || citySelect=="0" || time==""){
        
         return true;
     }else{
@@ -93,28 +94,20 @@ export default class CreateFoundPost extends React.Component{
 
 
 /*********************Date Picker */
-setDate = (event, date) => {
-  
-    date = date || this.state.date;
- 
-    this.setState({
-      show: Platform.OS === 'ios' ? true : false,
-      date,
-      
-    });
+ showDatePicker = () => {
     
-  }
+    this.setState({isDatePickerVisible : true})
+  };
  
-  show = mode => {
-    this.setState({
-      show: true,
-      mode,
-    });
-  }
+  hideDatePicker = () => {
+    this.setState({isDatePickerVisible : false})
+  };
  
-  showDatepicker = () => {
-    this.show('date');
-  }
+   handleConfirm = date => {
+    // console.warn("A date has been picked: ", date);
+    this.setState({chosenDate: moment(date).format('DD/MM/YYYY')})
+    this.hideDatePicker();
+  };
  
 
 
@@ -172,6 +165,7 @@ setDate = (event, date) => {
     return (
        <ScrollView>
       <View style ={styles.Container}>
+          
 
               <Text style={styles.WelcomText} > Founded Post</Text>
                     
@@ -249,7 +243,7 @@ setDate = (event, date) => {
                         selectedValue={this.state.gender}
                         onValueChange={(itemValue) => this.setState({gender:itemValue})}
                         >
-                        <Picker.Item label="Select a Gender " value="0"/>
+                        <Picker.Item  label="Select a Gender " value="0"/>
                         <Picker.Item label="Male" value="male" />
                         <Picker.Item label="Female" value="female"/>
                         </Picker>
@@ -260,29 +254,32 @@ setDate = (event, date) => {
                     {/* Date Picker  */}
 
                     <View style={styles.PickerContainer}>
-                        <View style={styles.Text} onPress={this.showDatepicker}>
+                        <View style={styles.Text} onPress={this.showDatePicker}>
                         
                         <TouchableOpacity
-                        onPress={this.showDatepicker}
+                        onPress={this.showDatePicker}
                         >
-                         <Text style={styles.Text} >Date</Text>
+                         
+                       
+                         {this.state.chosenDate == '' ?<Text style={styles.Text} >Date</Text> :   <Text style={styles.Text}>{this.state.chosenDate}</Text>}
                         </TouchableOpacity>
 
                 
                         </View>
-                        { show && <DateTimePicker value={date}
-                                    mode={mode}
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={this.setDate} />
-                        }
-                   
+                        
+                                  
 
 
 
                         
                     </View>
-
+                    
+                    <DateTimePickerModal
+                                isVisible={this.state.isDatePickerVisible}
+                                mode="date"
+                                onConfirm={this.handleConfirm}
+                                onCancel={this.hideDatePicker}
+                            /> 
                                 
                   
                         <View style={styles.PickerContainer}>
@@ -347,8 +344,16 @@ setDate = (event, date) => {
                                 // part file from storage
                                 { name : '', filename : this.state.imagename, type:this.image_type, data: RNFetchBlob.wrap(this.state.image_path)},
                                 {name:'name',data:`${this.state.name}`},
-                                {name:'Gender',data:`${this.state.gender}`},
-                                {name:'phone',data:`${this.state.phone}`}
+                                {name:'age',data:`${this.state.age}`},
+                                {name:'descreption',data:`${this.state.description}`},
+                                {name:'phone',data:`${this.state.phone}`},
+                                {name:'gender',data:`${this.state.gender}`},
+                                {name:'time',data:`${this.state.chosenDate}`},
+                                {name:'city',data:`${this.state.city}`},
+                                
+                                
+                                
+
                         
                                 // elements without property filename will be sent as plain text
                             ]).then((resp) => {
@@ -468,7 +473,7 @@ const styles =StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#360f9a',
         paddingBottom: -2,
-        marginLeft:20,
+      
     },
 
     Text:

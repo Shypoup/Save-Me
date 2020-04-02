@@ -86,8 +86,8 @@ getToken = async () => {
     
     <View style={styles.postText}>
     <Text style={styles.postText}>Name:<Text style={styles.innerPostText}> {item.childname}</Text></Text>
-    <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>9</Text></Text>
-    <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.Gender}</Text></Text>
+              <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{item.age}</Text></Text>
+    <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.gender}</Text></Text>
     <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text>
     <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text> 
     {/* <TouchableOpacity
@@ -118,6 +118,7 @@ const styles =StyleSheet.create({
     borderColor: '#360f9a',
     borderRadius:9,
     alignItems:'flex-start',
+    backgroundColor:'white'
     },
     headerText:{
         fontSize:20,

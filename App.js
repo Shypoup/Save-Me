@@ -48,9 +48,8 @@ function topTabs() {
     // style: { backgroundColor: 'powderblue' },
   }}
     >
-      
-      <TopTab.Screen name="Lost " component={LostPosts} />
       <TopTab.Screen name="Home" component={HomeScreen} />
+      <TopTab.Screen name="Lost " component={LostPosts} />
       <TopTab.Screen name="Accidents" component={AccidentsPosts} />
     </TopTab.Navigator>
   );
@@ -98,6 +97,7 @@ export default function MyTabs() {
           <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
+          
            
     </Stack.Navigator>
     </NavigationContainer>

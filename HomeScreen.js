@@ -87,16 +87,20 @@ getToken = async () => {
                     <FlatList
                         data={this.state.datasource}
                         
-              renderItem={({item})=>  <Card title={item.name}>
+              renderItem={({item})=>  <Card title={item.name}
+                        // image={{uri: `${item.main_image_URL}`}}
+              >
                      <View style={styles.postContainer}>
 
               
                             <View style={styles.postText}>
-                                <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>9</Text></Text>
-                                <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.Gender}</Text></Text>
-                                <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text>
-                                <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text> 
-
+                                <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{item.age}</Text></Text>
+                                <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.gender}</Text></Text>
+                                {/* <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text> */}
+                                <Text style={styles.postText}>Found Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>
+                                <Text style={styles.postText}>City: <Text style={styles.innerPostText}>{item.city}</Text></Text>
+                                {/* <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>  */}
+                                {/* <Text style={styles.postText}>Description: <Text style={styles.innerPostText}>{item.descreption}</Text></Text> */}
                             </View>
                             <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
                    </View>
