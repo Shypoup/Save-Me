@@ -17,7 +17,7 @@ import PickerComponent from './src/UI/Components/PickerComponent';
 import DatePicker from './src/UI/Components/DatePicker';
 import ImagePicker from './src/UI/Components/ImagePicker'
 import LostPost from './src/UI/Components/LostPost';
-import LostPostDetail from './src/UI/Components/LostPostDetail';
+import PostDetail from './src/UI/Components/PostDetail';
 import SearchLost from './src/UI/Lost/SearchLost';
 import EditProfile from './src/UI/General/EditProfile';
 import QRGenerator from './src/UI/Components/QRGenerator';
@@ -80,6 +80,7 @@ function Create(){
       <Stack.Screen name="CreateLost" component={CreatePost} />
       <Stack.Screen name="Create Founded" component={CreateFoundPost}  /> 
       <Stack.Screen name="Car accident" component={CreateAcciedentPost}  /> 
+      
     </Stack.Navigator>
   );
 }
@@ -97,7 +98,7 @@ export default function MyTabs() {
           <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
-          
+          <Stack.Screen name="Post Details" component={PostDetail}  />    
            
     </Stack.Navigator>
     </NavigationContainer>

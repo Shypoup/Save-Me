@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
+import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet,TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import {URL,Token} from './API/Defaults';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
@@ -7,6 +7,7 @@ import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Modal from './src/UI/Components/Modal';
+
 
 
 export default class HomeScreen extends React.Component{
@@ -19,6 +20,7 @@ export default class HomeScreen extends React.Component{
         inforamation:[],
         ipAddress:'',
         Token:''
+
         }
     }
   
@@ -89,29 +91,37 @@ getToken = async () => {
                 
                     <FlatList
                         data={this.state.datasource}
+                        renderItem={({item})=>  
+                        <TouchableOpacity
                         
-              renderItem={({item})=>  <Card title={item.name}
+                        onPress={()=> this.props.navigation.navigate('Post Details',{item: item})
+                                    
+                                }
+                        >
+                        <Card title={item.name}
                         // image={{uri: `${item.main_image_URL}`}}
-              >
-                     <View style={styles.postContainer}>
+                        // imageStyle={styles.cardImage}
+                    >
+                        <View style={styles.postContainer} >
 
-              
-                            <View style={styles.postText}>
-                                <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{item.age}</Text></Text>
-                                <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.gender}</Text></Text>
-                                {/* <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text> */}
-                                <Text style={styles.postText}>Found Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>
-                                <Text style={styles.postText}>City: <Text style={styles.innerPostText}>{item.city}</Text></Text>
-                                {/* <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>  */}
-                                {/* <Text style={styles.postText}>Description: <Text style={styles.innerPostText}>{item.descreption}</Text></Text> */}
-                            </View>
-                            <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
-                   </View>
-                                         </Card>
-                  }
-              keyExtractor={item => item._id}
-                        />
+                
+                                <View style={styles.postText}>
+                                    <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{item.age}</Text></Text>
+                                    <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.gender}</Text></Text>
+                                    {/* <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text> */}
+                                    <Text style={styles.postText}>Found Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>
+                                    <Text style={styles.postText}>City: <Text style={styles.innerPostText}>{item.city}</Text></Text>
+                                    {/* <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>  */}
+                                    {/* <Text style={styles.postText}>Description: <Text style={styles.innerPostText}>{item.descreption}</Text></Text> */}
+                                </View>
+                                <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
                     </View>
+                                            </Card>
+                                            </TouchableOpacity>
+                                }
+                        keyExtractor={item => item._id}
+                            />
+                        </View>
               )
           }      
     }
@@ -165,6 +175,14 @@ const styles =StyleSheet.create({
         fontSize:15,
         marginTop:30,
     
+    },
+    cardImage:{
+        resizeMode:"contain",
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
     }
     });
     
