@@ -1,5 +1,5 @@
 package com.saveme;
-
+import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;  
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
@@ -12,4 +12,10 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "SAVEME";
   }
+
+   @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        RNImmediatePhoneCallPackage.onRequestPermissionsResult(requestCode, permissions, grantResults); // very important event callback
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }

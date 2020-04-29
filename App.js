@@ -29,6 +29,7 @@ import SelectPost from './src/UI/Components/SelectPost';
 import AccidentsPosts from './src/UI/Accidents/ShowAccidentPosts';
 import LostPosts from './src/UI/Lost/ShowLostPosts';
 import CreateFoundPost from './src/UI/Lost/CreateFoundPost';
+import DangerMode from './src/UI/Danger/DangerMode';
 
 //Objects of screens
 const Tab = createBottomTabNavigator();  //bottonTab object
@@ -139,11 +140,20 @@ function Home (){
       }else if (route.name === 'Search') {
         iconName =  'ios-search'
         color= focused ?'#360f9a' : 'gray';
+      }else if (route.name === 'Danger') {
+        iconName =  'md-warning'
+        color= focused ?'#360f9a' : 'gray';
       }
+      else {
+        iconName =  'md-remove-circle'
+        color= focused ?'#360f9a' : 'gray';
+      }
+
         
         
         
 
+      
         
         return <Ionicons name={iconName} size={size} color={color} />;
       },
@@ -172,13 +182,13 @@ function Home (){
     />
 
 
-    {/* <Tab.Screen
-      name="Notifications"
-      component={Notifications}
+    <Tab.Screen
+      name="Danger"
+      component={DangerMode}
       
         
       
-    /> */}
+    />
     <Tab.Screen
       name="Profile"
       component={Profilee}

@@ -167,7 +167,7 @@ export default class CreateFoundPost extends React.Component{
       <View style ={styles.Container}>
           
 
-              <Text style={styles.WelcomText} > Founded Post</Text>
+              <Text style={styles.WelcomText} > Lost Post</Text>
                     
                     <TextInput 
                         style={styles.TextinputContainer} 

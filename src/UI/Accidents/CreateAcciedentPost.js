@@ -4,11 +4,21 @@ import axios from 'axios';
 import UploadImage from '../Components/UploadImage';
 // import uploadData from '../Components/UploadImage';
 import FormData from 'form-data';
+import ImagePicker from 'react-native-image-crop-picker';
+import RNFetchBlob from 'rn-fetch-blob';
+import {URL} from '../../../API/Defaults';
 
 // let dataa=uploadData;
 
-const CreateAcciedentPost = ({navigation}) =>{
-    
+export default class CreateAcciedentPost extends React.Component{
+    state={
+        descreption:'',
+        phone:'',
+        city:'',
+        photo:'',
+    }
+
+    render(){
     return (
        
       <View style ={styles.Container}>
@@ -18,63 +28,81 @@ const CreateAcciedentPost = ({navigation}) =>{
         
     <Text style={styles.WelcomText} >Create Post</Text>
     
-       
-       <TextInput 
-       style={styles.TextinputContainer}
-        returnKeyType = { "next" }
-        onSubmitEditing={() => { this.Phone.focus(); }}
-        blurOnSubmit={false}
-        placeholder='Description' 
-        placeholderTextColor='#360f9a' />
+                <TouchableOpacity 
+                    style={styles.TextinputContainer}
+                    onPress={ async()=>
+                        await  ImagePicker.openPicker({
+                            multiple: true
+                          }).then(images => {
+                            console.log(images);
+                            console.log(images[0].path);
+                            
+                            this.setState=({photo: images[0].path })
+                                
+                            
+            
+                          })
+                    }
+                    >
+                    <Text style={styles.Text}>Select Photos</Text>
+                    </TouchableOpacity>
+                 
+                 <TextInput 
+                        style={styles.TextinputContainer} 
+                        placeholder='Description' 
+                        placeholderTextColor='#360f9a'
+                        />
 
-       <TextInput 
-       style={styles.TextinputContainer}
-       ref={(input) => { this.Phone = input; }} 
-       placeholder='Phone' 
-       placeholderTextColor='#360f9a' 
-       textContentType='telephoneNumber'
-       keyboardType='numeric'
-        />
-       
-       <UploadImage fileName={1} /> 
+                 <TextInput 
+                        style={styles.TextinputContainer} 
+                        placeholder='Phone' 
+                        placeholderTextColor='#360f9a'
+                        />
+                
+               
+      
+ 
 
 
         <TouchableOpacity style={styles.Button}
-        
-        
-// onPress={()=>{
-  
-//     axios({
-//         method:'post',
-//         url:'http://192.168.1.7:3000/RoadAccedint',
-//         data:{
-         
-//             dataa
-//         },
-//         headers:{
-//            'X-AUTH':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5NmU4MDZkYzQ0NDMyNGMyYWI3OTMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTgyOTE5MzIwfQ.OUdMSqfpUV7MA6QnCP7fGkHelhK9UEaTUtj0KnrMo7k",
-//            'accept': 'application/json',
-//            'Accept-Language': 'en-US,en;q=0.8',
-//            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-//          }
-//     }).then((res) => {
-//         console.log("Response is:",res); 
-//     }).catch((error) => {
-//         if(error.response){
-//            console.log(error.response.data);
-//            console.log(error.response.status);
-//            console.log(error.response.headers);
-//         }else if (error.request) {
-//            console.log(error.request);
-//        } else {
-//            // Something happened in setting up the request and triggered an Error
-//            console.log('Error', error.message);
-//        }
-//        console.log(error.config);
-//     })
 
-//    }}
-        >
+        
+ onPress={ async ()=>{
+    
+    var bodyy = new FormData();
+    bodyy.append('', this.state.photo);
+    
+
+    RNFetchBlob.fetch('POST', `${URL}/RoadAccedint`, {
+
+        'Content-Type' : 'multipart/formdata',
+        'X-AUTH': ` eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0OGUxNTRiNDlmMzNiY2M2ZDhkYjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTg1ODYzNjk4fQ.o6ph_027WSz_bx8AK4YnRRxzPoLHcoTnZJP2FBwd7ys`
+    }, [
+        // part file from storage
+        { name : '', filename : 'image', type:'image/jpeg', data: this.state.photo},
+        {name:'information',data:`Hello`},
+        {name:'city',data:`Cairo`},
+        {name:'street',data:`Elbahr alazam`},
+        
+        // elements without property filename will be sent as plain text
+    ]).then((resp) => {
+        console.log(resp);     // ...
+        this.props.navigation.navigate('Home');
+    }).catch((err) => {
+        console.log(err);
+        
+    })
+    
+}  
+
+    
+        
+
+
+}
+
+    
+      >
             <Text  style={styles.ButtonText}>Post</Text>
         </TouchableOpacity>
         
@@ -85,7 +113,7 @@ const CreateAcciedentPost = ({navigation}) =>{
   
   )
 }
-
+}
 const styles =StyleSheet.create({
     Container:{
         marginHorizontal: 50,
@@ -164,6 +192,11 @@ const styles =StyleSheet.create({
         borderColor: '#360f9a',
         paddingBottom: -2,
     },
+    Text:
+    {
+        color: '#360f9a',
+        marginVertical:10, 
+        marginHorizontal:-2, 
+    }
 });
     
-export default CreateAcciedentPost;

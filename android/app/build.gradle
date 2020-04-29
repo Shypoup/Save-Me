@@ -134,6 +134,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -180,6 +181,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-immediate-phone-call')
     implementation project(':rn-fetch-blob')
     // implementation project(':react-native-svg')
     implementation project(':react-native-fs')
@@ -188,7 +190,8 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+    implementation project(':react-native-immediate-phone-call')
+    compile project(':react-native-sms-x')
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
