@@ -86,7 +86,7 @@ getToken = async () => {
               }
               return(
                 <View style={{flex:1, paddingTop:20}}>
-              
+                 
                 <Text style={styles.headerText}>Found Posts </Text>
                 
                     <FlatList
@@ -104,7 +104,7 @@ getToken = async () => {
                     >
                         <View style={styles.postContainer} >
 
-                
+                        {/* <Modal/>  */}
                                 <View style={styles.postText}>
                                     <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{item.age}</Text></Text>
                                     <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.gender}</Text></Text>
@@ -116,6 +116,24 @@ getToken = async () => {
                                 </View>
                                 <Image style={styles.postImage} source={{uri: `${item.main_image_URL}`}}/>
                     </View>
+                    
+
+                 <TouchableOpacity style={styles.IconContainer}
+                 onPress={()=> console.warn("Icon Pressed")}
+                 >
+                <Icon name='ban'
+                      type='font-awesome'
+                      size={23} 
+                     iconStyle={styles.Icon}
+                     
+                   />
+                <Text style={{color:'#360f6f' ,marginLeft:3}}>report</Text>
+                </TouchableOpacity>
+
+                
+
+               
+   
                                             </Card>
                                             </TouchableOpacity>
                                 }
@@ -183,6 +201,16 @@ const styles =StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
+    },
+    IconContainer:{
+        justifyContent:'center',
+        alignItems:'flex-start'
+    },
+    Icon:
+    {
+      marginHorizontal:9,
+      color: '#360f9a',
+      alignSelf:'flex-start'
     }
     });
     

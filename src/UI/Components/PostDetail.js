@@ -1,6 +1,9 @@
 import React from 'react';
-import {View, StyleSheet,Text,Image,Button} from 'react-native';
+import {View, StyleSheet,Text,Image,Button,TouchableOpacity} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import {Icon} from 'react-native-elements';
+import {URL} from '../../../API/Defaults';
+import axios from 'axios';
 
 
 
@@ -25,9 +28,24 @@ const LostPostDetail =({ route, navigation })=>{
   </Text>
     
     </View>
+
+                
+
+                 
+    <TouchableOpacity style={styles.IconContainer}
+                 onPress={()=> console.warn("Icon Pressed")}
+                 >
+                <Icon name='ban'
+                      type='font-awesome'
+                      size={23} 
+                     iconStyle={styles.Icon}
+                     
+                   />
+                <Text style={{color:'#360f6f' }}>report</Text>
+                </TouchableOpacity>
+
     
     </View>
-
     
     </View>
     </ScrollView>
@@ -73,6 +91,18 @@ const styles =StyleSheet.create({
       fontSize:15,
   
   },
+  IconContainer:{
+    justifyContent:'center',
+    alignItems:'flex-start',
+    margin:10,
+    marginVertical:20
+},
+Icon:
+{
+  marginHorizontal:8,
+  color: '#360f9a',
+  alignSelf:'flex-start'
+}
 
   });
 
