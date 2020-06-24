@@ -192,6 +192,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-immediate-phone-call')
     compile project(':react-native-sms-x')
+    compile project(':react-native-keyevent')
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")

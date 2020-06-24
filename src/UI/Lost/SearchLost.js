@@ -313,165 +313,235 @@
 
 
 
-import React from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  PixelRatio,
-  TouchableOpacity,
-  Image,
-  Platform
-} from 'react-native';
+// import React from 'react';
+// import {
+//   AppRegistry,
+//   StyleSheet,
+//   Text,
+//   View,
+//   PixelRatio,
+//   TouchableOpacity,
+//   Image,
+//   Platform
+// } from 'react-native';
 
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
 
 
-export default class RNImagePicker extends React.Component {
+// export default class RNImagePicker extends React.Component {
 
-  state = {
-    avatarSource: null,
-    videoSource: null,
-    progress: 0,
-  };
+//   state = {
+//     avatarSource: null,
+//     videoSource: null,
+//     progress: 0,
+//   };
 
-  selectPhotoTapped() {
-    const options = {
-      quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
-      storageOptions: {
-        skipBackup: true
-      }
-    };
+//   selectPhotoTapped() {
+//     const options = {
+//       quality: 1.0,
+//       maxWidth: 500,
+//       maxHeight: 500,
+//       storageOptions: {
+//         skipBackup: true
+//       }
+//     };
 
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
+//     ImagePicker.showImagePicker(options, (response) => {
+//       console.log('Response = ', response);
 
-      if (response.didCancel) {
-        console.log('User cancelled photo picker');
-      }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        var source;
+//       if (response.didCancel) {
+//         console.log('User cancelled photo picker');
+//       }
+//       else if (response.error) {
+//         console.log('ImagePicker Error: ', response.error);
+//       }
+//       else if (response.customButton) {
+//         console.log('User tapped custom button: ', response.customButton);
+//       }
+//       else {
+//         var source;
 
-        // You can display the image using either:
-        //source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+//         // You can display the image using either:
+//         //source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
 
-        //Or:
-        if (Platform.OS === 'android') {
-          source = {uri: response.uri, isStatic: true};
-        } else {
-          source = {uri: response.uri.replace('file://', ''), isStatic: true};
-        }
-        const data = new FormData();
+//         //Or:
+//         if (Platform.OS === 'android') {
+//           source = {uri: response.uri, isStatic: true};
+//         } else {
+//           source = {uri: response.uri.replace('file://', ''), isStatic: true};
+//         }
+//         const data = new FormData();
       
         
-        data.append('photo', {
-          uri: source.uri,
-          type: 'image/jpeg',
-          name: 'testPhotoName'
-        });
-        const url = Platform.OS === 'android' ? 'http://10.0.3.2:3000' : 'http://localhost:3000'; // genymotion's localhost is 10.0.3.2
-        fetch('http://192.168.1.6:3000/image', {
-          method: 'post',
-          body: data,
-          headers: new Headers({
-            'X-AUTH': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdjYjY2OTM5YjM2NTIwMzQ1MzQ5OTYiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTg1MjMxNDY2fQ.FThrkFg_EjXtI1Li-Qxa-uCiuSb9BR2MYMD7o56QWy0`, 
+//         data.append('photo', {
+//           uri: source.uri,
+//           type: 'image/jpeg',
+//           name: 'testPhotoName'
+//         });
+//         const url = Platform.OS === 'android' ? 'http://10.0.3.2:3000' : 'http://localhost:3000'; // genymotion's localhost is 10.0.3.2
+//         fetch('http://192.168.1.6:3000/image', {
+//           method: 'post',
+//           body: data,
+//           headers: new Headers({
+//             'X-AUTH': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdjYjY2OTM5YjM2NTIwMzQ1MzQ5OTYiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTg1MjMxNDY2fQ.FThrkFg_EjXtI1Li-Qxa-uCiuSb9BR2MYMD7o56QWy0`, 
             
-          }), 
-        }, (e) => {
-          const progress = e.loaded / e.total;
-          console.log(progress);
-          this.setState({
-            progress: progress
-          });
-        }).then((res) => console.log(res), (e) => console.log(e))
+//           }), 
+//         }, (e) => {
+//           const progress = e.loaded / e.total;
+//           console.log(progress);
+//           this.setState({
+//             progress: progress
+//           });
+//         }).then((res) => console.log(res), (e) => console.log(e))
 
-        this.setState({
-          avatarSource: source
-        });
+//         this.setState({
+//           avatarSource: source
+//         });
+//       }
+//     });
+//   }
+
+//   selectVideoTapped() {
+//     const options = {
+//       title: 'Video Picker',
+//       takePhotoButtonTitle: 'Take Video...',
+//       mediaType: 'video',
+//       videoQuality: 'medium'
+//     };
+
+//     ImagePicker.showImagePicker(options, (response) => {
+//       console.log('Response = ', response);
+
+//       if (response.didCancel) {
+//         console.log('User cancelled video picker');
+//       }
+//       else if (response.error) {
+//         console.log('ImagePicker Error: ', response.error);
+//       }
+//       else if (response.customButton) {
+//         console.log('User tapped custom button: ', response.customButton);
+//       }
+//       else {
+//         this.setState({
+//           videoSource: response.uri
+//         });
+//       }
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <Text>{this.state.progress}</Text>
+//         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+//           <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+//           { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+//             <Image style={styles.avatar} source={this.state.avatarSource} />
+//           }
+//           </View>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
+//           <View style={[styles.avatar, styles.avatarContainer]}>
+//             <Text>Select a Video</Text>
+//           </View>
+//         </TouchableOpacity>
+
+//         { this.state.videoSource &&
+//           <Text style={{margin: 8, textAlign: 'center'}}>{this.state.videoSource}</Text>
+//         }
+//       </View>
+//     );
+//   }
+
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF'
+//   },
+//   avatarContainer: {
+//     borderColor: '#9B9B9B',
+//     borderWidth: 1 / PixelRatio.get(),
+//     justifyContent: 'center',
+//     alignItems: 'center'
+//   },
+//   avatar: {
+//     borderRadius: 75,
+//     width: 150,
+//     height: 150
+//   }
+// });
+
+
+import KeyEvent from 'react-native-keyevent';
+import React from 'react';
+import {Text} from 'react-native';
+
+export default class SearchLost extends React.Component{
+// componentDidMount() {
+//   // if you want to react to keyDown
+//   KeyEvent.onKeyDownListener((keyEvent) => {
+//     console.log(`onKeyDown keyCode: ${keyEvent.keyCode}`);
+//     console.log(`Action: ${keyEvent.action}`);
+//     console.log(`Key: ${keyEvent.pressedKey}`);
+//   });
+
+//   // if you want to react to keyUp
+//   KeyEvent.onKeyUpListener((keyEvent) => {
+//     console.log(`onKeyUp keyCode: ${keyEvent.keyCode}`);
+//     console.log(`Action: ${keyEvent.action}`);
+//     console.log(`Key: ${keyEvent.pressedKey}`);
+//   });
+
+//   // if you want to react to keyMultiple
+//   KeyEvent.onKeyMultipleListener((keyEvent) => {
+//     console.log(`onKeyMultiple keyCode: ${keyEvent.keyCode}`);
+//     console.log(`Action: ${keyEvent.action}`);
+//     console.log(`Characters: ${keyEvent.characters}`);
+//   });
+// }
+
+// componentWillUnmount() {
+//   // if you are listening to keyDown
+//   KeyEvent.removeKeyDownListener();
+
+//    // if you are listening to keyUp
+//   KeyEvent.removeKeyUpListener();
+
+//    // if you are listening to keyMultiple
+//   KeyEvent.removeKeyMultipleListener();
+// }
+
+
+componentDidMount() {
+  KeyEvent.onKeyDownListener((keyEvent) => {
+    console.warn("before Pressed")
+      if (keyEvent.keyCode === 'Keycode of the power button'){
+          this.timeout = setTimeout(() => {
+              //Your SOS Function here
+              console.warn("Pressed")
+          }, 1000)
       }
-    });
-  }
+  });
 
-  selectVideoTapped() {
-    const options = {
-      title: 'Video Picker',
-      takePhotoButtonTitle: 'Take Video...',
-      mediaType: 'video',
-      videoQuality: 'medium'
-    };
-
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled video picker');
+  KeyEvent.onKeyUpListener((keyEvent) => {
+      if (keyEvent.keyCode === 'Keycode of the power button'){
+          clearTimeout(this.timeout)
       }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        this.setState({
-          videoSource: response.uri
-        });
-      }
-    });
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>{this.state.progress}</Text>
-        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
-          }
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer]}>
-            <Text>Select a Video</Text>
-          </View>
-        </TouchableOpacity>
-
-        { this.state.videoSource &&
-          <Text style={{margin: 8, textAlign: 'center'}}>{this.state.videoSource}</Text>
-        }
-      </View>
-    );
-  }
-
+  })
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  avatarContainer: {
-    borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
-  }
-});
+componentWillUnmount() {
+  KeyEvent.removeKeyDownListener();
+  KeyEvent.removeKeyUpListener();
+}
+render(){
+  return <Text>Hello</Text>
+}
+
+
+}

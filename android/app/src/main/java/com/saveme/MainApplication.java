@@ -8,6 +8,7 @@ import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.someone.sendsms.SendSMSPackage;
 import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;
+import com.github.kevinejohn.keyevent.KeyEventPackage;
 // import com.horcrux.svg.SvgPackage;
 import com.rnfs.RNFSPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           new SendSMSPackage();
           new RNImmediatePhoneCallPackage();
+          new KeyEventPackage();
           return packages;
         }
 

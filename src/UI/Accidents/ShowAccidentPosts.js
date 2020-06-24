@@ -1,18 +1,187 @@
+// import React from 'react';
+// import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
+// import axios from 'axios';
+// import {URL,Token} from '../../../API/Defaults';
+// export default class AccidentsPosts extends React.Component{
+  
+//     constructor(props){
+//         super(props);
+//         this.state={
+//         isloading: true,
+//         datasource:'',
+//         Token:'',
+//         }
+//     }
+             
+// getToken = async () => {
+//     try {
+//       const value = await AsyncStorage.getItem('token')
+//       console.log('Done Get Token')
+//       return value;
+//     } catch(e) {
+//         console.log("Somethimg went Wrong Get Token");
+//     }
+  
+//   }     
+    
+//     componentDidMount(){
+//         this.getToken().then((value)=>{
+//             console.log("GET Token : "+ value);
+//             this.setState({
+//                 Token:value
+//             })
+       
+//          axios.get(`${URL}/RoadAccedint`,{
+//                         headers :{
+//                         'X-AUTH': `${this.state.Token}`
+//                     }
+//                     }).then(response=>{
+//                     console.log(response.data);
+//                     console.log(response.data.length);
+                  
+                   
+//                     console.log();
+//                     console.log();
+//                     this.setState({
+//                         isloading: false,
+//                         datasource:response.data, 
+                        
+//                     })
+                    
+//                 }).catch(error =>{
+//                     console.log(error);
+                    
+//                 })
+                   
+//                 }
+//         )}
+
+
+//           render()
+         
+          
+//           {
+//               if(this.state.isloading){
+//                   return(
+//                       <View style={{flex:1, padding:20}}>
+//                           <ActivityIndicator/>
+//                       </View>
+
+//                   )
+//               }
+//               return(
+               
+            
+//                     <FlatList
+//                         data={this.state.datasource}
+//                         renderItem={({item})=><View> 
+//                    <View style={styles.postContainer}>
+    
+//                     <View style={styles.postText}>
+//                     <Text style={styles.postText}>Description:</Text>
+//                     <Text style={styles.innerPostText}> {item.inforamation}</Text>
+                    
+
+//                     {/* <TouchableOpacity
+//                     onPress={() =>props.navigation.navigate('LostDetail')}
+//                     >
+//                         <Text style={styles.seeMore}   >See More </Text>
+//                     </TouchableOpacity> */}
+                    
+//                     </View>
+//                     <View style={styles.ImageContainer}>
+//                     <Image style={styles.postImage} source={{uri: `${item.photo_URL}`}}/>
+//                     </View>
+//                     </View> 
+                              
+//                                 </View>
+//                                 }
+//                                 keyExtractor={item => item._id}
+//                                         />
+                                    
+//               )
+//           }      
+//     }
+    
+// const styles =StyleSheet.create({
+//     postContainer :{
+//     marginHorizontal: 20,
+//     marginVertical:5,
+//     flexDirection:'row',
+//     borderWidth : 0.3,
+//     borderColor: '#360f9a',
+//     borderRadius:9,
+//     alignItems:'stretch',
+//     },
+//     postImage:{
+//         flex: 1,
+//         width: 200,
+//         height: 200,
+//         resizeMode:  'contain',
+//          alignSelf:'flex-end',
+//          marginHorizontal:10,
+         
+      
+//     },
+//     postTextContainer:{
+//         flex:1,
+        
+//     },
+//     postText:{
+//         color: '#360f9a',
+//         fontSize:16,
+//         marginVertical:5,
+//         marginHorizontal:5,
+//         alignSelf:'flex-start'
+    
+//     },
+//     innerPostText:{
+//         color: '#000',
+//         fontSize:15,
+//         width:150,
+    
+//     },
+//     ImageContainer:{
+//         alignSelf:'flex-end',
+//     },
+//     seeMore:{
+        
+//         color:'gray',
+//         fontSize:15,
+//         marginTop:30,
+    
+//     }
+//     });
+    
+
+
+
 import React from 'react';
-import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet} from 'react-native';
+import {FlatList,ActivityIndicator,Text,View,Image,StyleSheet,TouchableOpacity} from 'react-native';
 import axios from 'axios';
-import {URL,Token} from '../../../API/Defaults';
-export default class AccidentsPosts extends React.Component{
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
+import AsyncStorage from '@react-native-community/async-storage';
+
+import {URL} from '../../../API/Defaults';
+// import Modal from './src/UI/Components/Modal';
+
+
+
+export default class ShowAccidentPosts extends React.Component{
   
     constructor(props){
         super(props);
         this.state={
         isloading: true,
         datasource:'',
-        Token:'',
+        inforamation:[],
+        ipAddress:'',
+        Token:''
+
         }
     }
-             
+  
+    
 getToken = async () => {
     try {
       const value = await AsyncStorage.getItem('token')
@@ -22,7 +191,9 @@ getToken = async () => {
         console.log("Somethimg went Wrong Get Token");
     }
   
-  }     
+  }   
+      
+      
     
     componentDidMount(){
         this.getToken().then((value)=>{
@@ -30,32 +201,33 @@ getToken = async () => {
             this.setState({
                 Token:value
             })
-       
+            
          axios.get(`${URL}/RoadAccedint`,{
                         headers :{
+                        
                         'X-AUTH': `${this.state.Token}`
-                    }
+                        }
                     }).then(response=>{
                     console.log(response.data);
                     console.log(response.data.length);
+                    console.log("Done");
                   
-                   
-                    console.log();
-                    console.log();
+             
                     this.setState({
                         isloading: false,
                         datasource:response.data, 
                         
                     })
+                   
                     
                 }).catch(error =>{
                     console.log(error);
                     
                 })
-                   
-                }
-        )}
+            })           
+            }
 
+        
 
           render()
          
@@ -70,52 +242,79 @@ getToken = async () => {
                   )
               }
               return(
-               
-            
+                <View style={{flex:1, paddingTop:20}}>
+              
+                <Text style={styles.headerText}>Lost Posts </Text>
+                
                     <FlatList
                         data={this.state.datasource}
-                        renderItem={({item})=><View> 
-                   <View style={styles.postContainer}>
-    
-                    <View style={styles.postText}>
-                    <Text style={styles.postText}>Description:</Text>
-                    <Text style={styles.innerPostText}> {item.inforamation}</Text>
-                    
-
-                    {/* <TouchableOpacity
-                    onPress={() =>props.navigation.navigate('LostDetail')}
-                    >
-                        <Text style={styles.seeMore}   >See More </Text>
-                    </TouchableOpacity> */}
-                    
-                    </View>
-                    <View style={styles.ImageContainer}>
-                    <Image style={styles.postImage} source={{uri: `${item.photo_URL}`}}/>
-                    </View>
-                    </View> 
-                              
-                                </View>
-                                }
-                                keyExtractor={item => item._id}
-                                        />
+                        renderItem={({item})=>  
+                        <TouchableOpacity
+                        
+                        onPress={()=> this.props.navigation.navigate('Post Details',{item: item})
                                     
+                                }
+                        >
+                        <Card title={item.childname}
+                        // image={{uri: `${item.main_image_URL}`}}
+                        // imageStyle={styles.cardImage}
+                    >
+                        <View style={styles.postContainer} >
+
+                
+                                <View style={styles.postText}>
+                                    <Text style={styles.postText}>Age: <Text style={styles.innerPostText}>{item.information}</Text></Text>
+                                    <Text style={styles.postText}>Gender: <Text style={styles.innerPostText}>{item.street}</Text></Text>
+                                    {/* <Text style={styles.postText}>Phone: <Text style={styles.innerPostText}>{item.phone}</Text></Text> */}
+                                    {/* <Text style={styles.postText}>Found Date: <Text style={styles.innerPostText}>{item.time}</Text></Text> */}
+                                    <Text style={styles.postText}>City: <Text style={styles.innerPostText}>{item.city}</Text></Text>
+                                    {/* <Text style={styles.postText}>Lost Date: <Text style={styles.innerPostText}>{item.time}</Text></Text>  */}
+                                    {/* <Text style={styles.postText}>Description: <Text style={styles.innerPostText}>{item.descreption}</Text></Text> */}
+                                </View>
+                                <Image style={styles.postImage} source={{uri: `${item.photo_URL}`}}/>
+                  
+                  
+                      </View>
+                                         
+                      <TouchableOpacity style={styles.IconContainer}
+                            onPress={()=> console.warn("Icon Pressed")}
+                            >
+                            <Icon name='ban'
+                                type='font-awesome'
+                                size={23} 
+                                iconStyle={styles.Icon}
+                                
+                            />
+                            <Text style={{color:'#360f6f' ,marginLeft:3}}>report</Text>
+                      </TouchableOpacity>
+                                            </Card>
+                                            </TouchableOpacity>
+                                }
+                        keyExtractor={item => item._id}
+                            />
+                        </View>
               )
           }      
     }
     
 const styles =StyleSheet.create({
     postContainer :{
-    marginHorizontal: 20,
-    marginVertical:5,
+    
     flexDirection:'row',
-    borderWidth : 0.3,
-    borderColor: '#360f9a',
-    borderRadius:9,
-    alignItems:'stretch',
+   
+    },
+    headerText:{
+        fontSize:20,
+        marginHorizontal: 20,
+        marginTop:-10,
+        marginBottom:5,
+        fontWeight: "bold",
+        color: '#360f6f',
+        
     },
     postImage:{
         flex: 1,
-        width: 200,
+        width: "100%",
         height: 200,
         resizeMode:  'contain',
          alignSelf:'flex-end',
@@ -124,6 +323,8 @@ const styles =StyleSheet.create({
       
     },
     postTextContainer:{
+       
+        alignItems:'flex-start',
         flex:1,
         
     },
@@ -132,17 +333,12 @@ const styles =StyleSheet.create({
         fontSize:16,
         marginVertical:5,
         marginHorizontal:5,
-        alignSelf:'flex-start'
     
     },
     innerPostText:{
         color: '#000',
         fontSize:15,
-        width:150,
     
-    },
-    ImageContainer:{
-        alignSelf:'flex-end',
     },
     seeMore:{
         
@@ -150,6 +346,24 @@ const styles =StyleSheet.create({
         fontSize:15,
         marginTop:30,
     
+    },
+    cardImage:{
+        resizeMode:"contain",
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    },
+    IconContainer:{
+        justifyContent:'center',
+        alignItems:'flex-start'
+    },
+    Icon:
+    {
+      marginHorizontal:9,
+      color: '#360f9a',
+      alignSelf:'flex-start'
     }
     });
     

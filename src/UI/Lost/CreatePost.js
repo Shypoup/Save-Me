@@ -231,7 +231,7 @@ export default class CreateFoundPost extends React.Component{
                             <Image  source={this.state.avatarSource} />
                             )}
                             {this.state.imagename !=null  ? <Text Text style={styles.Text}>{this.state.imagename}</Text>: null }
-
+  
                         </View>
                         </TouchableOpacity>
                         </View>

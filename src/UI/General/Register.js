@@ -126,7 +126,7 @@ const Register = ({navigation}) =>{
 
         }).then(response=>{
             console.log(response.data);
-            navigation.navigate("Ho");
+            navigation.navigate("Login");
         }).catch(error =>{
             console.log(error);
             
