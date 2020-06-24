@@ -12,7 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {URL} from '../../../API/Defaults';
 
-
+const MAIN_COLOR = '#b31605';
 
 export  default class Profile extends React.Component{
 
@@ -114,7 +114,7 @@ export  default class Profile extends React.Component{
             
                 }}
                 >
-                    <MaterialCommunityIcons name="logout" size={25} color="#360f9a" />
+                    <MaterialCommunityIcons name="logout" size={25} color={MAIN_COLOR} />
                 </TouchableOpacity>
 
 
@@ -132,14 +132,14 @@ export  default class Profile extends React.Component{
             </View>
   <View  style={styles.DataContainer} >
 <Text style={styles.Title}>Your Data</Text>
-  <Text style={styles.user}><EntypoIcons name="email" size={18} color="#360f9a" />  {this.state.mail}</Text>
-  <Text style={styles.user}><EntypoIcons name="phone" size={18} color="#360f9a" />  {this.state.phone}</Text>
-  <Text style={styles.user}><Icon name="location-city" size={18} color="#360f9a" /> {this.state.address}</Text>
-  <Text style={styles.user}><EntypoIcons name="drop" size={18} color="#360f9a" />  {this.state.bloodType}</Text>
+  <Text style={styles.user}><EntypoIcons name="email" size={18} color={MAIN_COLOR} />  {this.state.mail}</Text>
+  <Text style={styles.user}><EntypoIcons name="phone" size={18} color={MAIN_COLOR} />  {this.state.phone}</Text>
+  <Text style={styles.user}><Icon name="location-city" size={18} color={MAIN_COLOR} /> {this.state.address}</Text>
+  <Text style={styles.user}><EntypoIcons name="drop" size={18} color={MAIN_COLOR} />  {this.state.bloodType}</Text>
   <Text style={styles.Title}>Trusted Numbers</Text>
-  <Text style={styles.user}><Ionicons name="md-person" size={18} color="#360f9a" />  {this.state.firstTrusted}</Text>
-  <Text style={styles.user}><Ionicons name="md-person" size={18} color="#360f9a" />  {this.state.secondTrusted}</Text>
-  <Text style={styles.user}><Ionicons name="md-person" size={18} color="#360f9a" />  {this.state.thirdTrusted}</Text>
+  <Text style={styles.user}><Ionicons name="md-person" size={18} color={MAIN_COLOR} />  {this.state.firstTrusted}</Text>
+  <Text style={styles.user}><Ionicons name="md-person" size={18} color={MAIN_COLOR} />  {this.state.secondTrusted}</Text>
+  <Text style={styles.user}><Ionicons name="md-person" size={18} color={MAIN_COLOR} />  {this.state.thirdTrusted}</Text>
   </View>
   
   <TouchableOpacity 
@@ -168,7 +168,7 @@ export  default class Profile extends React.Component{
                 "Blood Type :  "+this.state.bloodType +"\n" 
         }
         size={530}
-        bgColor='#360f9a'
+        bgColor={MAIN_COLOR}
         fgColor='#fff' 
         
         />
@@ -183,7 +183,7 @@ export  default class Profile extends React.Component{
 
 const styles =StyleSheet.create({
 Container:{
-  // backgroundColor:"#360f9a",
+  // backgroundColor:{MAIN_COLOR},
     height:200,
     borderBottomEndRadius:90,
     marginHorizontal:10,
@@ -200,12 +200,12 @@ ProfilePicture:{
     marginVertical:20,
     borderRadius:75,
     borderWidth:5,
-    borderColor:"#360f9a",
+    borderColor:MAIN_COLOR,
    
    
 },
 username:{
-    color:'#360f9a',
+    color:MAIN_COLOR,
     fontSize:25,
     marginVertical:60,
     marginHorizontal:20,
@@ -225,13 +225,13 @@ user:{
     color:'#000',
 },
 Title:{
-    color:'#360f9a',
+    color:MAIN_COLOR,
     
     marginVertical:10,
 },
 Button:{
     borderRadius : 25,
-    backgroundColor: '#360f9a',
+    backgroundColor: MAIN_COLOR,
     marginVertical:5,
     marginHorizontal: 60,
     marginBottom: 20,
@@ -250,7 +250,7 @@ qr:{
     marginHorizontal: 60
 },
 hideButton:{
-    color:'#360f9a',
+    color:MAIN_COLOR,
     fontSize:15,
 },
 logout:{

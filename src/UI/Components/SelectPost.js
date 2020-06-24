@@ -1,7 +1,11 @@
 import React from 'react';
-import {View, StyleSheet,Text,TouchableOpacity} from 'react-native';
+import {View, StyleSheet,TouchableOpacity,Dimensions} from 'react-native';
+import {Text,Icon} from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
+const MAIN_COLOR = '#b31605';
+const WIDTH = Dimensions.get('window').width;
+const HIEGHT = Dimensions.get('window').height;
 
 
  const SelectPost =({navigation})=>{
@@ -9,29 +13,51 @@ import {View, StyleSheet,Text,TouchableOpacity} from 'react-native';
   return (
      
   <View style={styles.Container}>
-
-    
+      <View style={styles.header}>
+    <Text h2 style={styles.headerText} >Create Post   </Text>
+    <Ionicons name='ios-add-circle' size={32} color={MAIN_COLOR} style={styles.headerIcon}/>
+    </View>
 
          
-  <TouchableOpacity 
-   onPress={()=> navigation.navigate('CreateLost')}
-  style={styles.Button}
-  >
-            <Text  style={styles.ButtonText}>Create Lost Post</Text>
-        </TouchableOpacity>
+            <TouchableOpacity 
+                    onPress={()=> navigation.navigate('CreateLost')}
+                    style={styles.Button}
+                    >
+                  <Text  style={styles.ButtonText}> Lost Post</Text>
+                  <Ionicons name='ios-people' size={32} color={MAIN_COLOR} style={styles.ButtonIcon}/>
+             </TouchableOpacity>
 
         <TouchableOpacity 
+            // onPress={()=> navigation.navigate('CreateLost')}
             onPress={()=> navigation.navigate('Create Founded')}
             style={styles.Button}
             >
-            <Text  style={styles.ButtonText}>Create Founded Post</Text>
+            <Text  style={styles.ButtonText}> Founded Post</Text>
+            <Ionicons name='ios-people' size={32} color={MAIN_COLOR} style={styles.ButtonIcon}/>
         </TouchableOpacity>
 
         <TouchableOpacity 
-   onPress={()=> navigation.navigate('Car accident')}
-  style={styles.Button}
-  >
-            <Text  style={styles.ButtonText}>Create Accident Post</Text>
+            onPress={()=> navigation.navigate('Car accident')}
+            style={styles.Button}
+            >
+            <Text  style={styles.ButtonText}> Accident Post</Text>
+            <Icon name='car' type='font-awesome' size={28}    iconStyle={styles.ButtonIcon}  />
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+            // onPress={()=> navigation.navigate('Car accident')}
+            style={styles.Button}
+            >
+            <Text  style={styles.ButtonText}>Lost things </Text>
+            <Icon name='id-card' type='font-awesome' size={28}    iconStyle={styles.ButtonIcon}  />
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+            // onPress={()=> navigation.navigate('Car accident')}
+            style={styles.Button}
+            >
+            <Text  style={styles.ButtonText}> humanitarian situation</Text>
+            <Icon name='heart' type='font-awesome' size={28}    iconStyle={styles.ButtonIcon}  />
         </TouchableOpacity>
     
     </View>
@@ -46,63 +72,52 @@ const styles =StyleSheet.create({
         height:200,
         borderBottomEndRadius:90,
         marginHorizontal:10,
-        marginVertical:300,
+        alignContent:'center',
+        alignItems:'center'
+       
+        
     },
-    PhotoContainer:{
+
+    header:{
         flexDirection:'row',
-        
-        
-    },
-    ProfilePicture:{
-        height:150,
-        width:150,
-        marginVertical:20,
-        borderRadius:75,
-        borderWidth:5,
-        borderColor:"#360f9a",
-       
-       
-    },
-    username:{
-        color:'#360f9a',
-        fontSize:25,
-        marginVertical:60,
-        marginHorizontal:20,
-        alignSelf:'flex-end',
-        
-    
-      
-        
-    },
-    DataContainer:{
-        marginHorizontal:50,
-        marginVertical:30,
-        marginBottom:60,
-    },
-    user:{
-        fontSize:20,
-        color:'#000',
-    },
-    Title:{
-        color:'#360f9a',
-        
+        alignContent:'space-between',
+        // alignSelf:'center',
         marginVertical:10,
+        
     },
+    headerText:{
+        color:MAIN_COLOR,
+    },
+    headerIcon:{
+        marginVertical:15,
+        alignSelf:'flex-end'
+    },
+
     Button:{
-        borderRadius : 25,
-        backgroundColor: '#360f9a',
-        marginVertical:5,
-        marginHorizontal: 60,
+    height:HIEGHT*0.15,
+    width: WIDTH  -60,
+    backgroundColor: MAIN_COLOR,
+    borderRadius:9,
+    justifyContent:'center',
+    alignItems:'center',
+    borderWidth:1,
+    borderColor:'white',
+    flexDirection:'row',
+    marginVertical:2,
+
         
     
     },
     ButtonText:{
-        fontSize:20,
-        color:'white',
-        alignSelf:'center',
-        fontFamily:'sans-serif-condensed',
-        marginVertical:5,
+        fontSize:25,
+        color: 'white',
+        fontWeight:'bold',
     },
+    ButtonIcon:{
+        marginTop: 8 ,
+         marginHorizontal:5 ,
+          color: '#fff'
+    }
     
     });
 

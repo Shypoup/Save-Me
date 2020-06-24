@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
 import {URL} from '../../../API/Defaults';
 
-
+const MAIN_COLOR = '#b31605';
 export  default class EditProfile extends React.Component{
         
         constructor(props){
@@ -84,7 +84,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input} 
                 placeholder='First Name'
-                placeholderTextColor='#360f9a'  
+                placeholderTextColor={MAIN_COLOR}  
                 onChangeText={firstName => this.setState({firstName})}
                 value={this.state.firstName}
                 returnKeyType = { "next" }
@@ -99,7 +99,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Last Name'
-                placeholderTextColor='#360f9a'  onChangeText={lastName => this.setState({lastName})}
+                placeholderTextColor={MAIN_COLOR}  onChangeText={lastName => this.setState({lastName})}
                 value={this.state.lastName}
                 ref={ref => {this.lastName = ref;}} 
                 returnKeyType = { "next" }
@@ -114,7 +114,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Mail' 
-                placeholderTextColor='#360f9a'
+                placeholderTextColor={MAIN_COLOR}
                 onChangeText={mail => this.setState({mail})}
                 value={this.state.mail}
                 ref={ref => {this.Mail = ref;}} 
@@ -130,7 +130,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Phone'
-                placeholderTextColor='#360f9a'
+                placeholderTextColor={MAIN_COLOR}
                 textContentType='telephoneNumber' 
                 onChangeText={phone => this.setState({phone})}
                 value={this.state.phone}
@@ -148,7 +148,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Address'
-                placeholderTextColor='#360f9a' 
+                placeholderTextColor={MAIN_COLOR} 
                 textContentType='fullStreetAddress'
                 onChangeText={address => this.setState({address})}
                 value={this.state.address}
@@ -167,7 +167,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Blood Type'
-                placeholderTextColor='#360f9a' 
+                placeholderTextColor={MAIN_COLOR} 
                 textContentType='none'
                 onChangeText={bloodType => this.setState({bloodType})}
                   value={this.state.bloodType}
@@ -187,7 +187,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Phone1'
-                placeholderTextColor='#360f9a'
+                placeholderTextColor={MAIN_COLOR}
                 textContentType='telephoneNumber' 
                 onChangeText={firstTrusted => this.setState({firstTrusted})}
                 value={this.state.firstTrusted}
@@ -206,7 +206,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Phone2'
-                placeholderTextColor='#360f9a'
+                placeholderTextColor={MAIN_COLOR}
                 textContentType='telephoneNumber'
                 onChangeText={secondTrusted => this.setState({secondTrusted})}
                 value={this.state.secondTrusted}
@@ -223,7 +223,7 @@ getToken = async () => {
               <TextInput
                 style={styles.input}
                 placeholder='Phone3'
-                placeholderTextColor='#360f9a' 
+                placeholderTextColor={MAIN_COLOR} 
                 textContentType='telephoneNumber' 
                 onChangeText={thirdTrusted => this.setState({thirdTrusted})}
               value={this.state.thirdTrusted}
@@ -289,20 +289,20 @@ const styles =StyleSheet.create({
     },
     
     WelcomText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         fontSize : 28,
        alignSelf:'center',
        margin:20,
        
     },
     Title:{
-    color:'#360f9a',
+    color:MAIN_COLOR,
     marginTop:10,
     },
     
     TextinputContainer:{
         borderBottomWidth: 1,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         flexDirection:'row',
         paddingHorizontal:20,
         marginVertical:10,
@@ -313,7 +313,7 @@ const styles =StyleSheet.create({
         flex:1
     },
     iconStyle:{
-      color:'#360f9a',
+      color:MAIN_COLOR,
       fontSize:18,
       marginTop:15,
       marginRight:5,
@@ -332,7 +332,7 @@ const styles =StyleSheet.create({
     },
     Button:{
         borderRadius : 25,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginVertical:20,
 
     },
@@ -354,25 +354,25 @@ const styles =StyleSheet.create({
     },
     createTextColored:{
         fontSize:15,
-        color:'#360f9a',
+        color:MAIN_COLOR,
     },
     validationText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         marginTop: -9,
         marginHorizontal:40,
     },
     Picker:{
         borderBottomWidth: 2,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         flexDirection:'row',
         paddingHorizontal:30,
         marginVertical:10,
-        color:'#360f9a',
+        color:MAIN_COLOR,
         
     },
     PickerContainer:{
         borderBottomWidth: 1,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         paddingBottom: -2,
     },
 });

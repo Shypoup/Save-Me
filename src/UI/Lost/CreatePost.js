@@ -11,7 +11,7 @@ import moment from  'moment';
 // imoprt Reusable Components
 import {URL} from '../../../API/Defaults';
 
-
+const MAIN_COLOR = '#b31605';
 
 
 
@@ -175,7 +175,7 @@ export default class CreateFoundPost extends React.Component{
                         onSubmitEditing={() => { this.Age.focus(); }}
                         blurOnSubmit={false}
                         placeholder='Name' 
-                        placeholderTextColor='#360f9a'
+                        placeholderTextColor={MAIN_COLOR}
                         value={this.state.name}
                         onChangeText={name => this.setState({name})}
                         
@@ -188,7 +188,7 @@ export default class CreateFoundPost extends React.Component{
                         returnKeyType = { "next" }
                         onSubmitEditing={() => { this.Description.focus(); }}
                         blurOnSubmit={false}
-                        placeholder='Age' placeholderTextColor='#360f9a'
+                        placeholder='Age' placeholderTextColor={MAIN_COLOR}
                         value={this.state.age}
                         onChangeText={age => this.setState({age})}
                         />
@@ -203,7 +203,7 @@ export default class CreateFoundPost extends React.Component{
                         onSubmitEditing={() => { this.Phone.focus(); }}
                         blurOnSubmit={false} 
                         placeholder='Description' 
-                        placeholderTextColor='#360f9a'
+                        placeholderTextColor={MAIN_COLOR}
                         value={this.state.description}
                         onChangeText={description => this.setState({description})}
                         />
@@ -212,7 +212,7 @@ export default class CreateFoundPost extends React.Component{
                         style={styles.TextinputContainer} 
                         ref={(input) => { this.Phone = input; }} 
                         placeholder='Phone' 
-                        placeholderTextColor='#360f9a' 
+                        placeholderTextColor={MAIN_COLOR}
                         textContentType='telephoneNumber'
                         keyboardType='numeric'
                         value={this.state.phone}
@@ -401,7 +401,7 @@ const styles =StyleSheet.create({
     },
     
     WelcomText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         fontSize : 28,
        alignSelf:'center',
        margin:20,
@@ -411,7 +411,7 @@ const styles =StyleSheet.create({
         borderBottomWidth: 1,
         //borderRadius : 25,
         //borderWidth: 2,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         flexDirection:'row',
         
         paddingHorizontal:20,
@@ -430,7 +430,7 @@ const styles =StyleSheet.create({
     },
     Button:{
         borderRadius : 25,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginVertical:20,
 
     },
@@ -452,32 +452,32 @@ const styles =StyleSheet.create({
     },
     createTextColored:{
         fontSize:15,
-        color:'#360f9a',
+        color:MAIN_COLOR,
     },
     validationText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         marginTop: -9,
         marginHorizontal:40,
     },
     Picker:{
         borderBottomWidth: 2,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         flexDirection:'row',
         paddingHorizontal:30,
         marginVertical:10,
-        color:'#360f9a',
+        color:MAIN_COLOR,
         
     },
     PickerContainer:{
         borderBottomWidth: 1,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         paddingBottom: -2,
       
     },
 
     Text:
     {
-        color: '#360f9a',
+        color: MAIN_COLOR,
         marginVertical:10, 
         marginHorizontal:10, 
     }

@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Modal from './src/UI/Components/Modal';
 
 
-
+const MAIN_COLOR = '#b31605';
 export default class HomeScreen extends React.Component{
   
     constructor(props){
@@ -176,7 +176,7 @@ const styles =StyleSheet.create({
         
     },
     postText:{
-        color: '#360f9a',
+        color: MAIN_COLOR,
         fontSize:16,
         marginVertical:5,
         marginHorizontal:5,
@@ -209,7 +209,7 @@ const styles =StyleSheet.create({
     Icon:
     {
       marginHorizontal:9,
-      color: '#360f9a',
+      color: MAIN_COLOR,
       alignSelf:'flex-start'
     }
     });

@@ -37,15 +37,16 @@ const Stack=createStackNavigator();      //Stack  object
 const Drawer = createDrawerNavigator();  // Drawer object  not used
 const TopTab = createMaterialTopTabNavigator(); // Toptab object
 
+const MAIN_COLOR = '#b31605';
 
 //topTap
 function topTabs() {
   return (
     <TopTab.Navigator
     tabBarOptions={{
-      activeTintColor:'#360f9a',
-      indicatorStyle: {color:'#360f9a'},
-      activeTintColor: '#360f9a',
+      activeTintColor:MAIN_COLOR,
+      indicatorStyle: {color:MAIN_COLOR},
+      activeTintColor: MAIN_COLOR,
     // style: { backgroundColor: 'powderblue' },
   }}
     >
@@ -115,7 +116,7 @@ function Home (){
     <Tab.Navigator tabstyle={{}}
     initialRouteName="HomeScreen"
     tabBarOptions={{
-      activeTintColor: '#360f9a',
+      activeTintColor: MAIN_COLOR,
       inactiveTintColor: 'gray',
     }}
     screenOptions={({ route }) => ({
@@ -126,27 +127,27 @@ function Home (){
 
         if (route.name === 'Home') {
           iconName = 'ios-home'
-          color= focused ?'#360f9a' : 'gray';
+          color= focused ?MAIN_COLOR : 'gray';
             
         } else if (route.name === 'Notifications') {
           iconName = focused ? 'ios-notifications' : 'md-notifications';
-          color= focused ?'#360f9a' : 'gray';
+          color= focused ?MAIN_COLOR : 'gray';
         } else if (route.name === 'Profile') {
         iconName =  'ios-person'
-        color= focused ?'#360f9a' : 'gray';
+        color= focused ?MAIN_COLOR : 'gray';
       }else if (route.name === 'Create Post') {
         iconName =  'ios-add-circle'
-        color= focused ?'#360f9a' : 'gray';
+        color= focused ?MAIN_COLOR : 'gray';
       }else if (route.name === 'Search') {
         iconName =  'ios-search'
-        color= focused ?'#360f9a' : 'gray';
+        color= focused ?MAIN_COLOR : 'gray';
       }else if (route.name === 'Danger') {
         iconName =  'md-warning'
-        color= focused ?'#360f9a' : 'gray';
+        color= focused ?MAIN_COLOR : 'gray';
       }
       else {
         iconName =  'md-remove-circle'
-        color= focused ?'#360f9a' : 'gray';
+        color= focused ?MAIN_COLOR : 'gray';
       }
 
         
