@@ -43,16 +43,22 @@ const MAIN_COLOR = '#b31605';
 function topTabs() {
   return (
     <TopTab.Navigator
+    
     tabBarOptions={{
       activeTintColor:MAIN_COLOR,
       indicatorStyle: {color:MAIN_COLOR},
       activeTintColor: MAIN_COLOR,
+      scrollEnabled:true
     // style: { backgroundColor: 'powderblue' },
-  }}
+  }
+  
+}
     >
       <TopTab.Screen name="Home" component={HomeScreen} />
       <TopTab.Screen name="Lost " component={LostPosts} />
       <TopTab.Screen name="Accidents" component={AccidentsPosts} />
+      <TopTab.Screen name="Login " component={Login} />
+      <TopTab.Screen name="Register" component={Register} />
     </TopTab.Navigator>
   );
 }

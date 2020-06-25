@@ -280,7 +280,7 @@
 //   btnSection: {
 
 //     borderRadius : 25,
-//     backgroundColor: '#360f9a',
+//     backgroundColor: MAIN_COLOR,
 //     marginVertical:2,
 //     marginHorizontal: 90,
 //     marginBottom: 10,
@@ -295,7 +295,7 @@
 //   btnSearch: {
 
 //     borderRadius : 25,
-//     backgroundColor: '#360f9a',
+//     backgroundColor: MAIN_COLOR,
 //     marginVertical:5,
 //     marginHorizontal: 50,
 //     marginTop: 60,
@@ -477,71 +477,643 @@
 // });
 
 
-import KeyEvent from 'react-native-keyevent';
-import React from 'react';
-import {Text} from 'react-native';
+// import KeyEvent from 'react-native-keyevent';
+// import React from 'react';
+// import {Text} from 'react-native';
 
-export default class SearchLost extends React.Component{
+// export default class SearchLost extends React.Component{
+// // componentDidMount() {
+// //   // if you want to react to keyDown
+// //   KeyEvent.onKeyDownListener((keyEvent) => {
+// //     console.log(`onKeyDown keyCode: ${keyEvent.keyCode}`);
+// //     console.log(`Action: ${keyEvent.action}`);
+// //     console.log(`Key: ${keyEvent.pressedKey}`);
+// //   });
+
+// //   // if you want to react to keyUp
+// //   KeyEvent.onKeyUpListener((keyEvent) => {
+// //     console.log(`onKeyUp keyCode: ${keyEvent.keyCode}`);
+// //     console.log(`Action: ${keyEvent.action}`);
+// //     console.log(`Key: ${keyEvent.pressedKey}`);
+// //   });
+
+// //   // if you want to react to keyMultiple
+// //   KeyEvent.onKeyMultipleListener((keyEvent) => {
+// //     console.log(`onKeyMultiple keyCode: ${keyEvent.keyCode}`);
+// //     console.log(`Action: ${keyEvent.action}`);
+// //     console.log(`Characters: ${keyEvent.characters}`);
+// //   });
+// // }
+
+// // componentWillUnmount() {
+// //   // if you are listening to keyDown
+// //   KeyEvent.removeKeyDownListener();
+
+// //    // if you are listening to keyUp
+// //   KeyEvent.removeKeyUpListener();
+
+// //    // if you are listening to keyMultiple
+// //   KeyEvent.removeKeyMultipleListener();
+// // }
+
+
 // componentDidMount() {
-//   // if you want to react to keyDown
 //   KeyEvent.onKeyDownListener((keyEvent) => {
-//     console.log(`onKeyDown keyCode: ${keyEvent.keyCode}`);
-//     console.log(`Action: ${keyEvent.action}`);
-//     console.log(`Key: ${keyEvent.pressedKey}`);
+//     console.warn("before Pressed")
+//       if (keyEvent.keyCode === 'Keycode of the power button'){
+//           this.timeout = setTimeout(() => {
+//               //Your SOS Function here
+//               console.warn("Pressed")
+//           }, 1000)
+//       }
 //   });
 
-//   // if you want to react to keyUp
 //   KeyEvent.onKeyUpListener((keyEvent) => {
-//     console.log(`onKeyUp keyCode: ${keyEvent.keyCode}`);
-//     console.log(`Action: ${keyEvent.action}`);
-//     console.log(`Key: ${keyEvent.pressedKey}`);
-//   });
-
-//   // if you want to react to keyMultiple
-//   KeyEvent.onKeyMultipleListener((keyEvent) => {
-//     console.log(`onKeyMultiple keyCode: ${keyEvent.keyCode}`);
-//     console.log(`Action: ${keyEvent.action}`);
-//     console.log(`Characters: ${keyEvent.characters}`);
-//   });
+//       if (keyEvent.keyCode === 'Keycode of the power button'){
+//           clearTimeout(this.timeout)
+//       }
+//   })
 // }
 
 // componentWillUnmount() {
-//   // if you are listening to keyDown
 //   KeyEvent.removeKeyDownListener();
-
-//    // if you are listening to keyUp
 //   KeyEvent.removeKeyUpListener();
-
-//    // if you are listening to keyMultiple
-//   KeyEvent.removeKeyMultipleListener();
+// }
+// render(){
+//   return <Text>Hello</Text>
 // }
 
 
-componentDidMount() {
-  KeyEvent.onKeyDownListener((keyEvent) => {
-    console.warn("before Pressed")
-      if (keyEvent.keyCode === 'Keycode of the power button'){
-          this.timeout = setTimeout(() => {
-              //Your SOS Function here
-              console.warn("Pressed")
-          }, 1000)
+// }
+
+
+
+
+
+
+
+
+
+
+// import React,{useState} from 'react';
+// import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
+// import axios from 'axios';
+// import UploadImage from '../Components/UploadImage';
+// // import uploadData from '../Components/UploadImage';
+// import FormData from 'form-data';
+// import ImagePicker from 'react-native-image-crop-picker';
+// import RNFetchBlob from 'rn-fetch-blob';
+// import {URL} from '../../../API/Defaults';
+
+// // let dataa=uploadData;
+
+// export default class CreateAcciedentPost extends React.Component{
+//     state={
+//         descreption:'',
+//         phone:'',
+//         city:'',
+//         photo:'',
+//     }
+
+//     render(){
+//     return (
+       
+//       <View style ={styles.Container}>
+
+
+
+        
+//     <Text style={styles.WelcomText} >Create Post</Text>
+    
+//                 <TouchableOpacity 
+//                     style={styles.TextinputContainer}
+//                     onPress={ async()=>
+//                         await  ImagePicker.openPicker({
+//                             multiple: true
+//                           }).then(images => {
+//                             console.log(images);
+//                             console.log(images[0].path);
+                            
+//                             this.setState=({photo: images[0].path })
+                                
+                            
+            
+//                           })
+//                     }
+//                     >
+//                     <Text style={styles.Text}>Select Photos</Text>
+//                     </TouchableOpacity>
+                 
+//                  <TextInput 
+//                         style={styles.TextinputContainer} 
+//                         placeholder='Description' 
+//                         placeholderTextColor=MAIN_COLOR
+//                         />
+
+//                  <TextInput 
+//                         style={styles.TextinputContainer} 
+//                         placeholder='Phone' 
+//                         placeholderTextColor=MAIN_COLOR
+//                         />
+                
+               
+      
+ 
+
+
+//         <TouchableOpacity style={styles.Button}
+
+        
+//  onPress={ async ()=>{
+    
+//     var bodyy = new FormData();
+//     bodyy.append('', this.state.photo);
+    
+
+//     RNFetchBlob.fetch('POST', `${URL}/RoadAccedint`, {
+
+//         'Content-Type' : 'multipart/formdata',
+//         'X-AUTH': ` eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0OGUxNTRiNDlmMzNiY2M2ZDhkYjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTg1ODYzNjk4fQ.o6ph_027WSz_bx8AK4YnRRxzPoLHcoTnZJP2FBwd7ys`
+//     }, [
+//         // part file from storage
+//         { name : '', filename : 'image', type:'image/jpeg', data: this.state.photo},
+//         {name:'information',data:`Hello`},
+//         {name:'city',data:`Cairo`},
+//         {name:'street',data:`Elbahr alazam`},
+        
+//         // elements without property filename will be sent as plain text
+//     ]).then((resp) => {
+//         console.log(resp);     // ...
+//         this.props.navigation.navigate('Home');
+//     }).catch((err) => {
+//         console.log(err);
+        
+//     })
+    
+// }  
+
+    
+        
+
+
+// }
+
+    
+//       >
+//             <Text  style={styles.ButtonText}>Post</Text>
+//         </TouchableOpacity>
+        
+
+    
+
+//     </View>
+  
+//   )
+// }
+// }
+// const styles =StyleSheet.create({
+//     Container:{
+//         marginHorizontal: 50,
+//     },
+    
+//     WelcomText:{
+//         color:MAIN_COLOR,
+//         fontSize : 28,
+//        alignSelf:'center',
+//        margin:20,
+       
+//     },
+//     TextinputContainer:{
+//         borderBottomWidth: 1,
+//         //borderRadius : 25,
+//         //borderWidth: 2,
+//         borderColor: MAIN_COLOR,
+//         flexDirection:'row',
+        
+//         paddingHorizontal:20,
+//         marginVertical:10,
+        
+//     },
+//     Textinput :{
+      
+//         fontSize : 15,
+//         color : '#000',
+        
+       
+//     },
+//     Icon:{
+//         fontSize: 40, 
+//     },
+//     Button:{
+//         borderRadius : 25,
+//         backgroundColor: MAIN_COLOR,
+//         marginVertical:20,
+
+//     },
+//     ButtonText:{
+//         fontSize:30,
+//         color:'white',
+//         alignSelf:'center',
+//         fontFamily:'sans-serif-condensed',
+//         marginVertical:5,
+//     },
+//     CreateAccountContainer:{
+//         flexDirection:'row',
+//         alignContent:'center',
+//         marginHorizontal: 40,
+        
+//     },
+//     createTextNormal:{
+//         fontSize:15,
+//     },
+//     createTextColored:{
+//         fontSize:15,
+//         color:MAIN_COLOR,
+//     },
+//     validationText:{
+//         color:MAIN_COLOR,
+//         marginTop: -9,
+//         marginHorizontal:40,
+//     },
+//     Picker:{
+//         borderBottomWidth: 2,
+//         borderColor: MAIN_COLOR,
+//         flexDirection:'row',
+//         paddingHorizontal:30,
+//         marginVertical:10,
+//         color:MAIN_COLOR,
+        
+//     },
+//     PickerContainer:{
+//         borderBottomWidth: 1,
+//         borderColor: MAIN_COLOR,
+//         paddingBottom: -2,
+//     },
+//     Text:
+//     {
+//         color: MAIN_COLOR,
+//         marginVertical:10, 
+//         marginHorizontal:-2, 
+//     }
+// });
+    
+
+
+
+//Import default Packages & COmponents
+import React from 'react';
+import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+import RNFetchBlob from 'rn-fetch-blob';
+import AsyncStorage from '@react-native-community/async-storage';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from  'moment';
+
+// imoprt Reusable Components
+import {URL} from '../../../API/Defaults';
+
+
+
+const MAIN_COLOR = '#b31605';
+
+
+export default class CreateAcciedentPost extends React.Component{
+
+    state = {
+        //data
+        
+         gender:'0',
+
+
+
+    
+
+        // Image Picker
+        avatarSource: null, 
+        imagename:null,
+        image_path:null,
+        image_type:null,
+        finished: false,
+        images:[],
+        images:'',
+
+        //Token 
+        Token:'',
+        
+      };
+    
+      constructor(props) {
+        super(props);
+    
+        this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
+      
       }
-  });
-
-  KeyEvent.onKeyUpListener((keyEvent) => {
-      if (keyEvent.keyCode === 'Keycode of the power button'){
-          clearTimeout(this.timeout)
-      }
-  })
-}
-
-componentWillUnmount() {
-  KeyEvent.removeKeyDownListener();
-  KeyEvent.removeKeyUpListener();
-}
-render(){
-  return <Text>Hello</Text>
-}
+      
 
 
+      //Get Token 
+      getToken = async () => {
+        try {
+          const value = await AsyncStorage.getItem('token')
+          console.log('Done Get Token')
+          return value;
+        } catch(e) {
+            console.log("Somethimg went Wrong Get Token");
+        }
+      
+      }  
+
+ //Picker
+ clickme=()=>{
+  
+    var img=this.state.image_path;
+    
+    var genderSelect = this.state.gender;
+    
+    
+    if(  img=="" || genderSelect=="0"   ){
+       
+        return true;
+    }else{
+        return false;
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+ /***********Image Picker Package  */
+    async  selectPhotoTapped() {
+
+    ImagePicker.openPicker({
+        multiple: true,
+        waitAnimationEnd: false,
+        // includeExif: true,
+        forceJpg: true,
+        maxFiles: 5,
+        compressImageQuality: 0.8,
+        mediaType: 'photo'
+      }).then(images => {
+        this.setState({
+          image: null,
+          images: images.map(i => {
+            console.log('received image', i);
+            return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+          })
+        });
+        console.log( this.state.images)
+      }).catch(e => alert(e));
+    
+        
+
+    /***********End Of Image Picker Package  */
+
+
+
+        }
+    componentDidMount(){
+        this.getToken().then((value)=>{
+            console.log("GET Token : "+ value);
+            this.setState({
+                Token:value
+            })
+      
+       
+    
+})
+    }    
+
+    render(){
+        const { show, date, mode } = this.state;
+    return (
+       <ScrollView>
+      <View style ={styles.Container}>
+          
+
+              <Text style={styles.WelcomText} > Search for  lost person</Text>
+                    
+              <View style={styles.PickerContainer}>
+                    <Picker
+                        style={styles.Picker}
+                        selectedValue={this.state.city}
+                        onValueChange={(itemValue) => this.setState({city:itemValue})}
+                        >
+                        <Picker.Item label="Select a Gender " value="0"/>
+                        <Picker.Item label="Male" value="Male" />
+                        <Picker.Item label="Female" value="Fmale"/>
+                        </Picker>
+                    
+                    </View>
+
+
+                
+
+                    
+                     {/* Select An Image */}
+                     <View style={styles.TextinputContainer} >
+                        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+                        <View 
+                        >
+                            {this.state.avatarSource === null ? (
+                            <Text style={styles.Text}>Select a Photo</Text>
+                            ) : (
+                            <Image  source={this.state.avatarSource} />
+                            )}
+                            {this.state.imagename !=null  ? <Text Text style={styles.Text}>{this.state.imagename}</Text>: null }
+
+                        </View>
+                        </TouchableOpacity>
+                        </View>
+                    {/* End Select An Image */}
+
+              
+
+                        
+
+                        <TouchableOpacity style={styles.Button}
+                        
+                        onPress={()=>{
+                            // if(this.clickme()){
+                            //     alert("Please Fill all Fields");
+                            // }else{
+
+                            
+                            
+                            RNFetchBlob.fetch('POST', `${URL}/RoadAccedint`, {
+                    
+                                'Content-Type' : 'multipart/formdata',
+                                'X-AUTH': `${this.state.Token}`
+                            }, [
+                                // part file from storage
+                                { name : '', filename : this.state.imagename, type:this.state.image_type, data: RNFetchBlob.wrap(this.state.image_path)},
+                                
+                                // {name:'descreption',data:`${this.state.description}`},
+                                // {name:'phone',data:`${this.state.phone}`},
+                                // {name:'gender',data:`${this.state.gender}`},
+                                // {name:'time',data:`${this.state.chosenDate}`},
+                                // {name:'city',data:`${this.state.city}`},
+                                   {name:'information',data:`Test`},
+                                   {name:'city',data:`Test`},
+                                   {name:'street',data:`Test`},
+                                   
+                                
+                                
+                                
+
+                        
+                                // elements without property filename will be sent as plain text
+                            ]).then((resp) => {
+                                console.log(resp);     // ...
+                                this.props.navigation.navigate('Home');
+                            }).catch((err) => {
+                                console.log(err);
+                                
+                            })
+                            
+                    }  
+                        
+                            
+                                
+
+                    
+                    }
+                        
+                        
+                
+                        >
+                            <Text  style={styles.ButtonText}>Search</Text>
+                        </TouchableOpacity>
+                        
+
+                        {/* <DatePicker /> */}
+
+                        
+
+                    </View>
+                    </ScrollView>
+  )
+}
+}
+
+
+
+
+
+
+
+const styles =StyleSheet.create({
+    Container:{
+        marginHorizontal: 50,
+    },
+    
+    WelcomText:{
+        color:MAIN_COLOR,
+        fontSize : 28,
+       alignSelf:'center',
+       margin:20,
+       
+    },
+    TextinputContainer:{
+        borderBottomWidth: 1,
+        //borderRadius : 25,
+        //borderWidth: 2,
+        borderColor: MAIN_COLOR,
+        flexDirection:'row',
+        
+        paddingHorizontal:20,
+        marginVertical:10,
+        
+    },
+    Textinput :{
+      
+        fontSize : 15,
+        color : '#000',
+        
+       
+    },
+    Icon:{
+        fontSize: 40, 
+    },
+    Button:{
+        borderRadius : 25,
+        backgroundColor: MAIN_COLOR,
+        marginVertical:20,
+
+    },
+    ButtonText:{
+        fontSize:30,
+        color:'white',
+        alignSelf:'center',
+        fontFamily:'sans-serif-condensed',
+        marginVertical:5,
+    },
+    CreateAccountContainer:{
+        flexDirection:'row',
+        alignContent:'center',
+        marginHorizontal: 40,
+        
+    },
+    createTextNormal:{
+        fontSize:15,
+    },
+    createTextColored:{
+        fontSize:15,
+        color:MAIN_COLOR,
+    },
+    validationText:{
+        color:MAIN_COLOR,
+        marginTop: -9,
+        marginHorizontal:40,
+    },
+    Picker:{
+        borderBottomWidth: 2,
+        borderColor: MAIN_COLOR,
+        flexDirection:'row',
+        paddingHorizontal:30,
+        marginVertical:10,
+        color:MAIN_COLOR,
+        
+    },
+    PickerContainer:{
+        borderBottomWidth: 1,
+        borderColor: MAIN_COLOR,
+        paddingBottom: -2,
+      
+    },
+
+    Text:
+    {
+        color: MAIN_COLOR,
+        marginVertical:10, 
+        marginHorizontal:10, 
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

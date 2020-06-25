@@ -5,7 +5,7 @@ import axios from 'axios';
 import {URL} from '../../../API/Defaults';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
+const MAIN_COLOR = '#b31605';
 
 
 
@@ -55,24 +55,21 @@ render(){
         <View style ={styles.Container}>
 
     
-    <View style={styles.shape2}>
-        <View style={styles.shape}/>
-      
-    </View>
+   
  
 
 
 
-    <Text style={styles.WelcomText} >Welcome back !</Text>
+    <Text style={styles.WelcomText} >Login</Text>
     
     <View style={styles.TextinputContainer}>
        <Icon name="ios-mail" 
-       color="#360f9a" 
+       color={MAIN_COLOR} 
        style={styles.Icon} />     
        <TextInput 
         style={styles.Textinput} 
         placeholder='Mail' 
-        placeholderTextColor='#360f9a' 
+        placeholderTextColor={MAIN_COLOR} 
         value={this.state.mail}
         onChangeText={mail => this.setState({mail})}
         returnKeyType = { "next" }
@@ -84,13 +81,13 @@ render(){
    
 
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
+       <Icon name="ios-lock" color={MAIN_COLOR} style={styles.Icon} /> 
        <TextInput 
         style={styles.Textinput}
         placeholder='password' 
         textContentType='password' 
         secureTextEntry={true} 
-        placeholderTextColor='#360f9a'
+        placeholderTextColor={MAIN_COLOR}
         ref={(input) => { this.password = input; }} 
         value={this.state.password}
         onChangeText={password => this.setState({password})}
@@ -139,7 +136,7 @@ render(){
         <Text style={styles.createTextColored} onPress={()=> this.props.navigation.navigate('Register')}>Create One</Text>
         </View>
 
-        <View style={styles.shape3}/>
+      
     </View>
     </ScrollView>
   )
@@ -151,26 +148,28 @@ const styles =StyleSheet.create({
     },
     
     WelcomText:{
-        color:'#360f9a',
-        fontSize : 28,
+        color:MAIN_COLOR,
+        fontSize : 38,
        alignSelf:'center',
        margin:40,
+       fontWeight:'bold'
        
     },
     TextinputContainer:{
         
         borderRadius : 25,
-        borderWidth: 1,
-        borderColor: '#360f9a',
+        borderWidth: 0.5,
+        borderColor: MAIN_COLOR,
         flexDirection:'row',
         flex:1,
         paddingHorizontal:20,
-        marginVertical:10,
+        marginTop:20,
+        marginBottom:10
         
     },
     Textinput :{
       
-        fontSize : 18,
+        fontSize : 15,
         color : '#000',
         paddingLeft :20,
         flex:1,
@@ -181,7 +180,7 @@ const styles =StyleSheet.create({
     },
     Button:{
         borderRadius : 25,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginVertical:20,
 
     },
@@ -203,19 +202,20 @@ const styles =StyleSheet.create({
     },
     createTextColored:{
         fontSize:15,
-        color:'#360f9a',
+        color:MAIN_COLOR,
     },
     validationText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         marginTop: -9,
         marginHorizontal:40,
+        fontSize:10,
     },
 
     shape:{
         height:140,
         width:140,
         borderRadius:100,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginHorizontal: 15,
         
     },
@@ -225,7 +225,7 @@ const styles =StyleSheet.create({
         borderRadius:100,
         borderRadius : 75,
         borderWidth: 2,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         marginHorizontal: -50,
         alignSelf:'flex-end'
     },
@@ -233,7 +233,7 @@ const styles =StyleSheet.create({
         height:140,
         width:140,
         borderRadius:100,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginHorizontal: -120,
         alignSelf:'flex-start',
         marginVertical: 15,

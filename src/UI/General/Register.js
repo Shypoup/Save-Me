@@ -5,6 +5,7 @@ import axios from'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import {URL} from '../../../API/Defaults';
 
+const MAIN_COLOR = '#b31605';
 
 
 const Register = ({navigation}) =>{
@@ -18,10 +19,10 @@ const Register = ({navigation}) =>{
   return (
       <ScrollView>
       <View style ={styles.Container}>
-
+{/* 
     <View style={styles.shape2}>
         <View style={styles.shape}/>
-    </View>
+    </View> */}
  
 
 
@@ -29,12 +30,12 @@ const Register = ({navigation}) =>{
     <Text style={styles.WelcomText} >Welcome!</Text>
     
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
+       <Icon name="ios-person" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.lastName.focus(); }}
         blurOnSubmit={false}
-        placeholder='First Name' placeholderTextColor='#360f9a'
+        placeholder='First Name' placeholderTextColor={MAIN_COLOR}
        value={firstName}
        onChangeText={newvalue => setFirstName(newvalue)}
        />
@@ -42,27 +43,27 @@ const Register = ({navigation}) =>{
     {firstName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
     
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-person" color="#360f9a" style={styles.Icon} />     
+       <Icon name="ios-person" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
        ref={ref => {this.lastName = ref;}} 
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.Phone.focus(); }}
         blurOnSubmit={false}
-        placeholder='Last Name' placeholderTextColor='#360f9a'
+        placeholder='Last Name' placeholderTextColor={MAIN_COLOR}
        value={lastName}
        onChangeText={newvalue => setLastName(newvalue)}
        />
     </View>
     {lastName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
     <View style={styles.TextinputContainer}>
-    <Icon name="md-phone-portrait" color="#360f9a" style={styles.Icon} />     
+    <Icon name="md-phone-portrait" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
        ref={ref => {this.Phone = ref;}} 
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.Mail.focus(); }}
         blurOnSubmit={false}
         placeholder='Phone' 
-        placeholderTextColor='#360f9a' 
+        placeholderTextColor={MAIN_COLOR} 
         textContentType='telephoneNumber' 
        value={phone}
        onChangeText={newvalue => setPhone(newvalue)}
@@ -70,13 +71,13 @@ const Register = ({navigation}) =>{
        />
     </View>
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-mail" color="#360f9a" style={styles.Icon} />     
+       <Icon name="ios-mail" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
        ref={ref => {this.Mail = ref;}} 
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.password.focus(); }}
         blurOnSubmit={false}
-        placeholder='Mail' placeholderTextColor='#360f9a' textContentType='emailAddress' 
+        placeholder='Mail' placeholderTextColor={MAIN_COLOR} textContentType='emailAddress' 
        value={mail}
        onChangeText={newvalue => setMail(newvalue)}
        />
@@ -84,13 +85,13 @@ const Register = ({navigation}) =>{
     {mail.length < 1  ? <Text style={styles.validationText}>Can't be empty</Text>: null }
 
     <View style={styles.TextinputContainer}>
-       <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
+       <Icon name="ios-lock" color={MAIN_COLOR} style={styles.Icon} /> 
        <TextInput style={styles.Textinput}
        ref={ref => {this.password = ref;}} 
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.confirmPassword.focus(); }}
         blurOnSubmit={false}
-        placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor='#360f9a'
+        placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor={MAIN_COLOR}
        value={password}
        onChangeText={newvalue => setPassword(newvalue)}
        />  
@@ -100,14 +101,14 @@ const Register = ({navigation}) =>{
 
 
         <View style={styles.TextinputContainer}>
-       <Icon name="ios-lock" color="#360f9a" style={styles.Icon} /> 
+       <Icon name="ios-lock" color={MAIN_COLOR} style={styles.Icon} /> 
        <TextInput style={styles.Textinput} 
        value={confirmPassword}
        ref={ref => {this.confirmPassword = ref;}} 
        placeholder='Confirm password' 
        textContentType='password' 
        secureTextEntry={true}  
-       placeholderTextColor='#360f9a'  
+       placeholderTextColor={MAIN_COLOR}  
        onChangeText={newvalue => setConfirmPassword(newvalue)}
        />  
         </View>
@@ -145,7 +146,7 @@ const Register = ({navigation}) =>{
         <Text style={styles.createTextColored} onPress={()=> navigation.navigate('Login')}>Login</Text>
         </View>
 
-        <View style={styles.shape3}/>
+        {/* <View style={styles.shape3}/> */}
     </View>
     </ScrollView>
   )
@@ -158,7 +159,7 @@ const styles =StyleSheet.create({
     },
     
     WelcomText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         fontSize : 28,
        alignSelf:'center',
        margin:20,
@@ -167,8 +168,8 @@ const styles =StyleSheet.create({
     TextinputContainer:{
         
         borderRadius : 25,
-        borderWidth: 1,
-        borderColor: '#360f9a',
+        borderWidth: 0.5,
+        borderColor: MAIN_COLOR,
         flexDirection:'row',
         flex:1,
         paddingHorizontal:20,
@@ -177,7 +178,7 @@ const styles =StyleSheet.create({
     },
     Textinput :{
       
-        fontSize : 18,
+        fontSize : 15,
         color : '#000',
         paddingLeft :20,
         flex:1,
@@ -188,7 +189,7 @@ const styles =StyleSheet.create({
     },
     Button:{
         borderRadius : 25,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginVertical:20,
 
     },
@@ -210,20 +211,20 @@ const styles =StyleSheet.create({
     },
     createTextColored:{
         fontSize:15,
-        color:'#360f9a',
+        color:MAIN_COLOR,
     },
     validationText:{
-        color:'#360f9a',
+        color:MAIN_COLOR,
         marginTop: -9,
         marginHorizontal:40,
-        fontSize:12,
+        fontSize:10,
     },
 
     shape:{
         height:140,
         width:140,
         borderRadius:100,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginHorizontal: 15,
         
     },
@@ -233,7 +234,7 @@ const styles =StyleSheet.create({
         borderRadius:100,
         borderRadius : 75,
         borderWidth: 2,
-        borderColor: '#360f9a',
+        borderColor: MAIN_COLOR,
         marginHorizontal: -110,
         alignSelf:'flex-end'
     },
@@ -241,7 +242,7 @@ const styles =StyleSheet.create({
         height:140,
         width:140,
         borderRadius:100,
-        backgroundColor: '#360f9a',
+        backgroundColor: MAIN_COLOR,
         marginHorizontal: -120,
         alignSelf:'flex-start',
         marginVertical: 15,

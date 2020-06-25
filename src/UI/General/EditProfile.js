@@ -5,6 +5,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {URL} from '../../../API/Defaults';
 
 const MAIN_COLOR = '#b31605';
@@ -13,15 +16,21 @@ export  default class EditProfile extends React.Component{
         constructor(props){
             super(props);
             this.state={
-                firstName:" ",
-                lastName:" ",
-                mail:" ",
-                phone:" ",
-                address:" ",
-                bloodType:" ",
-                firstTrusted:" ",
-                secondTrusted:" ",
-                thirdTrusted:" ",
+              //Personal Data
+                firstName:"",
+                lastName:"",
+                mail:"",
+                phone:"",
+                address:"",
+              //Medical Data
+                bloodType:"",
+                doctorName:"",
+                doctorNumber:"",
+                pathography:"",
+              //Trusted data
+                firstTrusted:"",
+                secondTrusted:"",
+                thirdTrusted:"",
                 Token:'',
             };
         }
@@ -77,7 +86,7 @@ getToken = async () => {
             <Text style={styles.WelcomText} >Edit Profile</Text>
 
 
-            <Text style={styles.Title}>Your Info</Text>
+            <Text style={styles.Title}>Personal Data: </Text>
 
              <View style={styles.TextinputContainer} >
              <EntypoIcons name="edit" style={styles.iconStyle} /> 
@@ -132,6 +141,7 @@ getToken = async () => {
                 placeholder='Phone'
                 placeholderTextColor={MAIN_COLOR}
                 textContentType='telephoneNumber' 
+                keyboardType='numeric'
                 onChangeText={phone => this.setState({phone})}
                 value={this.state.phone}
                 ref={ref => {this.Phone = ref;}} 
@@ -161,7 +171,7 @@ getToken = async () => {
 
 
 
-              
+            <Text style={styles.Title}>Medical Data: </Text>
             <View style={styles.TextinputContainer} >
              <EntypoIcons name="drop" style={styles.iconStyle} /> 
               <TextInput
@@ -173,10 +183,60 @@ getToken = async () => {
                   value={this.state.bloodType}
                     ref={ref => {this.bloodType = ref;}} 
               returnKeyType = { "next" }
-                onSubmitEditing={() => { this.Phone1.focus(); }}
+                onSubmitEditing={() => { this.doctorName.focus(); }}
                 blurOnSubmit={false}
               />
             </View>  
+
+            <View style={styles.TextinputContainer} >
+            <Fontisto name="doctor" style={styles.iconStyle} />
+              <TextInput
+                style={styles.input}
+                placeholder='Doctor name'
+                placeholderTextColor={MAIN_COLOR} 
+                textContentType='none'
+                onChangeText={doctorName => this.setState({doctorName})}
+                value={this.state.doctorName}
+                ref={ref => {this.doctorName = ref;}} 
+                returnKeyType = { "next" }
+                onSubmitEditing={() => { this.doctorNumber.focus(); }}
+                blurOnSubmit={false}
+              />
+            </View> 
+
+            <View style={styles.TextinputContainer} >
+            <EntypoIcons name="phone" style={styles.iconStyle} /> 
+              <TextInput
+                style={styles.input}
+                placeholder='Doctor number'
+                textContentType='telephoneNumber' 
+                keyboardType='numeric'
+                placeholderTextColor={MAIN_COLOR} 
+                textContentType='none'
+                onChangeText={doctorNumber => this.setState({doctorNumber})}
+                  value={this.state.doctorNumber}
+                    ref={ref => {this.doctorNumber = ref;}} 
+              returnKeyType = { "next" }
+                onSubmitEditing={() => { this.pathography.focus(); }}
+                blurOnSubmit={false}
+              />
+            </View> 
+
+            <View style={styles.TextinputContainer} >
+            <FontAwesome5 name="notes-medical" style={styles.iconStyle} />
+              <TextInput
+                style={styles.input}
+                placeholder='Pathography'
+                placeholderTextColor={MAIN_COLOR} 
+                textContentType='none'
+                onChangeText={pathography => this.setState({pathography})}
+                  value={this.state.pathography}
+                    ref={ref => {this.pathography = ref;}} 
+              returnKeyType = { "next" }
+                onSubmitEditing={() => { this.Phone1.focus(); }}
+                blurOnSubmit={false}
+              />
+            </View> 
               
             
             <Text  style={styles.Title}>Trusted persons' Numbers</Text>
