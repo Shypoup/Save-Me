@@ -155,7 +155,7 @@ const Register = ({navigation}) =>{
 const styles =StyleSheet.create({
     Container:{
         marginHorizontal: 30,
-        marginTop:-30,
+        marginTop:30,
     },
     
     WelcomText:{

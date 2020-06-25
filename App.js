@@ -30,6 +30,10 @@ import AccidentsPosts from './src/UI/Accidents/ShowAccidentPosts';
 import LostPosts from './src/UI/Lost/ShowLostPosts';
 import CreateFoundPost from './src/UI/Lost/CreateFoundPost';
 import DangerMode from './src/UI/Danger/DangerMode';
+import LostThings from './src/UI/Additional/LostThings';
+import Humanitarian from './src/UI/Additional/Humanitarian';
+import HumanitarianPosts from './src/UI/Additional/HumanitarianPosts';
+import LostThingsPosts from './src/UI/Additional/LostThingsPosts';
 
 //Objects of screens
 const Tab = createBottomTabNavigator();  //bottonTab object
@@ -46,10 +50,11 @@ function topTabs() {
     
     tabBarOptions={{
       activeTintColor:MAIN_COLOR,
-      indicatorStyle: {color:MAIN_COLOR},
+      indicatorStyle: { backgroundColor:MAIN_COLOR},
       activeTintColor: MAIN_COLOR,
-      scrollEnabled:true
-    // style: { backgroundColor: 'powderblue' },
+      scrollEnabled:true,
+      
+    // style: { under },
   }
   
 }
@@ -57,8 +62,8 @@ function topTabs() {
       <TopTab.Screen name="Home" component={HomeScreen} />
       <TopTab.Screen name="Lost " component={LostPosts} />
       <TopTab.Screen name="Accidents" component={AccidentsPosts} />
-      <TopTab.Screen name="Login " component={Login} />
-      <TopTab.Screen name="Register" component={Register} />
+      <TopTab.Screen name="Lost things" component={LostThingsPosts} />
+      <TopTab.Screen name="Humanitarian" component={HumanitarianPosts} />
     </TopTab.Navigator>
   );
 }
@@ -88,6 +93,8 @@ function Create(){
       <Stack.Screen name="CreateLost" component={CreatePost} />
       <Stack.Screen name="Create Founded" component={CreateFoundPost}  /> 
       <Stack.Screen name="Car accident" component={CreateAcciedentPost}  /> 
+      <Stack.Screen name="LostThings Post" component={LostThings}  /> 
+      <Stack.Screen name="Humanitarian" component={Humanitarian}  /> 
       
     </Stack.Navigator>
   );
@@ -103,8 +110,9 @@ export default function MyTabs() {
   
   <NavigationContainer>
      <Stack.Navigator>
+     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} />
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
           <Stack.Screen name="Post Details" component={PostDetail}  />    
            

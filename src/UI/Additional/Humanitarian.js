@@ -2,7 +2,8 @@
 import React from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import RNFetchBlob from 'rn-fetch-blob';
 import AsyncStorage from '@react-native-community/async-storage';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -16,12 +17,12 @@ const MAIN_COLOR = '#b31605';
 
 
 
-export default class CreateFoundPost extends React.Component{
+
+export default class Humanitarian extends React.Component{
 
     state = {
         //data
-         name:'',
-         age:'',
+       
          lostDate:'',
          description:'',
          phone:'',
@@ -40,6 +41,9 @@ export default class CreateFoundPost extends React.Component{
         imagename:null,
         image_path:null,
         image_type:null,
+        finished: false,
+        images:[],
+        images:'',
 
         //Token 
         Token:'',
@@ -112,42 +116,35 @@ export default class CreateFoundPost extends React.Component{
 
 
  /***********Image Picker Package  */
-      selectPhotoTapped() {
-        const options = {
-          quality: 1.0,
-          maxWidth: 500,
-          maxHeight: 500,
-          storageOptions: {
-            skipBackup: true,
-          },
-        };
-    
-        ImagePicker.showImagePicker(options, response => {
-          if (response.didCancel) {
-            console.log('User cancelled photo picker');
-          } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          } else {
-            let source = {uri: response.uri};
-            alert("Photo Uploaded");
-             this.state.imagename= response.fileName;
-             this.state.image_path=response.path;
-             this.state.image_type = response.type;
-             this.state.data = response.data;
-            
-            this.setState({
-              avatarSource: source,
-            });
-          }
+    async  selectPhotoTapped() {
+
+     
+    ImagePicker.openPicker({
+        multiple: true,
+        waitAnimationEnd: false,
+        // includeExif: true,
+        forceJpg: true,
+        maxFiles: 5,
+        compressImageQuality: 0.8,
+        mediaType: 'photo'
+      }).then(images => {
+        this.setState({
+          image: null,
+          images: images.map(i => {
+            console.log('received image', i);
+            return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+          })
         });
-    }
+        console.log( this.state.images)
+      }).catch(e => alert(e));
+    
+        
+
     /***********End Of Image Picker Package  */
 
 
 
-
+        }
     componentDidMount(){
         this.getToken().then((value)=>{
             console.log("GET Token : "+ value);
@@ -167,32 +164,9 @@ export default class CreateFoundPost extends React.Component{
       <View style ={styles.Container}>
           
 
-              <Text style={styles.WelcomText} > Founded Post</Text>
+              <Text style={styles.WelcomText} >Humanitarian Situation</Text>
                     
-                    <TextInput 
-                        style={styles.TextinputContainer} 
-                        returnKeyType = { "next" }
-                        onSubmitEditing={() => { this.Age.focus(); }}
-                        blurOnSubmit={false}
-                        placeholder='Name' 
-                        placeholderTextColor={MAIN_COLOR}
-                        value={this.state.name}
-                        onChangeText={name => this.setState({name})}
-                        
-                        />
-
-                    <TextInput 
-                        style={styles.TextinputContainer}
-                        style={styles.TextinputContainer}
-                        ref={ref => {this.Age = ref;}} 
-                        returnKeyType = { "next" }
-                        onSubmitEditing={() => { this.Description.focus(); }}
-                        blurOnSubmit={false}
-                        placeholder='Age' placeholderTextColor={MAIN_COLOR}
-                        value={this.state.age}
-                        onChangeText={age => this.setState({age})}
-                        />
-
+                
                         
                     
 
@@ -212,7 +186,7 @@ export default class CreateFoundPost extends React.Component{
                         style={styles.TextinputContainer} 
                         ref={(input) => { this.Phone = input; }} 
                         placeholder='Phone' 
-                        placeholderTextColor={MAIN_COLOR} 
+                        placeholderTextColor={MAIN_COLOR }
                         textContentType='telephoneNumber'
                         keyboardType='numeric'
                         value={this.state.phone}
@@ -237,50 +211,8 @@ export default class CreateFoundPost extends React.Component{
                         </View>
                     {/* End Select An Image */}
 
-                    <View style={styles.PickerContainer}>
-                    <Picker
-                        style={styles.Picker}
-                        selectedValue={this.state.gender}
-                        onValueChange={(itemValue) => this.setState({gender:itemValue})}
-                        >
-                        <Picker.Item  label="Select a Gender " value="0"/>
-                        <Picker.Item label="Male" value="male" />
-                        <Picker.Item label="Female" value="female"/>
-                        </Picker>
-                    </View>
-
-
-
-                    {/* Date Picker  */}
-
-                    <View style={styles.PickerContainer}>
-                        <View style={styles.Text} onPress={this.showDatePicker}>
-                        
-                        <TouchableOpacity
-                        onPress={this.showDatePicker}
-                        >
-                         
-                       
-                         {this.state.chosenDate == '' ?<Text style={styles.Text} >Date</Text> :   <Text style={styles.Text}>{this.state.chosenDate}</Text>}
-                        </TouchableOpacity>
-
-                
-                        </View>
-                        
-                                  
-
-
-
-                        
-                    </View>
                     
-                    <DateTimePickerModal
-                                isVisible={this.state.isDatePickerVisible}
-                                mode="date"
-                                onConfirm={this.handleConfirm}
-                                onCancel={this.hideDatePicker}
-                            /> 
-                                
+                   
                   
                         <View style={styles.PickerContainer}>
                     <Picker
@@ -330,26 +262,29 @@ export default class CreateFoundPost extends React.Component{
                         <TouchableOpacity style={styles.Button}
                         
                         onPress={()=>{
-                            if(this.clickme()){
-                                alert("Please Fill all Fields");
-                            }else{
+                            // if(this.clickme()){
+                            //     alert("Please Fill all Fields");
+                            // }else{
 
                             
                             
-                            RNFetchBlob.fetch('POST', `${URL}/found`, {
+                            RNFetchBlob.fetch('POST', `${URL}/RoadAccedint`, {
                     
                                 'Content-Type' : 'multipart/formdata',
                                 'X-AUTH': `${this.state.Token}`
                             }, [
                                 // part file from storage
-                                { name : '', filename : this.state.imagename, type:this.image_type, data: RNFetchBlob.wrap(this.state.image_path)},
-                                {name:'name',data:`${this.state.name}`},
-                                {name:'age',data:`${this.state.age}`},
-                                {name:'descreption',data:`${this.state.description}`},
-                                {name:'phone',data:`${this.state.phone}`},
-                                {name:'gender',data:`${this.state.gender}`},
-                                {name:'time',data:`${this.state.chosenDate}`},
-                                {name:'city',data:`${this.state.city}`},
+                                { name : '', filename : this.state.imagename, type:this.state.image_type, data: RNFetchBlob.wrap(this.state.image_path)},
+                                
+                                // {name:'descreption',data:`${this.state.description}`},
+                                // {name:'phone',data:`${this.state.phone}`},
+                                // {name:'gender',data:`${this.state.gender}`},
+                                // {name:'time',data:`${this.state.chosenDate}`},
+                                // {name:'city',data:`${this.state.city}`},
+                                   {name:'information',data:`Test`},
+                                   {name:'city',data:`Test`},
+                                   {name:'street',data:`Test`},
+                                   
                                 
                                 
                                 
@@ -360,7 +295,6 @@ export default class CreateFoundPost extends React.Component{
                                 console.log(resp);     // ...
                                 this.props.navigation.navigate('Home');
                             }).catch((err) => {
-                                // ...
                                 console.log(err);
                                 
                             })
@@ -374,7 +308,7 @@ export default class CreateFoundPost extends React.Component{
                     }
                         
                         
-                }
+                
                         >
                             <Text  style={styles.ButtonText}>Post</Text>
                         </TouchableOpacity>
@@ -483,3 +417,4 @@ const styles =StyleSheet.create({
         marginHorizontal:10, 
     }
 });
+

@@ -8,8 +8,9 @@ const WIDTH = Dimensions.get('window').width;
 const HIEGHT = Dimensions.get('window').height;
 
 
- const SelectPost =({navigation})=>{
-   
+ export default class CreatePost extends React.Component{
+
+   render(){
   return (
      
   <View style={styles.Container}>
@@ -18,18 +19,18 @@ const HIEGHT = Dimensions.get('window').height;
     <Ionicons name='ios-add-circle' size={32} color={MAIN_COLOR} style={styles.headerIcon}/>
     </View>
 
-         
+            
             <TouchableOpacity 
-                    onPress={()=> navigation.navigate('CreateLost')}
+                    onPress={()=> this.props.navigation.navigate('CreateLost')}
                     style={styles.Button}
-                    >
+            >
                   <Text  style={styles.ButtonText}> Lost Post</Text>
                   <Ionicons name='ios-people' size={32} color={MAIN_COLOR} style={styles.ButtonIcon}/>
              </TouchableOpacity>
+             
 
         <TouchableOpacity 
-            // onPress={()=> navigation.navigate('CreateLost')}
-            onPress={()=> navigation.navigate('Create Founded')}
+            onPress={()=> this.props.navigation.navigate('Create Founded')}
             style={styles.Button}
             >
             <Text  style={styles.ButtonText}> Founded Post</Text>
@@ -37,7 +38,7 @@ const HIEGHT = Dimensions.get('window').height;
         </TouchableOpacity>
 
         <TouchableOpacity 
-            onPress={()=> navigation.navigate('Car accident')}
+            onPress={()=> this.props.navigation.navigate('Car accident')}
             style={styles.Button}
             >
             <Text  style={styles.ButtonText}> Accident Post</Text>
@@ -45,7 +46,7 @@ const HIEGHT = Dimensions.get('window').height;
         </TouchableOpacity>
 
         <TouchableOpacity 
-            // onPress={()=> navigation.navigate('Car accident')}
+            onPress={()=> this.props.navigation.navigate('LostThings Post')}
             style={styles.Button}
             >
             <Text  style={styles.ButtonText}>Lost things </Text>
@@ -53,7 +54,7 @@ const HIEGHT = Dimensions.get('window').height;
         </TouchableOpacity>
 
         <TouchableOpacity 
-            // onPress={()=> navigation.navigate('Car accident')}
+            onPress={()=> this.props.navigation.navigate('Humanitarian')}
             style={styles.Button}
             >
             <Text  style={styles.ButtonText}> humanitarian situation</Text>
@@ -64,7 +65,7 @@ const HIEGHT = Dimensions.get('window').height;
     
     
   )
-}
+}}
 
 const styles =StyleSheet.create({
     Container:{
@@ -120,5 +121,3 @@ const styles =StyleSheet.create({
     }
     
     });
-
-export default SelectPost;

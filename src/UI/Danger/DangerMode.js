@@ -163,7 +163,13 @@ export default class App extends React.Component{
     return(
       <ScrollView>
       <View style={styles.container}>
-          
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Danger Mode </Text>
+          <Icon name='ios-warning' type='ionicon' size={35} 
+               iconStyle={{marginTop: 8 , marginRight:5 , color: '#fff'}}
+        />
+        
+        </View>
         {/* <Text style={{color: MAIN_COLOR , marginBottom:20}} h2>Danger</Text> */}
          {/* <View style={styles.MessageAndCallContainer}> */}
           <TouchableOpacity 
@@ -294,9 +300,25 @@ export default class App extends React.Component{
 const styles = StyleSheet.create({
   container:{
      alignItems:'center',
-     marginTop:25,
+     
      flex:1
   }, 
+  header:{
+    flexDirection:'row',
+    width:WIDTH,
+    backgroundColor: MAIN_COLOR,
+    alignItems:'center',
+    marginBottom:20,
+    justifyContent:'center',
+  },
+  headerText:{
+    color:'#fff',
+    fontSize:35,
+    fontWeight:'bold',
+    marginVertical:10
+    
+    
+  },
   MessageAndCallContainer:{
     // flexDirection:'row'
   },

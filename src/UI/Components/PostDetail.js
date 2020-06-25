@@ -5,7 +5,7 @@ import {Icon} from 'react-native-elements';
 import {URL} from '../../../API/Defaults';
 import axios from 'axios';
 
-
+const MAIN_COLOR = '#b31605';
 
 const LostPostDetail =({ route, navigation })=>{
 
@@ -41,7 +41,7 @@ const LostPostDetail =({ route, navigation })=>{
                      iconStyle={styles.Icon}
                      
                    />
-                <Text style={{color:'#360f6f' }}>report</Text>
+                <Text style={{color:MAIN_COLOR }}>report</Text>
                 </TouchableOpacity>
 
     
@@ -60,7 +60,7 @@ const styles =StyleSheet.create({
   marginVertical:5,
   
   borderWidth : 0.3,
-  borderColor: '#360f9a',
+  borderColor: MAIN_COLOR,
   borderRadius:9,
   alignItems:'stretch',
   },
@@ -80,7 +80,7 @@ const styles =StyleSheet.create({
       
   },
   postText:{
-      color: '#360f9a',
+      color: MAIN_COLOR,
       fontSize:16,
       marginVertical:5,
       marginHorizontal:5,
@@ -100,7 +100,7 @@ const styles =StyleSheet.create({
 Icon:
 {
   marginHorizontal:8,
-  color: '#360f9a',
+  color: MAIN_COLOR,
   alignSelf:'flex-start'
 }
 

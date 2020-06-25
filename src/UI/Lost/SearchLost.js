@@ -1016,9 +1016,10 @@ const styles =StyleSheet.create({
     
     WelcomText:{
         color:MAIN_COLOR,
-        fontSize : 28,
+        fontSize : 22,
        alignSelf:'center',
        margin:20,
+       fontWeight:'bold'
        
     },
     TextinputContainer:{

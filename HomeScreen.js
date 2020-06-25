@@ -78,8 +78,10 @@ getToken = async () => {
           {
               if(this.state.isloading){
                   return(
-                      <View style={{flex:1, padding:20}}>
-                          <ActivityIndicator/>
+                    <View style={{flex:1, padding:20, justifyContent:'center', alignItems:'center'}}>
+                          
+                    <ActivityIndicator size={"large"}/>
+                    <Text style={{margin:10}}>Please check internet connection</Text>
                       </View>
 
                   )
@@ -156,7 +158,7 @@ const styles =StyleSheet.create({
         marginTop:-10,
         marginBottom:5,
         fontWeight: "bold",
-        color: '#360f6f',
+        color: MAIN_COLOR,
         
     },
     postImage:{
