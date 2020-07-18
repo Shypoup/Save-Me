@@ -7,27 +7,32 @@ import {URL} from '../../../API/Defaults';
 
 const MAIN_COLOR = '#b31605';
 
+export default class Register extends  React.Component {
 
-const Register = ({navigation}) =>{
-  const [firstName,setFirstName] =useState('');
-  const [lastName,setLastName] =useState('');
-  const [phone,setPhone]=useState('');
-  const [mail,setMail] =useState('');
-  const [password,setPassword] =useState('');
-  const [confirmPassword,setConfirmPassword] =useState('');
+    constructor(props){
+        super(props);
+        this.state={
+            firstName:'',
+            lastName:'',
+            phone:'',
+            mail:'',
+            password:'',
+            confirmPassword:'',
+        };
+    }
+
+  render(){
   
   return (
+      
       <ScrollView>
       <View style ={styles.Container}>
-{/* 
-    <View style={styles.shape2}>
-        <View style={styles.shape}/>
-    </View> */}
+
  
 
 
 
-    <Text style={styles.WelcomText} >Welcome!</Text>
+    <Text style={styles.WelcomText} >Register</Text>
     
     <View style={styles.TextinputContainer}>
        <Icon name="ios-person" color={MAIN_COLOR} style={styles.Icon} />     
@@ -35,54 +40,73 @@ const Register = ({navigation}) =>{
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.lastName.focus(); }}
         blurOnSubmit={false}
-        placeholder='First Name' placeholderTextColor={MAIN_COLOR}
-       value={firstName}
-       onChangeText={newvalue => setFirstName(newvalue)}
+        placeholder='First Name' 
+        placeholderTextColor={MAIN_COLOR}
+       value={this.state.firstName}
+  
+       onChangeText={firstName => this.setState({firstName})}
        />
     </View>
-    {firstName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+    {this.state.firstName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
     
+
+
     <View style={styles.TextinputContainer}>
        <Icon name="ios-person" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
-       ref={ref => {this.lastName = ref;}} 
+       
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.Phone.focus(); }}
         blurOnSubmit={false}
         placeholder='Last Name' placeholderTextColor={MAIN_COLOR}
-       value={lastName}
-       onChangeText={newvalue => setLastName(newvalue)}
+       value={this.state.lastName}
+       ref={ref => {this.lastName = ref}} 
+    
+       onChangeText={lastName => this.setState({lastName})}
+
        />
     </View>
-    {lastName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+    {this.state.lastName.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+   
+   
+   {/* Phone  */}
     <View style={styles.TextinputContainer}>
     <Icon name="md-phone-portrait" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
-       ref={ref => {this.Phone = ref;}} 
+      
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.Mail.focus(); }}
         blurOnSubmit={false}
         placeholder='Phone' 
         placeholderTextColor={MAIN_COLOR} 
         textContentType='telephoneNumber' 
-       value={phone}
-       onChangeText={newvalue => setPhone(newvalue)}
+       value={this.state.phone}
+    //    onChangeText={newvalue => setPhone(newvalue)}
+       onChangeText={phone => this.setState({phone})}
+       ref={(input) => { this.Phone = input; }}  
        keyboardType='numeric'
        />
     </View>
+
+
+
     <View style={styles.TextinputContainer}>
        <Icon name="ios-mail" color={MAIN_COLOR} style={styles.Icon} />     
        <TextInput style={styles.Textinput}
-       ref={ref => {this.Mail = ref;}} 
+       ref={ref => {this.Mail = ref}} 
        returnKeyType = { "next" }
         onSubmitEditing={() => { this.password.focus(); }}
         blurOnSubmit={false}
         placeholder='Mail' placeholderTextColor={MAIN_COLOR} textContentType='emailAddress' 
-       value={mail}
-       onChangeText={newvalue => setMail(newvalue)}
+       value={this.state.mail}
+
+       onChangeText={mail => this.setState({mail})}
        />
     </View>
-    {mail.length < 1  ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+    {this.state.mail.length < 1  ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+
+
+
 
     <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color={MAIN_COLOR} style={styles.Icon} /> 
@@ -92,42 +116,44 @@ const Register = ({navigation}) =>{
         onSubmitEditing={() => { this.confirmPassword.focus(); }}
         blurOnSubmit={false}
         placeholder='password' textContentType='password' secureTextEntry={true}  placeholderTextColor={MAIN_COLOR}
-       value={password}
-       onChangeText={newvalue => setPassword(newvalue)}
+       value={this.state.password}
+       onChangeText={password => this.setState({password})}
+    //    onChangeText={newvalue => setPassword(newvalue)}
        />  
         </View>
         
-        {password.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+        {this.state.password.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
 
 
         <View style={styles.TextinputContainer}>
        <Icon name="ios-lock" color={MAIN_COLOR} style={styles.Icon} /> 
        <TextInput style={styles.Textinput} 
-       value={confirmPassword}
+       value={this.state.confirmPassword}
        ref={ref => {this.confirmPassword = ref;}} 
        placeholder='Confirm password' 
        textContentType='password' 
        secureTextEntry={true}  
        placeholderTextColor={MAIN_COLOR}  
-       onChangeText={newvalue => setConfirmPassword(newvalue)}
+    //    onChangeText={newvalue => setConfirmPassword(newvalue)}
+       onChangeText={confirmPassword => this.setState({confirmPassword})}
        />  
         </View>
         
-        {confirmPassword.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
+        {this.state.confirmPassword.length < 1 ? <Text style={styles.validationText}>Can't be empty</Text>: null }
         
 
         <TouchableOpacity style={styles.Button}
          onPress={()=>{
             axios.post(`${URL}/register`,{
-            Fname: `${firstName}`,
-            Lname:`${lastName}`,
-            phone:`${phone}`,
-            email:`${mail}`,
-            password:`${password}`,
+            Fname: `${this.state.firstName}`,
+            Lname:`${this.state.lastName}`,
+            phone:`${this.state.phone}`,
+            email:`${this.state.mail}`,
+            password:`${this.state.password}`,
 
         }).then(response=>{
             console.log(response.data);
-            navigation.navigate("Login");
+            this.props.navigation.navigate("Login");
         }).catch(error =>{
             console.log(error);
             
@@ -143,7 +169,7 @@ const Register = ({navigation}) =>{
 
         <View style={styles.CreateAccountContainer}>
         <Text style={styles.createTextNormal}>Already have an account ? </Text>
-        <Text style={styles.createTextColored} onPress={()=> navigation.navigate('Login')}>Login</Text>
+        <Text style={styles.createTextColored} onPress={()=> this.props.navigation.navigate('Login')}>Login</Text>
         </View>
 
         {/* <View style={styles.shape3}/> */}
@@ -151,7 +177,7 @@ const Register = ({navigation}) =>{
     </ScrollView>
   )
 }
-
+}
 const styles =StyleSheet.create({
     Container:{
         marginHorizontal: 30,
@@ -163,6 +189,7 @@ const styles =StyleSheet.create({
         fontSize : 28,
        alignSelf:'center',
        margin:20,
+       fontWeight:'bold'
        
     },
     TextinputContainer:{
@@ -250,4 +277,3 @@ const styles =StyleSheet.create({
     },
 });
     
-export default Register;
