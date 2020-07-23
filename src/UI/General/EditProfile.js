@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image,ScrollView} from 'react-native';
+import React,{useEffect} from 'react';
+import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image,ScrollView,Alert} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -45,6 +45,30 @@ getToken = async () => {
     }
   
   }   
+
+  geData = () => {
+      axios.get(`${URL}/profile`,{
+        headers :{
+            'X-AUTH': `${this.state.Token}`
+    }
+    }).then(response=>{
+    console.log(response.data);
+      this.setState({
+    firstName    : response.data.Fname,
+    lastName     : response.data.Lname,
+    phone        : response.data.phone,
+    mail         : response.data.email,
+    firstTrusted : response.data.trusted1,
+    secondTrusted: response.data.trusted2,
+    thirdTrusted : response.data.trusted3,
+    address      :response.data.address,
+    bloodType    :response.data.bloodType, 
+    })
+  }).catch(error =>{
+    console.log(error);
+  });
+ 
+  }
       
       
     
@@ -78,6 +102,8 @@ getToken = async () => {
     
 })
     }    
+
+   
         render(){
       return (
     
@@ -317,7 +343,19 @@ getToken = async () => {
                         }
                     }).then((res) => {
                         console.log("Response is:",res); 
-                        this.props.navigation.pop();
+                        this.setState({
+                            Fname:res.Fname,
+                            Lname:res.Lname,
+                            email:res.email,
+                            phone:res.phone,
+                            address:res.address,
+                            bloodType:res.bloodType,
+                            trusted1:res.trusted1,
+                            trusted2:res.trusted2,
+                            trusted3:res.trusted3,
+                        });
+                       this.props.navigation.push('Profile');
+                        
                     }).catch((error) => {
                         if(error.response){
                           console.log(error.response.data);

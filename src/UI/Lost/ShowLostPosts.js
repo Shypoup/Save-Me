@@ -221,7 +221,7 @@ getToken = async () => {
                 Token:value
             })
             
-         axios.get(`${URL}/LostPosts`,{
+         axios.get(`${URL}/allLostPosts`,{
                         headers :{
                         
                         'X-AUTH': `${this.state.Token}`

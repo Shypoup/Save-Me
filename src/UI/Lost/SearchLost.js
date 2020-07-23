@@ -764,8 +764,8 @@
 import React from 'react';
 import {View, StyleSheet,TextInput,Text,TouchableOpacity,Picker,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-// import ImagePicker from 'react-native-image-picker';
-import ImagePicker from 'react-native-image-crop-picker';
+ import ImagePicker from 'react-native-image-picker';
+//import ImagePicker from 'react-native-image-crop-picker';
 import RNFetchBlob from 'rn-fetch-blob';
 import AsyncStorage from '@react-native-community/async-storage';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -795,9 +795,7 @@ export default class CreateAcciedentPost extends React.Component{
         imagename:null,
         image_path:null,
         image_type:null,
-        finished: false,
-        images:[],
-        images:'',
+
 
         //Token 
         Token:'',
@@ -851,26 +849,36 @@ export default class CreateAcciedentPost extends React.Component{
 
 
  /***********Image Picker Package  */
-    async  selectPhotoTapped() {
-
-    ImagePicker.openPicker({
-        multiple: true,
-        waitAnimationEnd: false,
-        // includeExif: true,
-        forceJpg: true,
-        maxFiles: 5,
-        compressImageQuality: 0.8,
-        mediaType: 'photo'
-      }).then(images => {
-        this.setState({
-          image: null,
-          images: images.map(i => {
-            console.log('received image', i);
-            return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-          })
-        });
-        console.log( this.state.images)
-      }).catch(e => alert(e));
+      selectPhotoTapped() {
+        const options = {
+            quality: 1.0,
+            maxWidth: 500,
+            maxHeight: 500,
+            storageOptions: {
+              skipBackup: true,
+            },
+          };
+        ImagePicker.showImagePicker(options, response => {
+            if (response.didCancel) {
+              console.log('User cancelled photo picker');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+              console.log('User tapped custom button: ', response.customButton);
+            } else {
+              let source = {uri: response.uri};
+              alert("Photo Uploaded");
+               this.state.imagename= response.fileName;
+               this.state.image_path=response.path;
+               this.state.image_type = response.type;
+               this.state.data = response.data;
+              
+              this.setState({
+                avatarSource: source,
+              });
+            }
+          });
+    }
     
         
 
@@ -878,7 +886,7 @@ export default class CreateAcciedentPost extends React.Component{
 
 
 
-        }
+        
     componentDidMount(){
         this.getToken().then((value)=>{
             console.log("GET Token : "+ value);
@@ -928,7 +936,7 @@ export default class CreateAcciedentPost extends React.Component{
                             <Image  source={this.state.avatarSource} />
                             )}
                             {this.state.imagename !=null  ? <Text Text style={styles.Text}>{this.state.imagename}</Text>: null }
-
+  
                         </View>
                         </TouchableOpacity>
                         </View>
@@ -940,14 +948,19 @@ export default class CreateAcciedentPost extends React.Component{
 
                         <TouchableOpacity style={styles.Button}
                         
-                        onPress={()=>{
+                        onPress={async ()=> {
                             // if(this.clickme()){
                             //     alert("Please Fill all Fields");
                             // }else{
-
+                              console.log("Sending and searching");
+                            console.log(this.state.image_path);
                             
-                            
-                            RNFetchBlob.fetch('POST', `${URL}/RoadAccedint`, {
+                          await RNFetchBlob.config({
+                            trusty : true,
+                            timeout: 120000
+                        
+                          })
+                          .fetch('POST', `${URL}/LostSearch/male`, {
                     
                                 'Content-Type' : 'multipart/formdata',
                                 'X-AUTH': `${this.state.Token}`
@@ -960,9 +973,9 @@ export default class CreateAcciedentPost extends React.Component{
                                 // {name:'gender',data:`${this.state.gender}`},
                                 // {name:'time',data:`${this.state.chosenDate}`},
                                 // {name:'city',data:`${this.state.city}`},
-                                   {name:'information',data:`Test`},
-                                   {name:'city',data:`Test`},
-                                   {name:'street',data:`Test`},
+                                //    {name:'information',data:`Test`},
+                                //    {name:'city',data:`Test`},
+                                //    {name:'street',data:`Test`},
                                    
                                 
                                 
@@ -974,7 +987,7 @@ export default class CreateAcciedentPost extends React.Component{
                                 console.log(resp);     // ...
                                 this.props.navigation.navigate('Home');
                             }).catch((err) => {
-                                console.log(err);
+                                console.log("error is:",err);
                                 
                             })
                             

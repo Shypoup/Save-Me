@@ -155,7 +155,7 @@ export default class Register extends  React.Component {
             console.log(response.data);
             this.props.navigation.navigate("Login");
         }).catch(error =>{
-            console.log(error);
+            console.log(error.data);
             
             
         });

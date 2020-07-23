@@ -22,6 +22,7 @@ import SearchLost from './src/UI/Lost/SearchLost';
 import EditProfile from './src/UI/General/EditProfile';
 import QRGenerator from './src/UI/Components/QRGenerator';
 import CreateAcciedentPost from './src/UI/Accidents/CreateAcciedentPost';
+import AsyncStorage from '@react-native-community/async-storage';
 import UploadImage from './src/UI/Components/UploadImage';
 import Notifications from './src/UI/General/Notifications';
 import other from './other';
@@ -40,6 +41,7 @@ const Tab = createBottomTabNavigator();  //bottonTab object
 const Stack=createStackNavigator();      //Stack  object
 const Drawer = createDrawerNavigator();  // Drawer object  not used
 const TopTab = createMaterialTopTabNavigator(); // Toptab object
+var arr = [];
 
 const MAIN_COLOR = '#b31605';
 
@@ -101,16 +103,32 @@ function Create(){
 }
 
 
+getToken = async () => {
+  try {
+    const value = await AsyncStorage.getItem('token')
+    console.log('Done Get Token');
+    token = value;
+    return value;
+  } catch(e) {
+      console.log("Somethimg went Wrong Get Token");
+  }
 
+}  
 
+token = getToken();
+console.log(token);
 
 // Stack navigation for Login 
 export default function MyTabs() {
+ 
+
   return (
   
   <NavigationContainer>
      <Stack.Navigator>
-     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+    
+
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> 
           <Stack.Screen name="Ho" component={Home} options={{ headerShown: false }} />
           
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} /> 
